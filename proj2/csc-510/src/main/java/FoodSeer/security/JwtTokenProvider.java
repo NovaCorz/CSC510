@@ -55,11 +55,11 @@ public class JwtTokenProvider {
      * @return the username that is authenticated
      */
     public String getUsername(String token) {
-        Claims claims = Jwts.parser()
-                .verifyWith(key())
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(key())
                 .build()
-                .parseSignedClaims(token)
-                .getPayload();
+                .parseClaimsJws(token)
+                .getBody();
 
         return claims.getSubject(); //username
 
@@ -71,10 +71,10 @@ public class JwtTokenProvider {
      * @return true if valid
      */
     public boolean validateToken(String token) {
-        Jwts.parser()
-                .verifyWith(key())
+        Jwts.parserBuilder()
+                .setSigningKey(key())
                 .build()
-                .parse(token);
+                .parseClaimsJws(token);
         return true;
     }
 }

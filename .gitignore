@@ -1,0 +1,2 @@
+# Ignore application.properties and other sensitive config
+**/application.properties

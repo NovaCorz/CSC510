@@ -1,4 +1,4 @@
-package usermanager.entity;
+package FoodSeer.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
