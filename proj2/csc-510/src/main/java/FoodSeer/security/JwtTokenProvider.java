@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Provides a token for the user.
@@ -46,7 +47,25 @@ public class JwtTokenProvider {
     }
 
     private SecretKey key() {
-        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
+        // jwtSecret in properties might be base64, hex, or plain text.
+        try {
+            // Try base64 first
+            return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
+        } catch ( final Exception e ) {
+            // If it's hex, decode hex string to bytes
+            if ( jwtSecret.matches("[0-9a-fA-F]+") && (jwtSecret.length() % 2 == 0) ) {
+                final int len = jwtSecret.length();
+                final byte[] data = new byte[len / 2];
+                for ( int i = 0; i < len; i += 2 ) {
+                    data[i / 2] = (byte) ( (Character.digit(jwtSecret.charAt(i), 16) << 4)
+                            + Character.digit(jwtSecret.charAt(i + 1), 16) );
+                }
+                return Keys.hmacShaKeyFor(data);
+            }
+
+            // Fallback to raw bytes of the string
+            return Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
+        }
     }
 
     /**

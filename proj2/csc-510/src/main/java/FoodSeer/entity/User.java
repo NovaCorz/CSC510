@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +15,7 @@ import lombok.Setter;
 import FoodSeer.dto.RegisterRequestDto;
 
 @Entity
+@Table(name = "users")
 @Data
 @Getter
 @Setter
@@ -36,7 +38,7 @@ public class User {
 
     @Builder.Default
     @Column ( nullable = false, length = 20 )
-    private String role = "USER";
+    private String role = "ROLE_STANDARD";
 
     public User ( final User o, final String pass ) {
         this.id = o.getId();
