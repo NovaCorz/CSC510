@@ -6,7 +6,6 @@ import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import lombok.AllArgsConstructor;
 import FoodSeer.entity.User;
 import FoodSeer.entity.Role;
 import FoodSeer.repositories.UserRepository;
@@ -16,7 +15,6 @@ import FoodSeer.repositories.RoleRepository;
  * Initializes application data such as a default admin user.
  */
 @Component
-@AllArgsConstructor
 public class DataInitializer {
 
     private final UserRepository userRepository;
@@ -26,18 +24,26 @@ public class DataInitializer {
     @Value("${app.admin-user-password:admin}")
     private String adminPassword;
 
+    public DataInitializer(UserRepository userRepository,
+                           RoleRepository roleRepository,
+                           PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
     @EventListener(ApplicationReadyEvent.class)
     public void onApplicationReady() {
         // Ensure roles exist
-        if ( roleRepository.findByName("ROLE_ADMIN") == null ) {
+        if (roleRepository.findByName("ROLE_ADMIN") == null) {
             roleRepository.save(new Role(null, "ROLE_ADMIN"));
         }
-        if ( roleRepository.findByName("ROLE_STANDARD") == null ) {
+        if (roleRepository.findByName("ROLE_STANDARD") == null) {
             roleRepository.save(new Role(null, "ROLE_STANDARD"));
         }
 
         // Ensure admin user exists
-        if ( !userRepository.existsByUsername("admin") ) {
+        if (!userRepository.existsByUsername("admin")) {
             final String hash = passwordEncoder.encode(adminPassword);
             final User admin = User.builder()
                     .username("admin")
@@ -49,5 +55,4 @@ public class DataInitializer {
             System.out.println("Created default admin user 'admin'");
         }
     }
-
 }
