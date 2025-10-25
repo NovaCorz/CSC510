@@ -31,7 +31,7 @@ public class AuthServiceImpl implements AuthService {
     private final JwtTokenProvider      jwtService;
 
     @Override
-    public ResponseEntity< ? > register ( final RegisterRequestDto req ) {
+    public ResponseEntity<Map<String, String>> register ( final RegisterRequestDto req ) {
         System.out.println( "PasswordEncoder bean is: " + passwordEncoder.getClass() );
         if ( userRepository.existsByUsername( req.username() ) ) {
             return ResponseEntity.badRequest().body( Map.of( "error", "Username already taken" ) );

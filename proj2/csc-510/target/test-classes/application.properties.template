@@ -1,0 +1,13 @@
+spring.application.name=user-manager
+spring.jpa.hibernate.ddl-auto=create-drop
+spring.datasource.url=jdbc:h2:mem:testdb;MODE=MySQL;
+spring.datasource.username=sa
+spring.datasource.password=
+spring.datasource.driver-class-name=org.h2.Driver
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+# SHA256 encryption - https://emn178.github.io/online-tools/sha256.html
+app.jwt-secret=
+# Expiration time in milliseconds - 7 days
+app.jwt-expiration-milliseconds=604800000
+# Plain text password for default admin user
+app.admin-user-password=

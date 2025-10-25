@@ -1,4 +1,4 @@
-package FoodSeer.com;
+package FoodSeer;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
