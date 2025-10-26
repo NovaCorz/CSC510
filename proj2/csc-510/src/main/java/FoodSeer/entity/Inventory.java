@@ -18,6 +18,7 @@ public class Inventory {
 
     /** ID for inventory entry */
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /** List of food objects in the inventory */
