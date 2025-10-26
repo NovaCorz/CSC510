@@ -1,23 +1,19 @@
-name: Build & Test CSC-510
+name: Build & Test FoodSeer
 
 on:
   push:
-    branches:
-      - '**'           # Run on ALL branches
+    branches: ['**']
   pull_request:
-    branches:
-      - '**'           # Run on ALL PRs
+    branches: ['**']
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Check out the repository
       - name: Check out repository
         uses: actions/checkout@v4
 
-      # 2️⃣ Set up JDK 21 (your pom.xml targets Java 21)
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
@@ -25,26 +21,30 @@ jobs:
           java-version: '21'
           cache: 'maven'
 
-      # 3️⃣ Optional: list directory tree for debugging
       - name: Verify repo structure
-        run: ls -R
+        run: ls -R proj2/csc-510
 
-      # 4️⃣ Cache Maven dependencies
-      - name: Cache Maven dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+      - name: Copy application.properties (template → actual)
+        run: |
+          if [ -f proj2/csc-510/src/main/resources/application.properties.template ]; then
+            cp proj2/csc-510/src/main/resources/application.properties.template proj2/csc-510/src/main/resources/application.properties
+          fi
+          if [ -f proj2/csc-510/src/test/resources/application.properties.template ]; then
+            cp proj2/csc-510/src/test/resources/application.properties.template proj2/csc-510/src/test/resources/application.properties
+          fi
 
-      # 5️⃣ Build and test your project
+      - name: Check config files
+        run: |
+          echo "==== MAIN CONFIG ===="
+          cat proj2/csc-510/src/main/resources/application.properties || true
+          echo "==== TEST CONFIG ===="
+          cat proj2/csc-510/src/test/resources/application.properties || true
+
       - name: Build & Run Tests
         run: |
           cd proj2/csc-510
           mvn -B clean test
 
-      # 6️⃣ Upload JUnit reports (optional)
       - name: Upload JUnit Test Results
         if: always()
         uses: actions/upload-artifact@v4
