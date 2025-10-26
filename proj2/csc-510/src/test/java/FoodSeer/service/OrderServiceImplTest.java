@@ -19,6 +19,7 @@ import FoodSeer.dto.FoodDto;
 import FoodSeer.dto.InventoryDto;
 import FoodSeer.dto.OrderDto;
 import FoodSeer.entity.Food;
+import FoodSeer.mapper.FoodMapper;
 import FoodSeer.repository.FoodRepository;
 import FoodSeer.repository.InventoryRepository;
 import FoodSeer.repository.OrderRepository;
@@ -29,32 +30,32 @@ import FoodSeer.repository.OrderRepository;
 @SpringBootTest
 class OrderServiceImplTest {
 
-    /** Reference to food repository */
+    /** Reference to Food repository */
     @Autowired
     private FoodRepository foodRepository;
 
-    /** Reference to inventory repository */
+    /** Reference to Inventory repository */
     @Autowired
     private InventoryRepository inventoryRepository;
 
-    /** Reference to order repository */
+    /** Reference to Order repository */
     @Autowired
     private OrderRepository orderRepository;
 
-    /** Reference to order service */
+    /** Reference to Order service */
     @Autowired
     private OrderService orderService;
 
-    /** Reference to inventory service */
+    /** Reference to Inventory service */
     @Autowired
     private InventoryService inventoryService;
 
-    /** Reference to food service */
+    /** Reference to Food service */
     @Autowired
     private FoodService foodService;
 
     /**
-     * Clears all relevant repositories before each test.
+     * Clears all repositories before each test.
      */
     @BeforeEach
     public void setUp() throws Exception {
@@ -70,17 +71,18 @@ class OrderServiceImplTest {
     @Transactional
     @WithMockUser(username = "customer", roles = "CUSTOMER")
     void testCreateOrder() {
-        // Create a few food items
+        // Create and save a food item
         final FoodDto food1 = new FoodDto();
         food1.setFoodName("COFFEE");
         food1.setAmount(10);
         food1.setPrice(5);
         food1.setAllergies(List.of("CAFFEINE"));
 
-        final FoodDto savedFood1 = foodService.createFood(food1);
+        final FoodDto savedFood = foodService.createFood(food1);
 
+        // Create order containing that food
         final OrderDto orderDto = new OrderDto(0L, "Order1");
-        orderDto.setFoods(List.of(FoodServiceImplTest.mapToFood(savedFood1)));
+        orderDto.setFoods(List.of(FoodMapper.mapToFood(savedFood))); // ✅ FIXED mapper reference
 
         final OrderDto savedOrder = orderService.createOrder(orderDto);
 
@@ -90,7 +92,7 @@ class OrderServiceImplTest {
     }
 
     /**
-     * Tests fulfilling an order and verifying that inventory updates accordingly.
+     * Tests fulfilling an order and verifying inventory updates accordingly.
      */
     @Test
     @Transactional
@@ -109,7 +111,7 @@ class OrderServiceImplTest {
         final InventoryDto inventoryDto = new InventoryDto(1L, foods);
         inventoryService.createInventory(inventoryDto);
 
-        // Save the foods in DB
+        // Save foods in DB
         foodRepository.saveAll(foods);
 
         // Create an order with one item
@@ -136,20 +138,5 @@ class OrderServiceImplTest {
 
         assertEquals(1, orderService.getAllFulfilledOrders().size());
         assertEquals(savedOrder.getId(), orderService.getOrderById(savedOrder.getId()).getId());
-    }
-
-    /**
-     * Utility helper to convert FoodDto → Food for test convenience.
-     */
-    private static Food mapToFood(final FoodDto foodDto) {
-        final Food food = new Food();
-        food.setId(foodDto.getId());
-        food.setFoodName(foodDto.getFoodName());
-        food.setAmount(foodDto.getAmount());
-        food.setPrice(foodDto.getPrice());
-        if (foodDto.getAllergies() != null) {
-            food.setAllergies(foodDto.getAllergies());
-        }
-        return food;
     }
 }
