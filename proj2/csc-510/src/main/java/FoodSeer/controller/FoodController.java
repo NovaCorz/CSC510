@@ -90,17 +90,40 @@ public class FoodController {
     }
 
     /**
-     * Update Food
+     * Updates an existing food's details (amount, price, and allergies).
      *
      * @param foodDto
-     *            as FoodDto
-     * @return ResponseEntity(FoodDto) as response
+     *            FoodDto containing the updated fields
+     * @return ResponseEntity containing the updated FoodDto
      */
     @PostMapping ( "/updateFood" )
     public ResponseEntity<FoodDto> updateFood ( @RequestBody final FoodDto foodDto ) {
-        final FoodDto fromSaved = foodService.getFoodById( foodDto.getId() );
-        final FoodDto savedFoodDto = foodService.updateFood( fromSaved.getFoodName(), foodDto.getAmount() );
-        return ResponseEntity.ok( savedFoodDto );
+        // Check if food exists first by ID or name
+        final String name = foodDto.getFoodName();
+        if (name == null || name.trim().isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        // Verify that food exists
+        if (!foodService.isDuplicateName(name)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        // Validate updated values
+        if (foodDto.getAmount() < 0 || foodDto.getPrice() < 0) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        // Perform the update using new service signature
+        final FoodDto updatedFood = foodService.updateFood(
+            name,
+            foodDto.getAmount(),
+            foodDto.getPrice(),
+            foodDto.getAllergies()
+        );
+
+        return ResponseEntity.ok(updatedFood);
     }
+
 
 }
