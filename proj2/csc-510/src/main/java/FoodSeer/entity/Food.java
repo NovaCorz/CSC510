@@ -66,9 +66,8 @@ public class Food {
      * @param allergies
      *            The list of allergies associated with the food
      */
-    public Food ( final Long id, final String name, final int amount, final int price, final List<String> allergies ) {
+    public Food ( final String name, final int amount, final int price, final List<String> allergies ) {
         super();
-        this.id = id;
         this.foodName = name.toUpperCase();
         this.amount = amount;
         this.price = price;

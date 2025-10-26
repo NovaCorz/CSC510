@@ -44,7 +44,8 @@ public class InventoryServiceImplTest {
         final Query query = entityManager.createNativeQuery("DELETE FROM inventory");
         query.executeUpdate();
 
-        final Query resetAutoIncrement = entityManager.createNativeQuery("ALTER TABLE inventory AUTO_INCREMENT = 1");
+        final Query resetAutoIncrement =
+                entityManager.createNativeQuery("ALTER TABLE inventory AUTO_INCREMENT = 1");
         resetAutoIncrement.executeUpdate();
     }
 
@@ -58,9 +59,10 @@ public class InventoryServiceImplTest {
         // Ensure Inventory always starts with ID 1L.
         final List<Food> foods = new ArrayList<>();
 
-        final Food pizza = new Food(1L, "pizza", 20, 10, new ArrayList<>());
-        final Food pasta = new Food(2L, "pasta", 30, 12, new ArrayList<>());
-        final Food salad = new Food(3L, "salad", 40, 8, new ArrayList<>());
+        // Food constructor no longer takes ID — let Hibernate assign it
+        final Food pizza = new Food("pizza", 20, 10, new ArrayList<>());
+        final Food pasta = new Food("pasta", 30, 12, new ArrayList<>());
+        final Food salad = new Food("salad", 40, 8, new ArrayList<>());
 
         foods.add(pizza);
         foods.add(pasta);
@@ -87,8 +89,8 @@ public class InventoryServiceImplTest {
 
         final List<Food> foods = new ArrayList<>();
 
-        final Food pizza = new Food(1L, "pizza", 20, 10, new ArrayList<>());
-        final Food pasta = new Food(2L, "pasta", 30, 12, new ArrayList<>());
+        final Food pizza = new Food("pizza", 20, 10, new ArrayList<>());
+        final Food pasta = new Food("pasta", 30, 12, new ArrayList<>());
 
         foods.add(pizza);
         foods.add(pasta);
