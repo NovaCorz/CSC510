@@ -4,9 +4,12 @@ import FoodSeer.entity.User;
 
 public interface UserService {
 
-    public boolean userExists ( String username );
-
+    /**
+     * Returns the currently authenticated user.
+     */
     public User getCurrentUser ();
+
+    public User getByUsername ( String username );
 
     /**
      * Returns all users in the system.
@@ -27,5 +30,6 @@ public interface UserService {
      * Delete a user by id.
      */
     public void deleteUser(Long id);
+    
 
 }

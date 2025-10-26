@@ -59,4 +59,9 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping ( "/me" )
+    public ResponseEntity<UserDto> getCurrentUser () {
+        return ResponseEntity.ok( UserDto.fromEntity(userService.getCurrentUser()) );
+    }
+
 }
