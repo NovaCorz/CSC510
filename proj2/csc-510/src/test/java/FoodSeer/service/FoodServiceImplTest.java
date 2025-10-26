@@ -124,11 +124,15 @@ public class FoodServiceImplTest {
         final FoodDto createdFood1 = foodService.createFood( food1 );
         assertAll( "Food contents",
                 () -> assertEquals( "COFFEE", createdFood1.getFoodName() ),
-                () -> assertEquals( 5, createdFood1.getAmount() ) );
+                () -> assertEquals( 5, createdFood1.getAmount() ),
+		        () -> assertEquals( 3, createdFood1.getPrice() ),
+		        () -> assertEquals( 5, createdFood1.getAmount() ) );
 
-        final FoodDto updatedFood = foodService.updateFood( "COFFEE", 12 );
+        final FoodDto updatedFood = foodService.updateFood( "COFFEE", 12, 5, Arrays.asList("Water") );
         assertAll( "Updated food contents",
                 () -> assertEquals( "COFFEE", updatedFood.getFoodName() ),
-                () -> assertEquals( 12, updatedFood.getAmount() ) );
+                () -> assertEquals( 12, updatedFood.getAmount() ),
+		        () -> assertEquals( 3, createdFood1.getPrice() ),
+		        () -> assertEquals( 5, createdFood1.getAmount() ) );
     }
 }

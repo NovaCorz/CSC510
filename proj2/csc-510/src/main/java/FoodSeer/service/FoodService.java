@@ -74,7 +74,7 @@ public interface FoodService {
      *            as an int
      * @return FoodDto with new amount
      */
-    FoodDto updateFood ( String name, int amount );
+    FoodDto updateFood(final String name, final int amount, final int price, final List<String> allergies);
 
     /**
      * Returns true if the food already exists in the database.

@@ -55,8 +55,8 @@ public class FoodServiceImpl implements FoodService {
             throw new IllegalArgumentException( "The name of the new food already exists in the system." );
         }
         // check for invalid units
-        if ( isValidFood( foodDto ) ) {
-            throw new IllegalArgumentException( "The units of the food must be a positive integer." );
+        if ( !isValidFood( foodDto ) ) {
+            throw new IllegalArgumentException( "The provided food information is invalid." );
         }
 
         final Food food = FoodMapper.mapToFood( foodDto );

@@ -104,7 +104,7 @@ public class InventoryServiceImpl implements InventoryService {
                 if (inventory.getFoods().get(index).getFoodName().equals(f.getFoodName())) {
 
                     // Update existing food item
-                    final FoodDto fDto = foodService.updateFood(f.getFoodName(), f.getAmount());
+                    final FoodDto fDto = foodService.updateFood(f.getFoodName(), f.getAmount(), f.getPrice(), f.getAllergies());
                     final Food updatedFood = FoodMapper.mapToFood(fDto);
 
                     // track indexes and updated foods
