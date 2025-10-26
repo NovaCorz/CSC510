@@ -1,4 +1,4 @@
-package FoodSeer.repository;
+package FoodSeer.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

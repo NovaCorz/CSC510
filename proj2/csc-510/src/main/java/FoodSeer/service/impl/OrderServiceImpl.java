@@ -16,8 +16,8 @@ import FoodSeer.entity.Order;
 import FoodSeer.exception.ResourceNotFoundException;
 import FoodSeer.mapper.FoodMapper;
 import FoodSeer.mapper.OrderMapper;
-import FoodSeer.repository.FoodRepository;
-import FoodSeer.repository.OrderRepository;
+import FoodSeer.repositories.FoodRepository;
+import FoodSeer.repositories.OrderRepository;
 import FoodSeer.service.InventoryService;
 import FoodSeer.service.OrderService;
 

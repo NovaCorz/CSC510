@@ -1,4 +1,4 @@
-package FoodSeer.repository;
+package FoodSeer.repositories;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

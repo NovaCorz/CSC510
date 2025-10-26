@@ -20,9 +20,9 @@ import FoodSeer.dto.InventoryDto;
 import FoodSeer.dto.OrderDto;
 import FoodSeer.entity.Food;
 import FoodSeer.mapper.FoodMapper;
-import FoodSeer.repository.FoodRepository;
-import FoodSeer.repository.InventoryRepository;
-import FoodSeer.repository.OrderRepository;
+import FoodSeer.repositories.FoodRepository;
+import FoodSeer.repositories.InventoryRepository;
+import FoodSeer.repositories.OrderRepository;
 
 /**
  * Tests OrderService and OrderServiceImpl classes for the FoodSeer project.

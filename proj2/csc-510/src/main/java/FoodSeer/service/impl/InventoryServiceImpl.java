@@ -14,7 +14,7 @@ import FoodSeer.entity.Inventory;
 import FoodSeer.exception.ResourceNotFoundException;
 import FoodSeer.mapper.FoodMapper;
 import FoodSeer.mapper.InventoryMapper;
-import FoodSeer.repository.InventoryRepository;
+import FoodSeer.repositories.InventoryRepository;
 import FoodSeer.service.FoodService;
 import FoodSeer.service.InventoryService;
 import jakarta.persistence.EntityManager;

@@ -19,8 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import FoodSeer.TestUtils;
 import FoodSeer.dto.FoodDto;
-import FoodSeer.repository.FoodRepository;
-import FoodSeer.repository.InventoryRepository;
+import FoodSeer.repositories.FoodRepository;
+import FoodSeer.repositories.InventoryRepository;
 import FoodSeer.service.FoodService;
 
 /**
