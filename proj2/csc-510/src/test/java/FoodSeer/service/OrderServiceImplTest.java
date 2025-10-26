@@ -75,7 +75,7 @@ class OrderServiceImplTest {
         food1.setFoodName("COFFEE");
         food1.setAmount(10);
         food1.setPrice(5);
-        food1.setAllergies(new String[] { "CAFFEINE" });
+        food1.setAllergies(List.of("CAFFEINE"));
 
         final FoodDto savedFood1 = foodService.createFood(food1);
 

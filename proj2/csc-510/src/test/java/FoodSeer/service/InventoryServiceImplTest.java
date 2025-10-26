@@ -21,7 +21,7 @@ import jakarta.persistence.Query;
  * Tests InventoryServiceImpl for FoodSeer.
  */
 @SpringBootTest
-public class InventoryServiceTest {
+public class InventoryServiceImplTest {
 
     /** Reference to InventoryService (and InventoryServiceImpl). */
     @Autowired
