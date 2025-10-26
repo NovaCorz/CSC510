@@ -1,0 +1,46 @@
+name: Run FoodSeer Tests
+
+on:
+  push:
+    branches:
+      - '**'       # ✅ Run on push to ANY branch
+  pull_request:
+    branches:
+      - '**'       # ✅ Run on PR targeting ANY branch
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2️⃣ Set up JDK (adjust version if needed)
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # 3️⃣ Cache Maven dependencies for faster builds
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      # 4️⃣ Build project and run all tests under src/test/**
+      - name: Build and Run Tests
+        run: mvn -B clean test
+
+      # 5️⃣ Upload JUnit test results (always runs, even if tests fail)
+      - name: Upload JUnit Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: junit-results
+          path: target/surefire-reports/
