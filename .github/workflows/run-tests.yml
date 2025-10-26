@@ -51,3 +51,11 @@ jobs:
         with:
           name: junit-results
           path: proj2/csc-510/target/surefire-reports/
+
+      - name: Publish Test Summary to Actions UI
+        if: always()
+        uses: dorny/test-reporter@v1
+        with:
+          name: JUnit Tests
+          path: proj2/csc-510/target/surefire-reports/*.xml
+          reporter: java-junit
