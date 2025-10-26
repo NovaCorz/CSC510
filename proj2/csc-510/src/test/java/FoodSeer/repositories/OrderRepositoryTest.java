@@ -57,9 +57,9 @@ class OrderRepositoryTest {
         // Initialize inventory with foods
         final List<Food> foods = new ArrayList<>();
 
-        final Food f1 = new Food(null, "COFFEE", 10, 5, List.of("CAFFEINE"));
-        final Food f2 = new Food(null, "MILK", 8, 3, List.of("LACTOSE"));
-        final Food f3 = new Food(null, "SUGAR", 15, 2, List.of("GLUCOSE"));
+        final Food f1 = new Food("COFFEE", 10, 5, List.of("CAFFEINE"));
+        final Food f2 = new Food("MILK", 8, 3, List.of("LACTOSE"));
+        final Food f3 = new Food("SUGAR", 15, 2, List.of("GLUCOSE"));
 
         foods.add(f1);
         foods.add(f2);

@@ -76,13 +76,13 @@ class OrderServiceImplTest {
         food1.setFoodName("COFFEE");
         food1.setAmount(10);
         food1.setPrice(5);
-        food1.setAllergies(List.of("CAFFEINE"));
+        food1.setAllergies(new ArrayList<>(List.of("CAFFEINE"))); // ✅ mutable list
 
         final FoodDto savedFood = foodService.createFood(food1);
 
         // Create order containing that food
         final OrderDto orderDto = new OrderDto(0L, "Order1");
-        orderDto.setFoods(List.of(FoodMapper.mapToFood(savedFood))); // ✅ FIXED mapper reference
+        orderDto.setFoods(new ArrayList<>(List.of(FoodMapper.mapToFood(savedFood)))); // ✅ mutable list
 
         final OrderDto savedOrder = orderService.createOrder(orderDto);
 
@@ -100,9 +100,9 @@ class OrderServiceImplTest {
     void testFulfillOrder() {
         // Initialize inventory
         final List<Food> foods = new ArrayList<>();
-        final Food f1 = new Food(null, "COFFEE", 5, 10, List.of("CAFFEINE"));
-        final Food f2 = new Food(null, "MILK", 5, 6, List.of("LACTOSE"));
-        final Food f3 = new Food(null, "SUGAR", 5, 4, List.of("GLUCOSE"));
+        final Food f1 = new Food("COFFEE", 5, 10, new ArrayList<>(List.of("CAFFEINE"))); // ✅ mutable list
+        final Food f2 = new Food("MILK", 5, 6, new ArrayList<>(List.of("LACTOSE")));     // ✅ mutable list
+        final Food f3 = new Food("SUGAR", 5, 4, new ArrayList<>(List.of("GLUCOSE")));    // ✅ mutable list
 
         foods.add(f1);
         foods.add(f2);
@@ -116,7 +116,7 @@ class OrderServiceImplTest {
 
         // Create an order with one item
         final OrderDto orderDto = new OrderDto(0L, "Order1");
-        orderDto.setFoods(List.of(f1));
+        orderDto.setFoods(new ArrayList<>(List.of(f1))); // ✅ mutable list
 
         assertEquals(0, orderService.getAllOrders().size());
 

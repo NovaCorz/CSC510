@@ -25,7 +25,6 @@ public class OrderMapper {
         dto.setFoods(order.getFoods().stream()
                 .map(FoodMapper::mapToFoodDto)
                 .map(foodDto -> new Food(
-                        foodDto.getId(),
                         foodDto.getFoodName(),
                         foodDto.getAmount(),
                         foodDto.getPrice(),
@@ -48,7 +47,6 @@ public class OrderMapper {
         // Map FoodDto objects to Food entities
         order.setFoods(orderDto.getFoods().stream()
                 .map(food -> new Food(
-                        food.getId(),
                         food.getFoodName(),
                         food.getAmount(),
                         food.getPrice(),

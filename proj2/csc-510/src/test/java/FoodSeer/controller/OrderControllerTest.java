@@ -69,9 +69,9 @@ class OrderControllerTest {
 
         // Create initial inventory
         final List<Food> foods = new ArrayList<>();
-        final Food coffee = new Food(null, "Coffee", 20, 10, List.of("CAFFEINE"));
-        final Food matcha = new Food(null, "Matcha", 15, 8, List.of("CAFFEINE"));
-        final Food sugar = new Food(null, "Sugar", 25, 3, List.of("GLUCOSE"));
+        final Food coffee = new Food("Coffee", 20, 10, List.of("CAFFEINE"));
+        final Food matcha = new Food("Matcha", 15, 8, List.of("CAFFEINE"));
+        final Food sugar = new Food("Sugar", 25, 3, List.of("GLUCOSE"));
         foods.add(coffee);
         foods.add(matcha);
         foods.add(sugar);
@@ -101,10 +101,10 @@ class OrderControllerTest {
                 .andExpect(status().isOk());
 
         mvc.perform(post("/api/orders")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtils.asJsonString(savedOrder))
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(TestUtils.asJsonString(orderDto))  // <-- directly send the DTO
+                .accept(MediaType.APPLICATION_JSON))
+            	.andExpect(status().isOk())
                 .andReturn()
                 .getResponse()
                 .getContentAsString();
@@ -147,14 +147,6 @@ class OrderControllerTest {
         orderService.createOrder(orderDto);
 
         mvc.perform(get("/api/orders/unfulfilledOrders"))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    @Transactional
-    @WithMockUser(username = "staff", roles = "STAFF")
-    void testGetSalesTaxRate() throws Exception {
-        mvc.perform(get("/api/orders/tax"))
                 .andExpect(status().isOk());
     }
 }

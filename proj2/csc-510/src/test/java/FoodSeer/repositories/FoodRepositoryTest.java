@@ -40,8 +40,8 @@ class FoodRepositoryTest {
         final List<String> allergies1 = Arrays.asList( "MILK", "SUGAR" );
         final List<String> allergies2 = Arrays.asList( "CINNAMON" );
 
-        final Food food1 = new Food( null, "COFFEE", 5, 3, allergies1 );
-        final Food food2 = new Food( null, "PUMPKIN_SPICE", 10, 7, allergies2 );
+        final Food food1 = new Food("COFFEE", 5, 3, allergies1 );
+        final Food food2 = new Food("PUMPKIN_SPICE", 10, 7, allergies2 );
 
         food1Id = foodRepository.save( food1 ).getId();
         food2Id = foodRepository.save( food2 ).getId();

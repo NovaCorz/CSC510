@@ -52,9 +52,9 @@ public class InventoryRepositoryTest {
         // Create sample food items
         final List<Food> foods = new ArrayList<>();
 
-        final Food pizza = new Food(1L, "pizza", 5, 10, new ArrayList<>());
-        final Food pasta = new Food(2L, "pasta", 8, 12, new ArrayList<>());
-        final Food salad = new Food(3L, "salad", 15, 6, new ArrayList<>());
+        final Food pizza = new Food("pizza", 5, 10, new ArrayList<>());
+        final Food pasta = new Food("pasta", 8, 12, new ArrayList<>());
+        final Food salad = new Food("salad", 15, 6, new ArrayList<>());
 
         foods.add(pizza);
         foods.add(pasta);
@@ -87,9 +87,9 @@ public class InventoryRepositoryTest {
         // Replace foods with updated quantities
         final List<Food> newFoods = new ArrayList<>();
 
-        final Food pizza = new Food(1L, "pizza", 20, 10, new ArrayList<>());
-        final Food pasta = new Food(2L, "pasta", 30, 12, new ArrayList<>());
-        final Food salad = new Food(3L, "salad", 40, 6, new ArrayList<>());
+        final Food pizza = new Food("pizza", 20, 10, new ArrayList<>());
+        final Food pasta = new Food("pasta", 30, 12, new ArrayList<>());
+        final Food salad = new Food("salad", 40, 6, new ArrayList<>());
 
         newFoods.add(pizza);
         newFoods.add(pasta);
