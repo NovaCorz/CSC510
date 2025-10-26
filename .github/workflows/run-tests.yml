@@ -3,28 +3,28 @@ name: Run All Tests
 on:
   push:
     branches:
-      - '**'       # Run on ALL branch pushes
+      - '**'
   pull_request:
     branches:
-      - '**'       # Run on ALL PRs
+      - '**'
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout repository
+      # 1️⃣ Checkout repo
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ Set up JDK
+      # 2️⃣ Set up Java
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      # 3️⃣ Cache Maven dependencies for faster builds
+      # 3️⃣ Cache Maven dependencies
       - name: Cache Maven dependencies
         uses: actions/cache@v4
         with:
@@ -33,16 +33,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      # 4️⃣ Navigate to correct directory and run tests
+      # 4️⃣ Run Maven tests from correct folder
       - name: Build and Run Tests
         run: |
-          cd ../../proj2/csc-510
+          cd proj2/csc-510
           mvn -B clean test
 
-      # 5️⃣ Upload JUnit test reports (optional but useful)
+      # 5️⃣ Upload test reports (relative to repo root)
       - name: Upload JUnit Test Results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: junit-results
-          path: ../../proj2/csc-510/target/surefire-reports/
+          path: proj2/csc-510/target/surefire-reports/
