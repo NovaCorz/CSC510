@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import FoodSeer.dto.OrderDto;
-import FoodSeer.entity.Settings;
 import FoodSeer.exception.ResourceNotFoundException;
-import FoodSeer.repository.SettingsRepository;
 import FoodSeer.service.OrderService;
 
 /**
@@ -32,10 +30,6 @@ public class OrderController {
     /** Connection to OrderService */
     @Autowired
     private OrderService orderService;
-
-    /** Settings repository for retrieving tax or configuration values */
-    @Autowired
-    private SettingsRepository settingsRepository;
 
     /**
      * Retrieves all orders in the system.
@@ -129,22 +123,4 @@ public class OrderController {
         }
     }
 
-    /**
-     * Retrieves the sales tax rate.
-     *
-     * @return ResponseEntity containing the tax rate
-     */
-    @GetMapping("/tax")
-    public ResponseEntity<Double> getSalesTaxRate() {
-        Settings settings = settingsRepository.findByName("salesTaxRate");
-
-        if (settings == null) {
-            settings = new Settings();
-            settings.setName("salesTaxRate");
-            settings.setValue(2.0);
-        }
-
-        settingsRepository.save(settings);
-        return ResponseEntity.ok(settings.getValue());
-    }
 }
