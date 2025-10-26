@@ -148,7 +148,7 @@ class OrderServiceImplTest {
         food.setAmount(foodDto.getAmount());
         food.setPrice(foodDto.getPrice());
         if (foodDto.getAllergies() != null) {
-            food.setAllergies(List.of(foodDto.getAllergies()));
+            food.setAllergies(foodDto.getAllergies());
         }
         return food;
     }

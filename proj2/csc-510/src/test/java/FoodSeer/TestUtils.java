@@ -1,27 +1,25 @@
-package edu.ncsu.csc326.wolfcafe;
+package FoodSeer;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Class for handy utils shared across all of the API tests
- *
- * @author Kai Presler-Marshall
- *
+ * Utility class for converting objects to JSON strings in tests.
  */
 public class TestUtils {
 
-    private static Gson gson = new Gson();
+    private static final ObjectMapper mapper = new ObjectMapper();
 
     /**
-     * Uses Google's GSON parser to serialize a Java object to JSON. Useful for
-     * creating JSON representations of our objects when calling API methods.
+     * Converts an object to its JSON representation.
      *
-     * @param obj
-     *            to serialize to JSON
-     * @return JSON string associated with object
+     * @param obj The object to convert.
+     * @return JSON string form of the object.
      */
-    public static String asJsonString ( final Object obj ) {
-        return gson.toJson( obj );
+    public static String asJsonString(final Object obj) {
+        try {
+            return mapper.writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
-
 }
