@@ -1,4 +1,15 @@
 -------------------------------------------------------------------------------
 Test set: FoodSeer.controller.AuthControllerTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.987 s -- in FoodSeer.controller.AuthControllerTest
+Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 11.07 s <<< FAILURE! -- in FoodSeer.controller.AuthControllerTest
+FoodSeer.controller.AuthControllerTest.shouldFailLoginWithInvalidCredentials -- Time elapsed: 0.197 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<401> but was:<500>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at FoodSeer.controller.AuthControllerTest.shouldFailLoginWithInvalidCredentials(AuthControllerTest.java:72)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+

@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasSize;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +30,12 @@ import FoodSeer.config.Roles.UserRoles;
 import FoodSeer.dto.RegisterRequestDto;
 import FoodSeer.dto.UpdateRoleDto;
 import FoodSeer.entity.User;
+import FoodSeer.repositories.UserRepository;
 import FoodSeer.service.AuthService;
 import FoodSeer.service.UserService;
 import jakarta.transaction.Transactional;
 
 @SpringBootTest
-@Transactional
 @AutoConfigureMockMvc
 class UserControllerTest {
 
@@ -50,30 +51,26 @@ class UserControllerTest {
     @Autowired
     private AuthService authService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     private User testUser;
     private User adminUser;
 
     @BeforeEach
     void setUp() {
-        testUser = User.builder()
-                .id(1L)
-                .username("testuser")
-                .email("test@example.com")
-                .password("password123")
-                .role(UserRoles.ROLE_STANDARD.name())
-                .build();
+        authService.register(new RegisterRequestDto("testuser", "test@example.com", "password123"));
+        authService.register(new RegisterRequestDto("admin", "admin@example.com", "adminpass"));
+        userService.updateUserRole(userService.getByUsername("admin").getId(), "ROLE_ADMIN");
 
-        adminUser = User.builder()
-                .id(2L)
-                .username("admin")
-                .email("admin@example.com")
-                .password("adminpass")
-                .role(Roles.ROLE_ADMIN)
-                .build();
+        // Reload persisted users with their database-generated IDs
+        testUser = userService.getByUsername("testuser");
+        adminUser = userService.getByUsername("admin");
+    }
 
-        authService.register(new RegisterRequestDto(testUser.getUsername(), testUser.getEmail(), testUser.getPassword()));
-        authService.register(new RegisterRequestDto(adminUser.getUsername(), adminUser.getEmail(), adminUser.getPassword()));
-        userService.updateUserRole(userService.getByUsername(adminUser.getUsername()).getId(), "ROLE_ADMIN");
+    @AfterEach
+    void cleanUp() {
+        userRepository.deleteAll();
     }
 
     @Test
@@ -99,17 +96,15 @@ class UserControllerTest {
     @WithMockUser(roles = "ADMIN")
     void shouldGetUserById() throws Exception {
     // Test for testUser
-    mockMvc.perform(get("/api/users/" + 2)
+    mockMvc.perform(get("/api/users/" + testUser.getId())
         .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.id").value(2))
         .andExpect(jsonPath("$.username").value(testUser.getUsername()));
 
     // Test for adminUser
-    mockMvc.perform(get("/api/users/" + 1)
+    mockMvc.perform(get("/api/users/" + adminUser.getId())
         .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.id").value(1))
         .andExpect(jsonPath("$.username").value(adminUser.getUsername()));
     }
 
@@ -133,7 +128,7 @@ class UserControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "STANDARD")
+    @WithMockUser(username = "testuser", authorities = "ROLE_STANDARD")
     void shouldNotAllowNonAdminToUpdateRole() throws Exception {
         mockMvc.perform(put("/api/users/" + testUser.getId() + "/role")
                 .contentType(MediaType.APPLICATION_JSON)

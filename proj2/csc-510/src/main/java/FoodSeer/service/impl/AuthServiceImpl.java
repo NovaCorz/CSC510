@@ -10,7 +10,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import lombok.AllArgsConstructor;
 import FoodSeer.dto.AuthResponseDto;
 import FoodSeer.dto.LoginRequestDto;
 import FoodSeer.dto.RegisterRequestDto;
@@ -18,17 +17,18 @@ import FoodSeer.entity.User;
 import FoodSeer.repositories.UserRepository;
 import FoodSeer.security.JwtTokenProvider;
 import FoodSeer.service.AuthService;
+import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
     @Autowired
-    private final UserRepository        userRepository;
+    private UserRepository        userRepository;
 
-    private final PasswordEncoder       passwordEncoder;
-    private final AuthenticationManager authManager;
-    private final JwtTokenProvider      jwtService;
+    private PasswordEncoder       passwordEncoder;
+    private AuthenticationManager authManager;
+    private JwtTokenProvider      jwtService;
 
     @Override
     public ResponseEntity<Map<String, String>> register ( final RegisterRequestDto req ) {

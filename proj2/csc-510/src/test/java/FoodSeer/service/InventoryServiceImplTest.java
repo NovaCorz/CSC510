@@ -9,6 +9,9 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +24,7 @@ import jakarta.persistence.Query;
  * Tests InventoryServiceImpl for FoodSeer.
  */
 @SpringBootTest
+@Transactional
 public class InventoryServiceImplTest {
 
     /** Reference to InventoryService (and InventoryServiceImpl). */
@@ -45,8 +49,8 @@ public class InventoryServiceImplTest {
         query.executeUpdate();
 
         final Query resetId =
-        	    entityManager.createNativeQuery("ALTER TABLE inventory ALTER COLUMN id RESTART WITH 1");
-        	resetId.executeUpdate();
+            entityManager.createNativeQuery("ALTER TABLE inventory AUTO_INCREMENT = 1");
+        resetId.executeUpdate();
 
     }
 

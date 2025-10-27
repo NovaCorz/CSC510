@@ -13,9 +13,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import lombok.AllArgsConstructor;
 import FoodSeer.security.JwtAuthenticationFilter;
+import FoodSeer.service.impl.JwtAccessDeniedHandler;
 import FoodSeer.service.impl.JwtAuthenticationEntryPoint;
+import lombok.AllArgsConstructor;
 
 /**
  * Details about roles and permissions. This file should be edited with any
@@ -27,10 +28,13 @@ import FoodSeer.service.impl.JwtAuthenticationEntryPoint;
 public class SpringSecurityConfig {
 
     /** JWT authentication entry point for an authenticated user */
-    private final JwtAuthenticationEntryPoint authenticationEntryPoint;
+    private JwtAuthenticationEntryPoint authenticationEntryPoint;
 
     /** Filters for authentication */
-    private final JwtAuthenticationFilter     authenticationFilter;
+    private JwtAuthenticationFilter     authenticationFilter;
+
+    /** Handles access denied (authorization) errors */
+    private JwtAccessDeniedHandler      accessDeniedHandler;
 
     /** Encodes passwords */
     @Bean
@@ -49,17 +53,17 @@ public class SpringSecurityConfig {
      */
     @Bean
     public SecurityFilterChain securityFilterChain ( final HttpSecurity http ) throws Exception {
-        http.csrf( ( csrf ) -> csrf.disable() ).authorizeHttpRequests( ( authorize ) -> {
-            authorize.requestMatchers( "/auth/**" ).permitAll();
-
-            authorize.requestMatchers( HttpMethod.OPTIONS, "/**" ).permitAll(); // allows
-                                                                                // preflight
-            authorize.requestMatchers( HttpMethod.GET, "/api/locations/{id:[0-9]+}" ).permitAll();
-
-            authorize.anyRequest().authenticated();
-        } ).httpBasic( Customizer.withDefaults() );
-
-        http.exceptionHandling( exception -> exception.authenticationEntryPoint( authenticationEntryPoint ) );
+        http.csrf( ( csrf ) -> csrf.disable() )
+            .exceptionHandling(exception -> exception
+                .authenticationEntryPoint(authenticationEntryPoint)
+                .accessDeniedHandler(accessDeniedHandler))
+            .authorizeHttpRequests( ( authorize ) -> {
+                authorize.requestMatchers( "/auth/**" ).permitAll();
+                authorize.requestMatchers( HttpMethod.OPTIONS, "/**" ).permitAll(); // allows preflight
+                authorize.requestMatchers( HttpMethod.GET, "/api/locations/{id:[0-9]+}" ).permitAll();
+                authorize.anyRequest().authenticated();
+            })
+            .httpBasic(Customizer.withDefaults());
 
         http.addFilterBefore( authenticationFilter, UsernamePasswordAuthenticationFilter.class );
 
