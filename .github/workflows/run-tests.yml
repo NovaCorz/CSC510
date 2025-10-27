@@ -15,6 +15,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      # Match the MySQL Action configuration
+      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/food_seer_test?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.MySQLDialect
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
