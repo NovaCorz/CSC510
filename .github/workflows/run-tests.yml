@@ -16,17 +16,16 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      # 👇 Force Spring Boot to use H2 instead of MySQL
       SPRING_DATASOURCE_URL: jdbc:h2:mem:foodseerdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.h2.Driver
       SPRING_DATASOURCE_USERNAME: sa
       SPRING_DATASOURCE_PASSWORD: ""
       SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.H2Dialect
-      SPRING_JPA_HIBERNATE_DDL_AUTO: create-drop
+      SPRING_JPA_HIBERNATE_DDL_AUTO: create
+      SPRING_JPA_PROPERTIES_HIBERNATE_HBM2DDL_CREATE_SCHEMAS: true
       SPRING_TEST_DATABASE_REPLACE: any
-      # Optional but good practice
       SPRING_H2_CONSOLE_ENABLED: false
-      SPRING_APPLICATION_NAME: foodseer-ci
+
 
     steps:
       - name: Check out repository
