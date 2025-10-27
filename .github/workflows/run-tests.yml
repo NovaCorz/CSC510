@@ -16,24 +16,21 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      # --- Use H2 in-memory database for CI ---
       SPRING_DATASOURCE_URL: jdbc:h2:mem:foodseerdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.h2.Driver
       SPRING_DATASOURCE_USERNAME: sa
       SPRING_DATASOURCE_PASSWORD: ""
       SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.H2Dialect
-    
-      # --- Make Hibernate recreate schema cleanly ---
       SPRING_JPA_HIBERNATE_DDL_AUTO: create-drop
       SPRING_JPA_PROPERTIES_HIBERNATE_HBM2DDL_CREATE_SCHEMAS: true
       SPRING_JPA_PROPERTIES_HIBERNATE_HBM2DDL_DROP_ORDER: true
       SPRING_JPA_PROPERTIES_HIBERNATE_HBM2DDL_FORCE_DROP: true
-    
-      # --- Misc recommended flags ---
       SPRING_H2_CONSOLE_ENABLED: false
       SPRING_TEST_DATABASE_REPLACE: any
       SPRING_SQL_INIT_MODE: never
-
+    
+      # ✅ Fix JWT signing key
+      APP_JWT_SECRET: "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF"
 
 
     steps:
