@@ -20,7 +20,7 @@
 **Food Seer** helps take the stress out of daily food choices by turning a simple conversation into a personalized meal recommendation. Designed exclusively for one restaurant's delivery system, Food Seer asks customers a few quick questions about their day and provides a tailored food option they can choose to purchase or pass until the next day.
 
 
-https://github.com/user-attachments/assets/45940413-30e4-48dd-bbea-70af6b97abf9
+**VIDEO**
 
 
 
