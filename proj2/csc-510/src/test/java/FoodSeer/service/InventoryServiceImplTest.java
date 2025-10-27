@@ -48,9 +48,8 @@ public class InventoryServiceImplTest {
         final Query query = entityManager.createNativeQuery("DELETE FROM inventory");
         query.executeUpdate();
 
-        final Query resetId =
-            entityManager.createNativeQuery("ALTER TABLE inventory AUTO_INCREMENT = 1");
-        resetId.executeUpdate();
+        entityManager.createNativeQuery("ALTER TABLE inventory ALTER COLUMN id RESTART WITH 1").executeUpdate();
+
 
     }
 
