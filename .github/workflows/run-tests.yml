@@ -25,6 +25,13 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
           cache: 'maven'
+          
+      - name: Start MySQL
+        uses: mirromutth/mysql-action@v1.1
+        with:
+          mysql version: '8.0'
+          mysql root password: root
+          mysql database: food_seer_test
 
       - name: Verify repo structure
         run: ls -R proj2/csc-510
