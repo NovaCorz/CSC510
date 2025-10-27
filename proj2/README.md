@@ -2,7 +2,7 @@
 
 
 [![DOI](https://zenodo.org/badge/887986629.svg)](https://doi.org/10.5281/zenodo.17460388)
-[![License](https://img.shields.io/github/license/SEFall24-Team61/campus-job-review-system)](https://github.com/NovaCorz/CSC510/BLOB/MAIN/proj2/LICENSE)
+[![License](https://img.shields.io/github/license/CSC510/proj2)](https://github.com/NovaCorz/CSC510/BLOB/MAIN/proj2/LICENSE)
 ![GitHub Release]
 ![codecov]
 ![Build main]
