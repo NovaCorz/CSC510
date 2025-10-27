@@ -16,11 +16,6 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public boolean userExists ( final String username ) {
-        return userRepository.existsByUsername( username );
-    }
-
-    @Override
     public User getCurrentUser () {
         final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if ( auth == null || !auth.isAuthenticated() ) {
@@ -56,4 +51,9 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
+    @Override
+    public User getByUsername(String username) {
+        final Optional<User> u = userRepository.findByUsername(username);
+        return u.orElse(null);
+    }   
 }

@@ -10,9 +10,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import lombok.AllArgsConstructor;
 import FoodSeer.entity.User;
 import FoodSeer.repositories.UserRepository;
+import lombok.AllArgsConstructor;
 
 /**
  * Supports finding and logging in a user by username or email.
@@ -22,7 +22,7 @@ import FoodSeer.repositories.UserRepository;
 public class CustomUserDetailsService implements UserDetailsService {
 
     /** Link to userRepository */
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
 
     /**
      * Returns UserDetails for the user associated with the username or email

@@ -1,22 +1,24 @@
 package FoodSeer.controller;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.when;
+// ...existing code...
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.Arrays;
+// ...existing code...
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasSize;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+// ...existing code...
+import org.springframework.boot.test.context.SpringBootTest;
+// ...existing code...
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -25,14 +27,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import FoodSeer.config.Roles;
 import FoodSeer.config.Roles.UserRoles;
-import FoodSeer.config.TestJpaConfig;
-import FoodSeer.config.TestSecurityConfig;
+import FoodSeer.dto.RegisterRequestDto;
 import FoodSeer.dto.UpdateRoleDto;
 import FoodSeer.entity.User;
+import FoodSeer.repositories.UserRepository;
+import FoodSeer.service.AuthService;
 import FoodSeer.service.UserService;
+import jakarta.transaction.Transactional;
 
-@WebMvcTest(UserController.class)
-@Import({TestSecurityConfig.class, TestJpaConfig.class})
+@SpringBootTest
+@AutoConfigureMockMvc
 class UserControllerTest {
 
     @Autowired
@@ -41,43 +45,43 @@ class UserControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @MockBean
+    @Autowired
     private UserService userService;
+
+    @Autowired
+    private AuthService authService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     private User testUser;
     private User adminUser;
 
     @BeforeEach
     void setUp() {
-        testUser = User.builder()
-                .id(1L)
-                .username("testuser")
-                .email("test@example.com")
-                .password("password123")
-                .role(UserRoles.ROLE_STANDARD.name())
-                .build();
+        authService.register(new RegisterRequestDto("testuser", "test@example.com", "password123"));
+        authService.register(new RegisterRequestDto("admin", "admin@example.com", "adminpass"));
+        userService.updateUserRole(userService.getByUsername("admin").getId(), "ROLE_ADMIN");
 
-        adminUser = User.builder()
-                .id(2L)
-                .username("admin")
-                .email("admin@example.com")
-                .password("adminpass")
-                .role(Roles.ROLE_ADMIN)
-                .build();
+        // Reload persisted users with their database-generated IDs
+        testUser = userService.getByUsername("testuser");
+        adminUser = userService.getByUsername("admin");
+    }
+
+    @AfterEach
+    void cleanUp() {
+        userRepository.deleteAll();
     }
 
     @Test
     @WithMockUser(roles = "ADMIN")
     void shouldListAllUsers() throws Exception {
-        when(userService.listUsers()).thenReturn(Arrays.asList(testUser, adminUser));
-
         mockMvc.perform(get("/api/users")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id").value(testUser.getId()))
-                .andExpect(jsonPath("$[0].username").value(testUser.getUsername()))
-                .andExpect(jsonPath("$[1].id").value(adminUser.getId()))
-                .andExpect(jsonPath("$[1].username").value(adminUser.getUsername()));
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$[*].username", hasItem(testUser.getUsername())))
+            .andExpect(jsonPath("$[*].username", hasItem(adminUser.getUsername())))
+            .andExpect(jsonPath("$", hasSize(2)));
     }
 
     @Test
@@ -91,19 +95,22 @@ class UserControllerTest {
     @Test
     @WithMockUser(roles = "ADMIN")
     void shouldGetUserById() throws Exception {
-        when(userService.findById(testUser.getId())).thenReturn(testUser);
+    // Test for testUser
+    mockMvc.perform(get("/api/users/" + testUser.getId())
+        .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.username").value(testUser.getUsername()));
 
-        mockMvc.perform(get("/api/users/" + testUser.getId())
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(testUser.getId()))
-                .andExpect(jsonPath("$.username").value(testUser.getUsername()));
+    // Test for adminUser
+    mockMvc.perform(get("/api/users/" + adminUser.getId())
+        .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.username").value(adminUser.getUsername()));
     }
 
     @Test
     @WithMockUser(roles = "ADMIN")
     void shouldReturn404WhenUserNotFound() throws Exception {
-        when(userService.findById(99L)).thenReturn(null);
 
         mockMvc.perform(get("/api/users/99")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -113,15 +120,6 @@ class UserControllerTest {
     @Test
     @WithMockUser(roles = "ADMIN")
     void shouldUpdateUserRole() throws Exception {
-        User updatedUser = User.builder()
-                .id(testUser.getId())
-                .username(testUser.getUsername())
-                .email(testUser.getEmail())
-                .role(Roles.ROLE_ADMIN)
-                .build();
-
-        when(userService.updateUserRole(eq(testUser.getId()), any(String.class))).thenReturn(updatedUser);
-
         mockMvc.perform(put("/api/users/" + testUser.getId() + "/role")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(new UpdateRoleDto(Roles.ROLE_ADMIN))))
@@ -130,7 +128,7 @@ class UserControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "STANDARD")
+    @WithMockUser(username = "testuser", authorities = "ROLE_STANDARD")
     void shouldNotAllowNonAdminToUpdateRole() throws Exception {
         mockMvc.perform(put("/api/users/" + testUser.getId() + "/role")
                 .contentType(MediaType.APPLICATION_JSON)

@@ -15,6 +15,24 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      SPRING_DATASOURCE_URL: jdbc:h2:mem:foodseerdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.h2.Driver
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD: ""
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.H2Dialect
+      SPRING_JPA_HIBERNATE_DDL_AUTO: create-drop
+      SPRING_JPA_PROPERTIES_HIBERNATE_HBM2DDL_CREATE_SCHEMAS: true
+      SPRING_JPA_PROPERTIES_HIBERNATE_HBM2DDL_DROP_ORDER: true
+      SPRING_JPA_PROPERTIES_HIBERNATE_HBM2DDL_FORCE_DROP: true
+      SPRING_H2_CONSOLE_ENABLED: false
+      SPRING_TEST_DATABASE_REPLACE: any
+      SPRING_SQL_INIT_MODE: never
+    
+      # ✅ Fix JWT signing key
+      APP_JWT_SECRET: "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF"
+
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -38,14 +56,15 @@ jobs:
             cp proj2/csc-510/src/test/resources/application.properties.template proj2/csc-510/src/test/resources/application.properties
           fi
 
-      - name: Check config files
+      - name: Show Effective Spring Boot Configuration
         run: |
-          echo "==== MAIN CONFIG ===="
-          cat proj2/csc-510/src/main/resources/application.properties || true
           echo "==== TEST CONFIG ===="
           cat proj2/csc-510/src/test/resources/application.properties || true
+          echo "==== ENVIRONMENT OVERRIDES ===="
+          echo "DB URL: $SPRING_DATASOURCE_URL"
+          echo "DIALECT: $SPRING_JPA_DATABASE_PLATFORM"
 
-      - name: Build & Run Tests
+      - name: Build & Run Tests (H2 In-Memory)
         run: |
           cd proj2/csc-510
           mvn -B clean test
