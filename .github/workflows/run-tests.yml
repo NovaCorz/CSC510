@@ -16,12 +16,17 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      # Match the MySQL Action configuration
-      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/food_seer_test?createDatabaseIfNotExist=true
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
-      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.MySQLDialect
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      # 👇 Force Spring Boot to use H2 instead of MySQL
+      SPRING_DATASOURCE_URL: jdbc:h2:mem:foodseerdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.h2.Driver
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD: ""
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.H2Dialect
+      SPRING_JPA_HIBERNATE_DDL_AUTO: create-drop
+      SPRING_TEST_DATABASE_REPLACE: any
+      # Optional but good practice
+      SPRING_H2_CONSOLE_ENABLED: false
+      SPRING_APPLICATION_NAME: foodseer-ci
 
     steps:
       - name: Check out repository
@@ -33,13 +38,6 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
           cache: 'maven'
-          
-      - name: Start MySQL
-        uses: mirromutth/mysql-action@v1.1
-        with:
-          mysql version: '8.0'
-          mysql root password: root
-          mysql database: food_seer_test
 
       - name: Verify repo structure
         run: ls -R proj2/csc-510
@@ -53,14 +51,15 @@ jobs:
             cp proj2/csc-510/src/test/resources/application.properties.template proj2/csc-510/src/test/resources/application.properties
           fi
 
-      - name: Check config files
+      - name: Show Effective Spring Boot Configuration
         run: |
-          echo "==== MAIN CONFIG ===="
-          cat proj2/csc-510/src/main/resources/application.properties || true
           echo "==== TEST CONFIG ===="
           cat proj2/csc-510/src/test/resources/application.properties || true
+          echo "==== ENVIRONMENT OVERRIDES ===="
+          echo "DB URL: $SPRING_DATASOURCE_URL"
+          echo "DIALECT: $SPRING_JPA_DATABASE_PLATFORM"
 
-      - name: Build & Run Tests
+      - name: Build & Run Tests (H2 In-Memory)
         run: |
           cd proj2/csc-510
           mvn -B clean test
