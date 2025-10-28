@@ -8,7 +8,7 @@
 [![GitHub Release](https://img.shields.io/github/release/NovaCorz/CSC510.svg)](https://github.com/NovaCorz/CSC510/releases)
 ![codecov]
 ![Build main]
-![Open Issues]
+[![Open Issues](https://img.shields.io/github/issues/NovaCorz/CSC510)](https://github.com/NovaCorz/CSC510/issues)
 ![Closed Issues]
 ![Pull Requests]
 ![GitHub last commit (branch)]
