@@ -28,10 +28,9 @@ jobs:
       SPRING_H2_CONSOLE_ENABLED: false
       SPRING_TEST_DATABASE_REPLACE: any
       SPRING_SQL_INIT_MODE: never
-    
+
       # ✅ Fix JWT signing key
       APP_JWT_SECRET: "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF"
-
 
     steps:
       - name: Check out repository
@@ -45,34 +44,34 @@ jobs:
           cache: 'maven'
 
       - name: Verify repo structure
-        run: ls -R proj2/csc-510
+        run: ls -R food-seer-backend
 
       - name: Copy application.properties (template → actual)
         run: |
-          if [ -f proj2/csc-510/src/main/resources/application.properties.template ]; then
-            cp proj2/csc-510/src/main/resources/application.properties.template proj2/csc-510/src/main/resources/application.properties
+          if [ -f food-seer-backend/src/main/resources/application.properties.template ]; then
+            cp food-seer-backend/src/main/resources/application.properties.template food-seer-backend/src/main/resources/application.properties
           fi
-          if [ -f proj2/csc-510/src/test/resources/application.properties.template ]; then
-            cp proj2/csc-510/src/test/resources/application.properties.template proj2/csc-510/src/test/resources/application.properties
+          if [ -f food-seer-backend/src/test/resources/application.properties.template ]; then
+            cp food-seer-backend/src/test/resources/application.properties.template food-seer-backend/src/test/resources/application.properties
           fi
 
       - name: Show Effective Spring Boot Configuration
         run: |
           echo "==== TEST CONFIG ===="
-          cat proj2/csc-510/src/test/resources/application.properties || true
+          cat food-seer-backend/src/test/resources/application.properties || true
           echo "==== ENVIRONMENT OVERRIDES ===="
           echo "DB URL: $SPRING_DATASOURCE_URL"
           echo "DIALECT: $SPRING_JPA_DATABASE_PLATFORM"
 
       - name: Build & Run Tests (H2 In-Memory)
         run: |
-          cd proj2/csc-510
+          cd food-seer-backend
           mvn -B clean test
 
       - name: Generate Surefire Report
         if: always()
         run: |
-          cd proj2/csc-510
+          cd food-seer-backend
           mvn surefire-report:report-only
 
       - name: Upload JUnit Test Results
@@ -80,12 +79,12 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: junit-results
-          path: proj2/csc-510/target/surefire-reports/
+          path: food-seer-backend/target/surefire-reports/
 
       - name: Publish Test Summary to Actions UI
         if: always()
         uses: dorny/test-reporter@v1
         with:
           name: JUnit Tests
-          path: proj2/csc-510/target/surefire-reports/*.xml
+          path: food-seer-backend/target/surefire-reports/*.xml
           reporter: java-junit
