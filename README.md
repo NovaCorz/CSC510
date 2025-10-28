@@ -15,7 +15,6 @@
 ![GitHub code size in bytes](https://img.shields.io/github/repo-size/NovaCorz/CSC510)
 ![Code style: black]
 ![linting: flake8]
-![JUnit Tests](https://img.shields.io/endpoint?url=https://camo.githubusercontent.com/672e848edad658bd64b7e5c58ff991f0e1e36ecd8604426640f9736861f397ea/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f74657374732d33372532307061737365642d73756363657373)
 
 ---
 
