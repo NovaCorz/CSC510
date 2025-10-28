@@ -1,2 +1,19 @@
 # Ignore application.properties and other sensitive config
 **/application.properties
+
+# Node modules
+**/node_modules/
+**/package-lock.json
+
+# Build outputs
+**/target/
+**/build/
+**/dist/
+
+# IDE files
+**/.vscode/
+**/.idea/
+**/*.iml
+
+# OS files
+**/.DS_Store

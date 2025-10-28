@@ -40,12 +40,20 @@ public class User {
     @Column ( nullable = false, length = 20 )
     private String role = "ROLE_STANDARD";
 
+    @Column ( length = 50 )
+    private String costPreference;
+
+    @Column ( length = 500 )
+    private String dietaryRestrictions;
+
     public User ( final User o, final String pass ) {
         this.id = o.getId();
         this.username = o.getUsername();
         this.email = o.getEmail();
         this.password = pass;
         this.role = o.getRole();
+        this.costPreference = o.getCostPreference();
+        this.dietaryRestrictions = o.getDietaryRestrictions();
     }
 
     public User ( final RegisterRequestDto o, final String pass ) {
