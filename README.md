@@ -105,7 +105,7 @@ This is just one example of how our system can help customers like Sarah navigat
 <code><a href="https://www.javascript.com/" target="_blank"><img height="50" src="https://cdn.freelogovectors.net/wp-content/uploads/2020/11/javascript_logo-768x873.png"></a></code>
 <code><a href="https://developer.mozilla.org/en-US/docs/Glossary/HTML5" target="_blank"><img height="50" src="https://cdn.pixabay.com/photo/2017/08/05/11/16/logo-2582748_1280.png"></a></code>
 <code><a href="https://www.java.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/java/java-icon.svg"></a></code>
-<code><a href="https://seeklogo.com/vector-logo/96578/mysql" target="_blank"><img height="50" src="https://images.seeklogo.com/logo-png/9/1/mysql-logo-png_seeklogo-96578.png"></a></code>
+<code><a href="" target="_blank"><img height="50" src="https://www.svgrepo.com/show/303251/mysql-logo.svg"></a></code>
 
 
 
