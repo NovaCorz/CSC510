@@ -25,7 +25,7 @@ but nevertheless, here is a track record that everyone is contributing a lot)|ev
 |The file .gitignore lists what files should not be saved to the repo. See [examples](https://github.com/github/gitignore)|in GH| |
 |The file INSTALL.md lists how to install the code|in GH| |
 |The file LICENSE.md lists rules of usage for this repo|in GH| |
-|The file CODE-OF-CONDUCT.md lists rules of behavior for this repo; e.g. see [example](https://github.com/probot/template/blob/master/CODE_OF_CONDUCT.md)|in GH| |
+|The file CODE-OF-CONDUCT.md lists rules of behavior for this repo; e.g. see [example](https://github.com/probot/template/blob/master/CODE_OF_CONDUCT.md)|in GH|:white_check_mark:|
 |The file CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up; e.g. see [example](https://github.com/probot/template/blob/master/CONTRIBUTING.md)|in GH| |
 |The file README.md contains all the following|in GH| |
 |Video|2min video of new functionality, showing a significant delta from prior.| |
