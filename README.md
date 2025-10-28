@@ -12,7 +12,7 @@
 [![Closed Issues](https://img.shields.io/github/issues-closed/NovaCorz/CSC510?color=green)](https://github.com/NovaCorz/CSC510/issues?q=is%3Aissue+is%3Aclosed)
 [![Pull Requests](https://img.shields.io/github/issues-pr/NovaCorz/CSC510)](https://github.com/NovaCorz/CSC510/pulls)
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/NovaCorz/CSC510/main) 
-![GitHub code size in bytes]
+![GitHub code size in bytes](https://img.shields.io/github/repo-size/NovaCorz/CSC510)
 ![Code style: black]
 ![linting: flake8]
 ---
