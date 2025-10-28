@@ -24,12 +24,12 @@ but nevertheless, here is a track record that everyone is contributing a lot)|ev
 |Short release cycles | (hard to see in short projects) project members are committing often enough so that everyone can get your work| |
 |The file .gitignore lists what files should not be saved to the repo. See [examples](https://github.com/github/gitignore)|in GH| |
 |The file INSTALL.md lists how to install the code|in GH| |
-|The file LICENSE.md lists rules of usage for this repo|in GH| |
+|The file LICENSE.md lists rules of usage for this repo|in GH|:white_check_mark:|
 |The file CODE-OF-CONDUCT.md lists rules of behavior for this repo; e.g. see [example](https://github.com/probot/template/blob/master/CODE_OF_CONDUCT.md)|in GH|:white_check_mark:|
 |The file CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up; e.g. see [example](https://github.com/probot/template/blob/master/CONTRIBUTING.md)|in GH| |
 |The file README.md contains all the following|in GH| |
 |Video|2min video of new functionality, showing a significant delta from prior.| |
-|DOI badge: exists. To get a Digitial Object Indentifier, regiser the project at [Zenodo](https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content). DOI badges look like this: ![Zenodo doi badge](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.1234567-blue.svg) |in GH|  |
+|DOI badge: exists. To get a Digitial Object Indentifier, regiser the project at [Zenodo](https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content). DOI badges look like this: ![Zenodo doi badge](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.1234567-blue.svg) |in GH|:white_check_mark:|
 |Badges showing your style checkers |config files in GH showing your config, badges in README| |
 |Badges showing your code formatters. |config files in GH showing your this formatter's  config, badges in README||
 |Badges showing your syntax checkers. |config files iin  GH showing this checker's config, badges in README  ||
