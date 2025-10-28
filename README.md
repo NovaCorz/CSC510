@@ -142,7 +142,7 @@ To set up the project locally, follow these steps.
 **Clone the Repository:**
 ```bash
 git clone https://github.com/NovaCorz/CSC510.git
-cd proj2
+cd CSC510
 ```
 Choose Your Installation Method (with Docker or without Docker). Detailed instructions are available in [INSTALL.md](INSTALL.md).
 
@@ -203,13 +203,11 @@ A heartfelt thank you to our contributors who made this project possible:
 
 
 ## 🙏 Acknowledgements
-
-
+We extend our heartfelt thanks to Professor Dr. Timothy Menzies for his invaluable guidance in shaping our understanding of effective Software Engineering practices. We’re also deeply grateful to the teaching assistants for their consistent support and encouragement throughout the project.
 
 
 ## 💡 Feedback
-
-
+Your input matters to us! If you have ideas for enhancements or new features, feel free to open an issue or submit a pull request. Thoughtful feedback from contributors like you helps us improve and evolve.
 
 
 ## ⚠️ Disclaimer
