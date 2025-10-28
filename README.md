@@ -3,7 +3,7 @@
 
 
 
-[![DOI](https://zenodo.org/badge/NovaCorz.svg)](https://zenodo.org/badge/latestdoi/NovaCorz)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17460388.svg)](https://doi.org/10.5281/zenodo.17460388)
 [![License](https://img.shields.io/github/license/NovaCorz/CSC510)](https://github.com/NovaCorz/CSC510/blob/main/LICENSE)
 [![GitHub Release](https://img.shields.io/github/release/NovaCorz/CSC510.svg)](https://github.com/NovaCorz/CSC510/releases)
 ![codecov]
