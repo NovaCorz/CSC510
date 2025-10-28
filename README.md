@@ -194,10 +194,10 @@ A heartfelt thank you to our contributors who made this project possible:
 **Group #13**
 
 
-- [Justin Kuethe](https://github.com/jrkuethe) - jrkuethe
+- [Justin Kuethe](https://github.com/NovaCorz) - jrkuethe
 - [Chase Goins](https://github.com/jcgoins2) - jcgoins2
-- [Andrew Parr](https://github.com/aaparr) - aaparr
-- [Mukul Sauhta](https://github.com/msauhta2) - msauhta2
+- [Andrew Parr](https://github.com/afluffybunny15) - aaparr
+- [Mukul Sauhta](https://github.com/muksaw) - msauhta2
 
 
 
