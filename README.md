@@ -181,7 +181,6 @@ We're excited about the enhancements coming to Food Seer! Here's what's on the h
 - **Multi-Restaurant Support:** Expand the platform to support multiple restaurant partners, giving customers more dining options.
 - **Dietary Restrictions & Allergies:** Enhanced filtering and recommendation systems that account for health needs and dietary preferences.
 - **Social Features:** Share recommendations with friends, see what others are ordering, and discover trending meals.
-- **Loyalty Program:** Reward frequent customers with special perks, discounts, and exclusive menu items.
 - **Mobile App:** Native iOS and Android applications for convenient on-the-go ordering and recommendations.
 
 
@@ -208,11 +207,6 @@ A heartfelt thank you to our contributors who made this project possible:
 
 
 ## 💡 Feedback
-
-
-
-
-## 🙏 Special Thanks to Previous Contributors
 
 
 
