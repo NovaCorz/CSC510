@@ -88,22 +88,3 @@ jobs:
           name: JUnit Tests
           path: food-seer-backend/target/surefire-reports/*.xml
           reporter: java-junit
-    
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'  # Adjust to your Java version
-          distribution: 'temurin'
-    
-      - name: Build and test with Maven
-        run: mvn clean test
-    
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./target/site/jacoco/jacoco.xml
-          flags: unittests
-          name: codecov-umbrella
-          fail_ci_if_error: true
-
