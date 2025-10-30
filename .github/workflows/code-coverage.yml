@@ -19,6 +19,9 @@ jobs:
         java-version: '21'  # Adjust to your Java version
         distribution: 'temurin'
     
+    - name: Jest Coverage Report
+      run: npx jest --coverage
+    
     - name: Build and test with Maven
       run: mvn clean test
     
