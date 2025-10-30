@@ -91,21 +91,23 @@ public class DataInitializer {
             sampleFoods.add(new Food("GRANOLA BAR", 45, 3, Arrays.asList("NUTS", "GLUTEN")));
             
             // Mid-range options ($10-$20)
-            sampleFoods.add(new Food("SANDWICH", 20, 12, Arrays.asList("GLUTEN", "WHEAT")));
-            sampleFoods.add(new Food("SALAD", 15, 10, new ArrayList<>()));
-            sampleFoods.add(new Food("PASTA", 18, 14, Arrays.asList("GLUTEN", "WHEAT")));
+            sampleFoods.add(new Food("TURKEY SANDWICH", 20, 12, Arrays.asList("GLUTEN", "WHEAT", "MEAT", "POULTRY")));
+            sampleFoods.add(new Food("GARDEN SALAD", 15, 10, new ArrayList<>())); // Vegan-friendly
+            sampleFoods.add(new Food("CAESAR SALAD", 15, 11, Arrays.asList("DAIRY", "EGGS"))); // Has cheese and dressing
+            sampleFoods.add(new Food("PASTA", 18, 14, Arrays.asList("GLUTEN", "WHEAT", "EGGS"))); // Most pasta has eggs
             sampleFoods.add(new Food("PIZZA SLICE", 25, 8, Arrays.asList("GLUTEN", "DAIRY", "WHEAT", "LACTOSE")));
-            sampleFoods.add(new Food("BURRITO", 22, 11, Arrays.asList("GLUTEN", "DAIRY", "WHEAT")));
-            sampleFoods.add(new Food("SOUP", 20, 9, new ArrayList<>()));
+            sampleFoods.add(new Food("BURRITO", 22, 11, Arrays.asList("GLUTEN", "DAIRY", "WHEAT", "MEAT", "BEEF")));
+            sampleFoods.add(new Food("VEGETABLE SOUP", 20, 9, new ArrayList<>())); // Vegan-friendly
+            sampleFoods.add(new Food("CHICKEN NOODLE SOUP", 18, 10, Arrays.asList("GLUTEN", "WHEAT", "MEAT", "POULTRY")));
             sampleFoods.add(new Food("SUSHI ROLL", 15, 13, Arrays.asList("FISH", "SOY")));
-            sampleFoods.add(new Food("CHICKEN WRAP", 18, 10, Arrays.asList("GLUTEN", "WHEAT")));
+            sampleFoods.add(new Food("CHICKEN WRAP", 18, 10, Arrays.asList("GLUTEN", "WHEAT", "MEAT", "POULTRY")));
             
             // Premium options (over $20)
-            sampleFoods.add(new Food("STEAK", 10, 28, new ArrayList<>()));
+            sampleFoods.add(new Food("STEAK", 10, 28, Arrays.asList("MEAT", "BEEF")));
             sampleFoods.add(new Food("SALMON", 12, 24, Arrays.asList("FISH")));
             sampleFoods.add(new Food("LOBSTER", 8, 35, Arrays.asList("SHELLFISH")));
             sampleFoods.add(new Food("SUSHI PLATTER", 10, 32, Arrays.asList("FISH", "SOY")));
-            sampleFoods.add(new Food("RIBEYE", 8, 30, new ArrayList<>()));
+            sampleFoods.add(new Food("RIBEYE", 8, 30, Arrays.asList("MEAT", "BEEF")));
             
             // Vegan/Vegetarian options
             sampleFoods.add(new Food("VEGGIE BURGER", 20, 11, Arrays.asList("GLUTEN", "SOY", "WHEAT")));

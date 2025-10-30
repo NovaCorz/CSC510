@@ -58,10 +58,63 @@ const Recommendations = () => {
 
     // Filter by dietary restrictions (allergies)
     if (userData.dietaryRestrictions) {
-      const restrictions = userData.dietaryRestrictions
-        .toLowerCase()
-        .split(',')
-        .map(r => r.trim());
+      const restrictionsInput = userData.dietaryRestrictions.toLowerCase();
+      const restrictions = restrictionsInput.split(',').map(r => r.trim());
+      
+      // Expand dietary preference keywords into specific allergen exclusions
+      const expandedRestrictions = new Set();
+      
+      restrictions.forEach(restriction => {
+        // Add the original restriction
+        expandedRestrictions.add(restriction);
+        
+        // Expand special dietary preferences
+        if (restriction.includes('vegan')) {
+          // Vegans avoid all animal products
+          expandedRestrictions.add('dairy');
+          expandedRestrictions.add('lactose');
+          expandedRestrictions.add('eggs');
+          expandedRestrictions.add('meat');
+          expandedRestrictions.add('beef');
+          expandedRestrictions.add('pork');
+          expandedRestrictions.add('poultry');
+          expandedRestrictions.add('chicken');
+          expandedRestrictions.add('fish');
+          expandedRestrictions.add('shellfish');
+          expandedRestrictions.add('honey');
+          expandedRestrictions.add('gelatin');
+        } else if (restriction.includes('vegetarian')) {
+          // Vegetarians avoid meat and fish but can have dairy/eggs
+          expandedRestrictions.add('meat');
+          expandedRestrictions.add('beef');
+          expandedRestrictions.add('pork');
+          expandedRestrictions.add('poultry');
+          expandedRestrictions.add('chicken');
+          expandedRestrictions.add('fish');
+          expandedRestrictions.add('shellfish');
+          expandedRestrictions.add('gelatin');
+        } else if (restriction.includes('lactose') || restriction.includes('dairy free')) {
+          expandedRestrictions.add('dairy');
+          expandedRestrictions.add('lactose');
+        } else if (restriction.includes('gluten free') || restriction.includes('celiac')) {
+          expandedRestrictions.add('gluten');
+          expandedRestrictions.add('wheat');
+          expandedRestrictions.add('barley');
+          expandedRestrictions.add('rye');
+        } else if (restriction.includes('nut')) {
+          expandedRestrictions.add('nuts');
+          expandedRestrictions.add('peanuts');
+          expandedRestrictions.add('tree nuts');
+          expandedRestrictions.add('almonds');
+        } else if (restriction.includes('pescatarian')) {
+          // Pescatarians avoid meat/poultry but eat fish
+          expandedRestrictions.add('meat');
+          expandedRestrictions.add('beef');
+          expandedRestrictions.add('pork');
+          expandedRestrictions.add('poultry');
+          expandedRestrictions.add('chicken');
+        }
+      });
       
       filtered = filtered.filter(food => {
         if (!food.allergies || food.allergies.length === 0) {
@@ -70,7 +123,7 @@ const Recommendations = () => {
         
         // Check if any of the food's allergies match user's restrictions
         const foodAllergies = food.allergies.map(a => a.toLowerCase());
-        return !restrictions.some(restriction => 
+        return !Array.from(expandedRestrictions).some(restriction => 
           foodAllergies.some(allergy => 
             allergy.includes(restriction) || restriction.includes(allergy)
           )
