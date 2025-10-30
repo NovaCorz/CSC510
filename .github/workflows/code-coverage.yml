@@ -20,6 +20,7 @@ jobs:
         distribution: 'temurin'
     
     - name: Jest Coverage Report
+      run: npm install --save-dev jest
       run: npx jest --coverage
     
     - name: Build and test with Maven
