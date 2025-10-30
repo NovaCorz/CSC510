@@ -110,7 +110,7 @@ This is just one example of how our system can help customers like Sarah navigat
 <code><a href="https://www.npmjs.com/" target="_blank"><img height="50" src="https://www.svgrepo.com/show/452077/npm.svg"></a></code>
 <code><a href="https://react.dev/" target="_blank"><img height="50" src="https://www.svgrepo.com/show/452092/react.svg"></a></code>
 <code><a href="https://spring.io/projects/spring-boot" target="_blank"><img height="50" src="https://spring.io/img/projects/spring-boot.svg"></a></code>
-<code><a href="https://ollama.com)" target="_blank"><img height="50" src="https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/dark/ollama.png"></a></code>
+<code><a href="https://ollama.com" target="_blank"><img height="50" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/ollama.svg"></a></code>
 
 
 
