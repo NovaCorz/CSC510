@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import FoodSeer.dto.UpdateRoleDto;
 import FoodSeer.dto.UserDto;
+import FoodSeer.dto.UserPreferencesDto;
 import FoodSeer.service.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @CrossOrigin("*")
 @RequestMapping("/api/users")
@@ -62,6 +65,27 @@ public class UserController {
     @GetMapping ( "/me" )
     public ResponseEntity<UserDto> getCurrentUser () {
         return ResponseEntity.ok( UserDto.fromEntity(userService.getCurrentUser()) );
+    }
+
+    @PutMapping ( "/me/preferences" )
+    public ResponseEntity<UserDto> updatePreferences (@RequestBody final UserPreferencesDto preferences) {
+        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !auth.isAuthenticated()) {
+            return ResponseEntity.status(401).build();
+        }
+        
+        final String username = auth.getName();
+        final var updatedUser = userService.updateUserPreferences(
+            username, 
+            preferences.costPreference(), 
+            preferences.dietaryRestrictions()
+        );
+        
+        if (updatedUser == null) {
+            return ResponseEntity.notFound().build();
+        }
+        
+        return ResponseEntity.ok(UserDto.fromEntity(updatedUser));
     }
 
 }

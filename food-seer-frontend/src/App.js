@@ -1,68 +1,42 @@
-import React, { useState } from 'react';
-import BudgetQuestion from './components/BudgetQuestion';
-import DietaryRestrictions from './components/DietaryRestrictions';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Preferences from './pages/Preferences';
+import Recommendations from './pages/Recommendations';
+import { isAuthenticated } from './services/api';
+
+// Protected Route component
+const ProtectedRoute = ({ children }) => {
+  return isAuthenticated() ? children : <Navigate to="/" />;
+};
 
 function App() {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [quizData, setQuizData] = useState({
-    budget: '',
-    customBudget: '',
-    dietaryRestrictions: [],
-    customDietary: ''
-  });
-
-  const handleNext = () => {
-    if (currentStep < 2) {
-      setCurrentStep(currentStep + 1);
-    }
-  };
-
-  const handlePrevious = () => {
-    if (currentStep > 1) {
-      setCurrentStep(currentStep - 1);
-    }
-  };
-
-  const updateQuizData = (field, value) => {
-    setQuizData(prev => ({
-      ...prev,
-      [field]: value
-    }));
-  };
-
-  const renderCurrentStep = () => {
-    switch (currentStep) {
-      case 1:
-        return (
-          <BudgetQuestion
-            budget={quizData.budget}
-            customBudget={quizData.customBudget}
-            onUpdate={updateQuizData}
-            onNext={handleNext}
-            onPrevious={handlePrevious}
-            canGoNext={quizData.budget !== '' || quizData.customBudget !== ''}
-          />
-        );
-      case 2:
-        return (
-          <DietaryRestrictions
-            restrictions={quizData.dietaryRestrictions}
-            customDietary={quizData.customDietary}
-            onUpdate={updateQuizData}
-            onNext={handleNext}
-            onPrevious={handlePrevious}
-            canGoNext={true}
-          />
-        );
-      default:
-        return null;
-    }
-  };
-
   return (
-    <div className="App">
-      {renderCurrentStep()}
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route 
+            path="/preferences" 
+            element={
+              <ProtectedRoute>
+                <Preferences />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/recommendations" 
+            element={
+              <ProtectedRoute>
+                <Recommendations />
+              </ProtectedRoute>
+            } 
+          />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

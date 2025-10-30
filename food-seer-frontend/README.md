@@ -1,106 +1,101 @@
-# Food Seer Frontend
+# FoodSeer Frontend
 
-A React-based frontend application for Food Seer, a personalized meal recommendation system. This frontend provides an interactive quiz interface for customers to specify their preferences and dietary requirements.
+A modern React-based frontend for the FoodSeer food recommendation application.
 
 ## Features
 
-- **Budget Question Page**: Interactive quiz asking about spending preferences per meal
-  - Radio button options for predefined budget ranges
-  - Custom input field for special occasions
-  - Clean, modern UI with dollar sign icon
-
-- **Dietary Restrictions Page**: Multi-select interface for dietary preferences
-  - Checkbox options for common dietary restrictions
-  - Custom input field for specific dietary needs
-  - Carrot icon representing food/dietary focus
-
-- **Responsive Design**: Mobile-friendly interface that works across devices
-- **Navigation**: Previous/Next buttons for seamless quiz flow
-- **State Management**: React hooks for managing quiz data and navigation
+- **User Authentication**: Secure login with JWT tokens
+- **Preferences Management**: Collect user budget and dietary restrictions
+- **Personalized Recommendations**: Display food recommendations based on user preferences
+- **Responsive Design**: Works on desktop and mobile devices
 
 ## Project Structure
 
 ```
-food-seer-frontend/
-├── public/
-│   └── index.html          # HTML template
-├── src/
-│   ├── components/
-│   │   ├── BudgetQuestion.js      # Budget selection component
-│   │   └── DietaryRestrictions.js # Dietary preferences component
-│   ├── App.js              # Main application component
-│   ├── index.js            # React entry point
-│   └── index.css           # Global styles
-└── package.json            # Dependencies and scripts
+src/
+├── components/          # Reusable React components
+│   ├── BudgetQuestion.js
+│   └── DietaryRestrictions.js
+├── pages/              # Page components
+│   ├── Login.js
+│   ├── Preferences.js
+│   └── Recommendations.js
+├── services/           # API service layer
+│   └── api.js
+├── App.js             # Main app with routing
+├── index.js           # Entry point
+└── index.css          # Global styles
 ```
 
-## Getting Started
+## Routes
+
+- `/` - Login page
+- `/preferences` - User preferences (protected)
+- `/recommendations` - Recommendations page (protected)
+
+## Development
 
 ### Prerequisites
-
-- Node.js (version 14 or higher)
+- Node.js 16+
 - npm or yarn
 
 ### Installation
+```bash
+npm install
+```
 
-1. Navigate to the frontend directory:
-   ```bash
-   cd proj2/food-seer-frontend
-   ```
+### Run Development Server
+```bash
+npm start
+```
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+The app will run on `http://localhost:3000`
 
-3. Start the development server:
-   ```bash
-   npm start
-   ```
+### Build for Production
+```bash
+npm run build
+```
 
-4. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## API Integration
 
-## Available Scripts
+The frontend communicates with the Spring Boot backend at `http://localhost:8080`
 
-- `npm start` - Runs the app in development mode
-- `npm build` - Builds the app for production
-- `npm test` - Launches the test runner
-- `npm eject` - Ejects from Create React App (one-way operation)
+### Authentication Flow
+1. User logs in with username/password
+2. Backend returns JWT token
+3. Token is stored in localStorage
+4. Token is included in all subsequent API requests via Authorization header
 
-## Design Features
+### API Endpoints Used
+- `POST /auth/login` - User login
+- `GET /api/users/me` - Get current user info
+- `PUT /api/users/me/preferences` - Update user preferences
 
-### UI Components
-- **Clean, Modern Design**: Minimalist interface with rounded corners and subtle shadows
-- **Consistent Styling**: Unified color scheme with orange (#ffa500) accents
-- **Interactive Elements**: Hover effects and smooth transitions
-- **Accessibility**: Proper contrast ratios and keyboard navigation support
+## Styling
 
-### Quiz Flow
-1. **Budget Selection**: Users choose their spending preference or enter custom amount
-2. **Dietary Restrictions**: Users select applicable dietary restrictions
-3. **Navigation**: Easy movement between steps with Previous/Next buttons
+The app uses vanilla CSS with a modern, clean design featuring:
+- Gradient backgrounds
+- Card-based layouts
+- Smooth transitions and hover effects
+- Responsive grid system
 
-### Responsive Design
-- Mobile-first approach
-- Flexible layouts that adapt to different screen sizes
-- Touch-friendly interface elements
+## Protected Routes
 
-## Integration
+Routes are protected using the `ProtectedRoute` component which checks for JWT token presence. Unauthenticated users are redirected to the login page.
 
-This frontend is designed to integrate with the Food Seer Spring Boot backend API. The quiz data collected can be sent to backend endpoints for processing and meal recommendations.
+## State Management
 
-## Future Enhancements
+- Authentication state: Managed via localStorage
+- User preferences: Managed locally and synced with backend
+- User data: Fetched on-demand from backend
 
-- Additional quiz questions for comprehensive preference collection
-- Integration with backend API endpoints
-- User authentication and profile management
-- Meal recommendation display
-- Feedback and rating system
-- AI chatbot integration
+## Browser Support
 
-## Technologies Used
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
 
-- **React 18**: Modern React with hooks
-- **CSS3**: Custom styling with flexbox and grid
-- **JavaScript ES6+**: Modern JavaScript features
-- **React Router**: Navigation between pages (ready for future expansion)
+## License
+
+Part of the FoodSeer project for CSC510
