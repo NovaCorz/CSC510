@@ -16,7 +16,7 @@ jobs:
     - name: Set up JDK
       uses: actions/setup-java@v4
       with:
-        java-version: '17'  # Adjust to your Java version
+        java-version: '21'  # Adjust to your Java version
         distribution: 'temurin'
     
     - name: Build and test with Maven
