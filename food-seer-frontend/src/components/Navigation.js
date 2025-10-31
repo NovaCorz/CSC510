@@ -28,11 +28,20 @@ const Navigation = () => {
 
   const isAdmin = user?.role === 'ROLE_ADMIN';
   const isStaff = user?.role === 'ROLE_STAFF' || isAdmin;
+  const isStandardUser = user?.role === 'ROLE_STANDARD';
+
+  const handleBrandClick = () => {
+    if (isStaff) {
+      navigate('/order-management');
+    } else {
+      navigate('/recommendations');
+    }
+  };
 
   return (
     <nav className="main-navigation">
       <div className="nav-container">
-        <div className="nav-brand" onClick={() => navigate('/recommendations')}>
+        <div className="nav-brand" onClick={handleBrandClick}>
           🍽️ FoodSeer
         </div>
 
@@ -45,73 +54,80 @@ const Navigation = () => {
 
         <div className={`nav-menu ${menuOpen ? 'open' : ''}`}>
           <div className="nav-links">
-            <button
-              className={`nav-link ${location.pathname === '/recommendations' ? 'active' : ''}`}
-              onClick={() => {
-                navigate('/recommendations');
-                setMenuOpen(false);
-              }}
-            >
-              🏠 Home
-            </button>
-
-            <button
-              className={`nav-link ${location.pathname === '/inventory' ? 'active' : ''}`}
-              onClick={() => {
-                navigate('/inventory');
-                setMenuOpen(false);
-              }}
-            >
-              🏪 Browse Foods
-            </button>
-
-            <button
-              className={`nav-link ${location.pathname === '/create-order' ? 'active' : ''}`}
-              onClick={() => {
-                navigate('/create-order');
-                setMenuOpen(false);
-              }}
-            >
-              🛒 Create Order
-            </button>
-
-            <button
-              className={`nav-link ${location.pathname === '/orders' ? 'active' : ''}`}
-              onClick={() => {
-                navigate('/orders');
-                setMenuOpen(false);
-              }}
-            >
-              📦 My Orders
-            </button>
-
-            {isStaff && (
+            {/* Customer-only menu items */}
+            {isStandardUser && (
               <>
-                <div className="nav-divider"></div>
                 <button
-                  className={`nav-link staff ${location.pathname === '/staff' ? 'active' : ''}`}
+                  className={`nav-link ${location.pathname === '/recommendations' ? 'active' : ''}`}
                   onClick={() => {
-                    navigate('/staff');
+                    navigate('/recommendations');
                     setMenuOpen(false);
                   }}
                 >
-                  👨‍🍳 Staff Dashboard
+                  🏠 Home
+                </button>
+
+                <button
+                  className={`nav-link ${location.pathname === '/inventory' ? 'active' : ''}`}
+                  onClick={() => {
+                    navigate('/inventory');
+                    setMenuOpen(false);
+                  }}
+                >
+                  🏪 Browse Foods
+                </button>
+
+                <button
+                  className={`nav-link ${location.pathname === '/create-order' ? 'active' : ''}`}
+                  onClick={() => {
+                    navigate('/create-order');
+                    setMenuOpen(false);
+                  }}
+                >
+                  🛒 Create Order
+                </button>
+
+                <button
+                  className={`nav-link ${location.pathname === '/orders' ? 'active' : ''}`}
+                  onClick={() => {
+                    navigate('/orders');
+                    setMenuOpen(false);
+                  }}
+                >
+                  📦 My Orders
                 </button>
               </>
             )}
 
-            {isAdmin && (
+            {/* Staff & Admin menu items */}
+            {isStaff && (
               <>
+                {isStandardUser && <div className="nav-divider"></div>}
                 <button
-                  className={`nav-link admin ${location.pathname === '/admin' ? 'active' : ''}`}
+                  className={`nav-link staff ${location.pathname === '/order-management' ? 'active' : ''}`}
                   onClick={() => {
-                    navigate('/admin');
+                    navigate('/order-management');
                     setMenuOpen(false);
                   }}
                 >
-                  🔧 Admin Dashboard
+                  📦 Order Management
                 </button>
 
+                <button
+                  className={`nav-link staff ${location.pathname === '/inventory-management' ? 'active' : ''}`}
+                  onClick={() => {
+                    navigate('/inventory-management');
+                    setMenuOpen(false);
+                  }}
+                >
+                  🏪 Inventory Management
+                </button>
+              </>
+            )}
+
+            {/* Admin-only menu items */}
+            {isAdmin && (
+              <>
                 <button
                   className={`nav-link admin ${location.pathname === '/users' ? 'active' : ''}`}
                   onClick={() => {

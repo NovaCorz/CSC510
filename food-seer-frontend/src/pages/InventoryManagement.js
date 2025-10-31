@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAllFoods, createFood, updateFood, deleteFood, getCurrentUser } from '../services/api';
 
-const AdminDashboard = () => {
+const InventoryManagement = () => {
   const [foods, setFoods] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -19,10 +19,10 @@ const AdminDashboard = () => {
     try {
       const user = await getCurrentUser();
       
-      // Check if user is admin
-      if (user.role !== 'ROLE_ADMIN') {
-        alert('Access denied. Admin privileges required.');
-        navigate('/recommendations');
+      // Check if user has staff or admin role
+      if (user.role !== 'ROLE_ADMIN' && user.role !== 'ROLE_STAFF') {
+        alert('Access denied. Staff or Admin privileges required.');
+        navigate('/');
         return;
       }
 
@@ -148,7 +148,7 @@ const AdminDashboard = () => {
   };
 
   const handleBack = () => {
-    navigate('/recommendations');
+    navigate('/order-management');
   };
 
   if (loading) {
@@ -162,7 +162,7 @@ const AdminDashboard = () => {
   return (
     <div className="admin-dashboard-container">
       <div className="dashboard-header">
-        <h1>🔧 Admin Dashboard - Inventory Management</h1>
+        <h1>📦 Inventory Management</h1>
         <div className="header-actions">
           <button className="add-button" onClick={() => setShowAddForm(!showAddForm)}>
             {showAddForm ? 'Cancel' : '+ Add Food'}
@@ -311,5 +311,5 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default InventoryManagement;
 

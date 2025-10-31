@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getUnfulfilledOrders, getFulfilledOrders, fulfillOrder, getCurrentUser } from '../services/api';
 
-const StaffDashboard = () => {
+const OrderManagement = () => {
   const [unfulfilledOrders, setUnfulfilledOrders] = useState([]);
   const [fulfilledOrders, setFulfilledOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,8 +16,8 @@ const StaffDashboard = () => {
       
       // Check if user has staff or admin role
       if (user.role !== 'ROLE_ADMIN' && user.role !== 'ROLE_STAFF') {
-        alert('Access denied. Staff privileges required.');
-        navigate('/recommendations');
+        alert('Access denied. Staff or Admin privileges required.');
+        navigate('/');
         return;
       }
 
@@ -62,7 +62,7 @@ const StaffDashboard = () => {
   };
 
   const handleBack = () => {
-    navigate('/recommendations');
+    navigate('/inventory-management');
   };
 
   if (loading) {
@@ -78,7 +78,7 @@ const StaffDashboard = () => {
   return (
     <div className="staff-dashboard-container">
       <div className="dashboard-header">
-        <h1>👨‍🍳 Staff Dashboard - Order Management</h1>
+        <h1>📦 Order Management</h1>
         <button className="back-button" onClick={handleBack}>
           Back
         </button>
@@ -183,5 +183,5 @@ const StaffDashboard = () => {
   );
 };
 
-export default StaffDashboard;
+export default OrderManagement;
 

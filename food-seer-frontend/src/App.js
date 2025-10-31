@@ -7,8 +7,8 @@ import Recommendations from './pages/Recommendations';
 import Inventory from './pages/Inventory';
 import CreateOrder from './pages/CreateOrder';
 import Orders from './pages/Orders';
-import StaffDashboard from './pages/StaffDashboard';
-import AdminDashboard from './pages/AdminDashboard';
+import OrderManagement from './pages/OrderManagement';
+import InventoryManagement from './pages/InventoryManagement';
 import UserManagement from './pages/UserManagement';
 import Navigation from './components/Navigation';
 import { isAuthenticated } from './services/api';
@@ -89,29 +89,29 @@ function App() {
             } 
           />
           
-          {/* Staff routes */}
+          {/* Staff & Admin routes */}
           <Route 
-            path="/staff" 
+            path="/order-management" 
             element={
               <ProtectedRoute>
                 <AppLayout>
-                  <StaffDashboard />
+                  <OrderManagement />
+                </AppLayout>
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/inventory-management" 
+            element={
+              <ProtectedRoute>
+                <AppLayout>
+                  <InventoryManagement />
                 </AppLayout>
               </ProtectedRoute>
             } 
           />
           
-          {/* Admin routes */}
-          <Route 
-            path="/admin" 
-            element={
-              <ProtectedRoute>
-                <AppLayout>
-                  <AdminDashboard />
-                </AppLayout>
-              </ProtectedRoute>
-            } 
-          />
+          {/* Admin-only routes */}
           <Route 
             path="/users" 
             element={
