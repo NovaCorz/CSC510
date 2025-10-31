@@ -47,8 +47,8 @@ public class DataInitializer {
         if (roleRepository.findByName("ROLE_ADMIN") == null) {
             roleRepository.save(new Role(null, "ROLE_ADMIN"));
         }
-        if (roleRepository.findByName("ROLE_STANDARD") == null) {
-            roleRepository.save(new Role(null, "ROLE_STANDARD"));
+        if (roleRepository.findByName("ROLE_CUSTOMER") == null) {
+            roleRepository.save(new Role(null, "ROLE_CUSTOMER"));
         }
         if (roleRepository.findByName("ROLE_STAFF") == null) {
             roleRepository.save(new Role(null, "ROLE_STAFF"));

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAllOrders, getCurrentUser } from '../services/api';
+import { getMyOrders, getCurrentUser } from '../services/api';
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -12,7 +12,7 @@ const Orders = () => {
     const fetchOrders = async () => {
       try {
         await getCurrentUser(); // Verify authentication
-        const ordersData = await getAllOrders();
+        const ordersData = await getMyOrders(); // Get only current user's orders
         setOrders(ordersData);
       } catch (error) {
         console.error('Error fetching orders:', error);

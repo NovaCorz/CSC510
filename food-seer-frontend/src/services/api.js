@@ -266,6 +266,24 @@ export const getAllOrders = async () => {
   }
 };
 
+export const getMyOrders = async () => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/orders/my-orders`, {
+      method: 'GET',
+      headers: createHeaders(true),
+    });
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch my orders');
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('Get my orders error:', error);
+    throw error;
+  }
+};
+
 export const getFulfilledOrders = async () => {
   try {
     const response = await fetch(`${API_BASE_URL}/api/orders/fulfilledOrders`, {

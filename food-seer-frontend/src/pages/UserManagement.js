@@ -100,7 +100,7 @@ const UserManagement = () => {
         return 'Admin';
       case 'ROLE_STAFF':
         return 'Staff';
-      case 'ROLE_STANDARD':
+      case 'ROLE_CUSTOMER':
         return 'Customer';
       default:
         return role;
@@ -143,7 +143,7 @@ const UserManagement = () => {
         </div>
         <div className="stat-card">
           <h3>Customers</h3>
-          <p className="stat-number">{users.filter(u => u.role === 'ROLE_STANDARD').length}</p>
+          <p className="stat-number">{users.filter(u => u.role === 'ROLE_CUSTOMER').length}</p>
         </div>
       </div>
 
@@ -161,7 +161,7 @@ const UserManagement = () => {
                 onChange={(e) => setNewRole(e.target.value)}
                 className="role-select"
               >
-                <option value="ROLE_STANDARD">Customer</option>
+                <option value="ROLE_CUSTOMER">Customer</option>
                 <option value="ROLE_STAFF">Staff</option>
                 <option value="ROLE_ADMIN">Admin</option>
               </select>

@@ -27,7 +27,7 @@ public class Role {
     @GeneratedValue ( strategy = GenerationType.IDENTITY )
     private Long   id;
     /**
-     * The name of the role (e.g., "ROLE_ADMIN", "ROLE_STANDARD").
+     * The name of the role (e.g., "ROLE_ADMIN", "ROLE_CUSTOMER", "ROLE_STAFF").
      */
     private String name;
 

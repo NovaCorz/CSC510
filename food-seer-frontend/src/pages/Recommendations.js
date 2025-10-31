@@ -35,25 +35,20 @@ const Recommendations = () => {
     let filtered = [...foodsData];
 
     // Filter by budget/cost preference
-    if (userData.costPreference) {
+    if (userData.costPreference && userData.costPreference !== 'no-limit') {
       const budget = userData.costPreference.toLowerCase();
       
-      if (budget.includes('budget') || budget.includes('cheap') || budget.includes('low')) {
-        // Filter for foods under 10
+      if (budget === 'budget') {
+        // Budget option: under $10
         filtered = filtered.filter(food => food.price < 10);
-      } else if (budget.includes('moderate') || budget.includes('medium') || budget.includes('mid')) {
-        // Filter for foods between 10 and 20
+      } else if (budget === 'moderate') {
+        // Moderate option: $10-$20
         filtered = filtered.filter(food => food.price >= 10 && food.price <= 20);
-      } else if (budget.includes('high') || budget.includes('premium') || budget.includes('expensive')) {
-        // Filter for foods over 20
+      } else if (budget === 'premium') {
+        // Premium option: over $20
         filtered = filtered.filter(food => food.price > 20);
-      } else {
-        // Try to parse as a number
-        const maxBudget = parseFloat(userData.costPreference);
-        if (!isNaN(maxBudget)) {
-          filtered = filtered.filter(food => food.price <= maxBudget);
-        }
       }
+      // If no-limit or unrecognized value, show all foods (no filtering)
     }
 
     // Filter by dietary restrictions (allergies)

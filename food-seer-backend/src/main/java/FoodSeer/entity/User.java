@@ -38,7 +38,7 @@ public class User {
 
     @Builder.Default
     @Column ( nullable = false, length = 20 )
-    private String role = "ROLE_STANDARD";
+    private String role = "ROLE_CUSTOMER";
 
     @Column ( length = 50 )
     private String costPreference;
@@ -60,7 +60,7 @@ public class User {
         this.username = o.username();
         this.email = o.email();
         this.password = pass;
-        this.role = "ROLE_STANDARD";
+        this.role = "ROLE_CUSTOMER";
     }
 
 }

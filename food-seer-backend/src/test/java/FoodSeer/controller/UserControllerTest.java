@@ -128,7 +128,7 @@ class UserControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "testuser", authorities = "ROLE_STANDARD")
+    @WithMockUser(username = "testuser", authorities = "ROLE_CUSTOMER")
     void shouldNotAllowNonAdminToUpdateRole() throws Exception {
         mockMvc.perform(put("/api/users/" + testUser.getId() + "/role")
                 .contentType(MediaType.APPLICATION_JSON)

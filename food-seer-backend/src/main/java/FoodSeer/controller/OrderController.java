@@ -123,4 +123,37 @@ public class OrderController {
         }
     }
 
+    /**
+     * Retrieves all orders for the current authenticated user.
+     *
+     * @return JSON list of current user's orders
+     */
+    @PreAuthorize("hasRole('CUSTOMER')")
+    @GetMapping("/my-orders")
+    public List<OrderDto> getMyOrders() {
+        return orderService.getCurrentUserOrders();
+    }
+
+    /**
+     * Retrieves fulfilled orders for the current authenticated user.
+     *
+     * @return JSON list of current user's fulfilled orders
+     */
+    @PreAuthorize("hasRole('CUSTOMER')")
+    @GetMapping("/my-orders/fulfilled")
+    public List<OrderDto> getMyFulfilledOrders() {
+        return orderService.getCurrentUserFulfilledOrders();
+    }
+
+    /**
+     * Retrieves unfulfilled orders for the current authenticated user.
+     *
+     * @return JSON list of current user's unfulfilled orders
+     */
+    @PreAuthorize("hasRole('CUSTOMER')")
+    @GetMapping("/my-orders/unfulfilled")
+    public List<OrderDto> getMyUnfulfilledOrders() {
+        return orderService.getCurrentUserUnfulfilledOrders();
+    }
+
 }

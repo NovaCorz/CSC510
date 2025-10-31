@@ -31,7 +31,7 @@ public class UserRepositoryTest {
                 .username("testuser")
                 .email("test@example.com")
                 .password("password123")
-                .role(UserRoles.ROLE_STANDARD.name())
+                .role(UserRoles.ROLE_CUSTOMER.name())
                 .build();
     }
     

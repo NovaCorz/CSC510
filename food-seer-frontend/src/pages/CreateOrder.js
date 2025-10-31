@@ -80,9 +80,9 @@ const CreateOrder = () => {
 
     setSubmitting(true);
     try {
-      // Prepare order data
+      // Prepare order data - send foods with only id field for backend processing
       const orderFoods = Object.values(cart).flatMap(item => 
-        Array(item.quantity).fill(item.food)
+        Array(item.quantity).fill({ id: item.food.id })
       );
 
       const orderData = {
@@ -91,6 +91,7 @@ const CreateOrder = () => {
         isFulfilled: false
       };
 
+      console.log('Sending order data:', orderData); // Debug log
       await createOrder(orderData);
       alert('Order placed successfully!');
       navigate('/orders');

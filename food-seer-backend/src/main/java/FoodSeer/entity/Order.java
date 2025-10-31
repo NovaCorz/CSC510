@@ -8,7 +8,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 /**
@@ -27,8 +29,13 @@ public class Order {
     /** Order name */
     private String name;
 
+    /** User who created this order */
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     /** List of foods in the order */
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @ManyToMany
     private List<Food> foods = new ArrayList<>();
 
     /** Boolean used to track if the order has been fulfilled */
@@ -134,5 +141,23 @@ public class Order {
      */
     public void setIsFulfilled(final boolean isFulfilled) {
         this.isFulfilled = isFulfilled;
+    }
+
+    /**
+     * Gets the user who created this order.
+     *
+     * @return the user
+     */
+    public User getUser() {
+        return user;
+    }
+
+    /**
+     * Sets the user who created this order.
+     *
+     * @param user the user
+     */
+    public void setUser(final User user) {
+        this.user = user;
     }
 }

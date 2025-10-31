@@ -28,7 +28,7 @@ const Navigation = () => {
 
   const isAdmin = user?.role === 'ROLE_ADMIN';
   const isStaff = user?.role === 'ROLE_STAFF' || isAdmin;
-  const isStandardUser = user?.role === 'ROLE_STANDARD';
+  const isStandardUser = user?.role === 'ROLE_CUSTOMER';
 
   const handleBrandClick = () => {
     if (isStaff) {
