@@ -19,10 +19,12 @@ import FoodSeer.dto.FoodDto;
 import FoodSeer.dto.InventoryDto;
 import FoodSeer.dto.OrderDto;
 import FoodSeer.entity.Food;
+import FoodSeer.entity.User;
 import FoodSeer.mapper.FoodMapper;
 import FoodSeer.repositories.FoodRepository;
 import FoodSeer.repositories.InventoryRepository;
 import FoodSeer.repositories.OrderRepository;
+import FoodSeer.repositories.UserRepository;
 
 /**
  * Tests OrderService and OrderServiceImpl classes for the FoodSeer project.
@@ -54,6 +56,10 @@ class OrderServiceImplTest {
     @Autowired
     private FoodService foodService;
 
+    /** Reference to User repository */
+    @Autowired
+    private UserRepository userRepository;
+
     /**
      * Clears all repositories before each test.
      */
@@ -62,6 +68,24 @@ class OrderServiceImplTest {
         foodRepository.deleteAll();
         orderRepository.deleteAll();
         inventoryRepository.deleteAll();
+        userRepository.deleteAll();
+
+        // Create test users that match @WithMockUser usernames
+        final User customer = User.builder()
+                .username("customer")
+                .email("customer@test.com")
+                .password("password")
+                .role("ROLE_CUSTOMER")
+                .build();
+        userRepository.save(customer);
+
+        final User staff = User.builder()
+                .username("staff")
+                .email("staff@test.com")
+                .password("password")
+                .role("ROLE_STAFF")
+                .build();
+        userRepository.save(staff);
     }
 
     /**

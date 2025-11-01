@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 
-const DietaryRestrictions = ({ restrictions, customDietary, onUpdate, onNext, onPrevious, canGoNext }) => {
+const DietaryRestrictions = ({ restrictions, onUpdate, onNext, onPrevious, canGoNext }) => {
   const [selectedRestrictions, setSelectedRestrictions] = useState(restrictions);
-  const [customValue, setCustomValue] = useState(customDietary);
 
   const dietaryOptions = [
-    { value: 'vegan', label: 'Vegan' },
-    { value: 'lactose-intolerant', label: 'Lactose intolerant' },
-    { value: 'vegetarian', label: 'Vegetarian' },
-    { value: 'other', label: 'Other' }
+    { value: 'vegan', label: 'Vegan', description: 'No animal products' },
+    { value: 'vegetarian', label: 'Vegetarian', description: 'No meat or fish' },
+    { value: 'gluten-free', label: 'Gluten Free', description: 'No gluten or wheat' }
   ];
 
   const handleRestrictionChange = (value) => {
@@ -21,27 +19,6 @@ const DietaryRestrictions = ({ restrictions, customDietary, onUpdate, onNext, on
     
     setSelectedRestrictions(newRestrictions);
     onUpdate('dietaryRestrictions', newRestrictions);
-    
-    if (value === 'other' && !selectedRestrictions.includes('other')) {
-      // If "other" is being selected, keep custom value
-    } else if (value === 'other' && selectedRestrictions.includes('other')) {
-      // If "other" is being deselected, clear custom value
-      onUpdate('customDietary', '');
-      setCustomValue('');
-    }
-  };
-
-  const handleCustomInputChange = (e) => {
-    const value = e.target.value;
-    setCustomValue(value);
-    onUpdate('customDietary', value);
-    
-    // Auto-select "other" when typing in custom input
-    if (value && !selectedRestrictions.includes('other')) {
-      const newRestrictions = [...selectedRestrictions, 'other'];
-      setSelectedRestrictions(newRestrictions);
-      onUpdate('dietaryRestrictions', newRestrictions);
-    }
   };
 
   const handleNext = () => {
@@ -56,7 +33,8 @@ const DietaryRestrictions = ({ restrictions, customDietary, onUpdate, onNext, on
         <div className="icon-carrot">🥕</div>
       </div>
       
-      <h1 className="question-title">What are your dietary restrictions?</h1>
+      <h1 className="question-title">Do you have any dietary restrictions?</h1>
+      <p className="question-subtitle">Select all that apply, or skip to see all options</p>
       
       <div className="options-container">
         {dietaryOptions.map((option) => (
@@ -67,17 +45,8 @@ const DietaryRestrictions = ({ restrictions, customDietary, onUpdate, onNext, on
           >
             <div className={`checkbox-button ${selectedRestrictions.includes(option.value) ? 'selected' : ''}`}></div>
             <div className="option-text">
-              {option.label}
-              {option.value === 'other' && (
-                <input
-                  type="text"
-                  className="custom-input"
-                  placeholder="Pescatarian, no cheese please"
-                  value={customValue}
-                  onChange={handleCustomInputChange}
-                  onClick={(e) => e.stopPropagation()}
-                />
-              )}
+              <div className="option-label">{option.label}</div>
+              <div className="option-description">{option.description}</div>
             </div>
           </div>
         ))}
@@ -93,8 +62,8 @@ const DietaryRestrictions = ({ restrictions, customDietary, onUpdate, onNext, on
           onClick={handleNext}
           disabled={!canGoNext}
         >
-          Next
-          <span className="next-icon">→</span>
+          Finish
+          <span className="next-icon">✓</span>
         </button>
       </div>
     </div>

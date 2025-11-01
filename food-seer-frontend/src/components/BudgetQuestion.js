@@ -1,30 +1,18 @@
 import React, { useState } from 'react';
 
-const BudgetQuestion = ({ budget, customBudget, onUpdate, onNext, onPrevious, canGoNext }) => {
+const BudgetQuestion = ({ budget, onUpdate, onNext, onPrevious, canGoNext }) => {
   const [selectedBudget, setSelectedBudget] = useState(budget);
-  const [customValue, setCustomValue] = useState(customBudget);
 
   const budgetOptions = [
-    { value: 'under-10', label: 'Under $10' },
-    { value: 'under-20', label: 'Under $20' },
-    { value: 'under-30', label: 'Under $30' },
-    { value: 'other', label: 'Other' }
+    { value: 'budget', label: 'Budget (Under $10)', description: 'Affordable options' },
+    { value: 'moderate', label: 'Moderate ($10-$20)', description: 'Mid-range pricing' },
+    { value: 'premium', label: 'Premium ($20+)', description: 'High-end options' },
+    { value: 'no-limit', label: 'No Limit', description: 'Show me everything' }
   ];
 
   const handleBudgetChange = (value) => {
     setSelectedBudget(value);
     onUpdate('budget', value);
-    
-    if (value !== 'other') {
-      onUpdate('customBudget', '');
-      setCustomValue('');
-    }
-  };
-
-  const handleCustomInputChange = (e) => {
-    const value = e.target.value;
-    setCustomValue(value);
-    onUpdate('customBudget', value);
   };
 
   const handleNext = () => {
@@ -50,17 +38,8 @@ const BudgetQuestion = ({ budget, customBudget, onUpdate, onNext, onPrevious, ca
           >
             <div className={`radio-button ${selectedBudget === option.value ? 'selected' : ''}`}></div>
             <div className="option-text">
-              {option.label}
-              {option.value === 'other' && (
-                <input
-                  type="text"
-                  className="custom-input"
-                  placeholder="Anniversary meal, no limit"
-                  value={customValue}
-                  onChange={handleCustomInputChange}
-                  onClick={(e) => e.stopPropagation()}
-                />
-              )}
+              <div className="option-label">{option.label}</div>
+              <div className="option-description">{option.description}</div>
             </div>
           </div>
         ))}

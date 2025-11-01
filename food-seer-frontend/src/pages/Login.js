@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { login } from '../services/api';
+import { login, getCurrentUser } from '../services/api';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -27,7 +27,17 @@ const Login = () => {
 
     try {
       await login(username, password);
-      navigate('/preferences');
+      
+      // Fetch user data to determine role and redirect accordingly
+      const user = await getCurrentUser();
+      
+      if (user.role === 'ROLE_ADMIN' || user.role === 'ROLE_STAFF') {
+        // Admins and Staff skip customer flow, go directly to Order Management
+        navigate('/order-management');
+      } else {
+        // Standard users go to preferences
+        navigate('/preferences');
+      }
     } catch (err) {
       setError('Invalid username or password');
     } finally {
