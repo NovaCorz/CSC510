@@ -22,8 +22,10 @@ import FoodSeer.dto.FoodDto;
 import FoodSeer.dto.InventoryDto;
 import FoodSeer.dto.OrderDto;
 import FoodSeer.entity.Food;
+import FoodSeer.entity.User;
 import FoodSeer.repositories.FoodRepository;
 import FoodSeer.repositories.OrderRepository;
+import FoodSeer.repositories.UserRepository;
 import FoodSeer.service.FoodService;
 import FoodSeer.service.InventoryService;
 import FoodSeer.service.OrderService;
@@ -59,6 +61,10 @@ class OrderControllerTest {
     @Autowired
     private InventoryService inventoryService;
 
+    /** Repository for users */
+    @Autowired
+    private UserRepository userRepository;
+
     /**
      * Sets up test case by clearing repositories and creating sample data.
      */
@@ -66,6 +72,24 @@ class OrderControllerTest {
     public void setUp() throws Exception {
         orderRepository.deleteAll();
         foodRepository.deleteAll();
+        userRepository.deleteAll();
+
+        // Create test users that match @WithMockUser usernames
+        final User customer = User.builder()
+                .username("customer")
+                .email("customer@test.com")
+                .password("password")
+                .role("ROLE_CUSTOMER")
+                .build();
+        userRepository.save(customer);
+
+        final User staff = User.builder()
+                .username("staff")
+                .email("staff@test.com")
+                .password("password")
+                .role("ROLE_STAFF")
+                .build();
+        userRepository.save(staff);
 
         // Create initial inventory
         final List<Food> foods = new ArrayList<>();

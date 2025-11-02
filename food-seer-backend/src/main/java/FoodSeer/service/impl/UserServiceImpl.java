@@ -55,5 +55,15 @@ public class UserServiceImpl implements UserService {
     public User getByUsername(String username) {
         final Optional<User> u = userRepository.findByUsername(username);
         return u.orElse(null);
-    }   
+    }
+
+    @Override
+    public User updateUserPreferences(String username, String costPreference, String dietaryRestrictions) {
+        final Optional<User> u = userRepository.findByUsername(username);
+        if (u.isEmpty()) return null;
+        final User user = u.get();
+        user.setCostPreference(costPreference);
+        user.setDietaryRestrictions(dietaryRestrictions);
+        return userRepository.save(user);
+    }
 }

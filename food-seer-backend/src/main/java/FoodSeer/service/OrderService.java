@@ -59,4 +59,25 @@ public interface OrderService {
      * @return a list of unfulfilled orders
      */
     List<OrderDto> getAllUnfulfilledOrders();
+
+    /**
+     * Retrieves all orders for the current authenticated user.
+     *
+     * @return a list of orders belonging to the current user
+     */
+    List<OrderDto> getCurrentUserOrders();
+
+    /**
+     * Retrieves fulfilled orders for the current authenticated user.
+     *
+     * @return a list of fulfilled orders belonging to the current user
+     */
+    List<OrderDto> getCurrentUserFulfilledOrders();
+
+    /**
+     * Retrieves unfulfilled orders for the current authenticated user.
+     *
+     * @return a list of unfulfilled orders belonging to the current user
+     */
+    List<OrderDto> getCurrentUserUnfulfilledOrders();
 }

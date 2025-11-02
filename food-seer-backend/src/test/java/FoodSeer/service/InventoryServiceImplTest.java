@@ -45,12 +45,12 @@ public class InventoryServiceImplTest {
      */
     @BeforeEach
     public void setUp() throws Exception {
+        // Clear inventory table before each test
         final Query query = entityManager.createNativeQuery("DELETE FROM inventory");
         query.executeUpdate();
-
-        entityManager.createNativeQuery("ALTER TABLE inventory ALTER COLUMN id RESTART WITH 1").executeUpdate();
-
-
+        
+        // Note: We don't reset auto-increment as it's database-specific
+        // Tests should not depend on specific ID values
     }
 
     /**
@@ -60,7 +60,6 @@ public class InventoryServiceImplTest {
     @Transactional
     public void testCreateInventory() {
 
-        // Ensure Inventory always starts with ID 1L.
         final List<Food> foods = new ArrayList<>();
 
         // Food constructor no longer takes ID — let Hibernate assign it
@@ -78,7 +77,7 @@ public class InventoryServiceImplTest {
 
         // Verify contents of returned InventoryDto
         assertAll("InventoryDto contents",
-                () -> assertEquals(1L, createdInventoryDto.getId()),
+                () -> assertEquals(inventoryDto.getId(), createdInventoryDto.getId()),
                 () -> assertEquals(20, createdInventoryDto.getFoods().get(0).getAmount()),
                 () -> assertEquals(30, createdInventoryDto.getFoods().get(1).getAmount()),
                 () -> assertEquals(40, createdInventoryDto.getFoods().get(2).getAmount()));
@@ -101,7 +100,7 @@ public class InventoryServiceImplTest {
 
         final InventoryDto inventoryDto = new InventoryDto(1L, foods);
 
-        inventoryService.createInventory(inventoryDto);
+        final InventoryDto createdInventoryDto = inventoryService.createInventory(inventoryDto);
 
         // Modify existing food amounts
         pizza.setAmount(100);
@@ -111,13 +110,13 @@ public class InventoryServiceImplTest {
         updatedFoods.add(pizza);
         updatedFoods.add(pasta);
 
-        inventoryDto.setFoods(updatedFoods);
+        createdInventoryDto.setFoods(updatedFoods);
 
-        final InventoryDto updatedInventoryDto = inventoryService.updateInventory(inventoryDto);
+        final InventoryDto updatedInventoryDto = inventoryService.updateInventory(createdInventoryDto);
 
-        // Validate updated values
+        // Validate updated values - ID should match what was created
         assertAll("Updated InventoryDto contents",
-                () -> assertEquals(1L, updatedInventoryDto.getId()),
+                () -> assertEquals(createdInventoryDto.getId(), updatedInventoryDto.getId()),
                 () -> assertEquals(100, updatedInventoryDto.getFoods().get(0).getAmount()),
                 () -> assertEquals(100, updatedInventoryDto.getFoods().get(1).getAmount()));
     }

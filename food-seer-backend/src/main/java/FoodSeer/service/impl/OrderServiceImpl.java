@@ -16,10 +16,12 @@ import FoodSeer.entity.Order;
 import FoodSeer.exception.ResourceNotFoundException;
 import FoodSeer.mapper.FoodMapper;
 import FoodSeer.mapper.OrderMapper;
+import FoodSeer.entity.User;
 import FoodSeer.repositories.FoodRepository;
 import FoodSeer.repositories.OrderRepository;
 import FoodSeer.service.InventoryService;
 import FoodSeer.service.OrderService;
+import FoodSeer.service.UserService;
 
 /**
  * Implementation of the OrderService interface for managing food orders.
@@ -39,6 +41,10 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private InventoryService inventoryService;
 
+    /** User service for getting current user. */
+    @Autowired
+    private UserService userService;
+
     /**
      * Creates an order with the given information.
      *
@@ -47,17 +53,27 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public OrderDto createOrder(final OrderDto orderDto) {
+        // Load actual Food entities from database (managed entities)
         final List<Food> foods = new ArrayList<>();
-
         for (final Food food : orderDto.getFoods()) {
             final Food f = foodRepository.findById(food.getId())
                     .orElseThrow(() -> new ResourceNotFoundException("A Food item does not exist within the order."));
             foods.add(f);
         }
 
-        orderDto.setFoods(foods);
-
-        final Order order = OrderMapper.mapToOrder(orderDto);
+        // Create order entity directly (not using mapper to avoid creating new Food objects)
+        final Order order = new Order();
+        order.setName(orderDto.getName());
+        order.setFoods(foods);
+        order.setIsFulfilled(false);
+        
+        // Set the current user as the owner of this order
+        final User currentUser = userService.getCurrentUser();
+        if (currentUser == null) {
+            throw new IllegalStateException("No authenticated user found");
+        }
+        order.setUser(currentUser);
+        
         final Order savedOrder = orderRepository.save(order);
         return OrderMapper.mapToOrderDto(savedOrder);
     }
@@ -98,15 +114,27 @@ public class OrderServiceImpl implements OrderService {
         final Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Order does not exist with id " + orderId));
 
-        final InventoryDto inventoryDto = inventoryService.getInventory();
+        // Count how many of each food is in the order
+        final Map<Long, Long> foodCounts = order.getFoods().stream()
+                .collect(Collectors.groupingBy(Food::getId, Collectors.counting()));
 
-        for (final Food food : order.getFoods()) {
-            final boolean foodAvailable = checkFoodAvailability(inventoryDto, food);
-            if (!foodAvailable) {
-                throw new IllegalArgumentException("Not enough stock to fulfill the order for " + food.getFoodName());
+        // Check inventory and deduct quantities
+        for (final Map.Entry<Long, Long> entry : foodCounts.entrySet()) {
+            final Long foodId = entry.getKey();
+            final Long quantityNeeded = entry.getValue();
+            
+            final Food food = foodRepository.findById(foodId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Food not found with id " + foodId));
+            
+            // Check if enough stock
+            if (food.getAmount() < quantityNeeded) {
+                throw new IllegalArgumentException("Not enough stock to fulfill the order for " + food.getFoodName() 
+                        + ". Need: " + quantityNeeded + ", Available: " + food.getAmount());
             }
-
-            updateInventory(inventoryDto, food);
+            
+            // Deduct from inventory
+            food.setAmount((int) (food.getAmount() - quantityNeeded));
+            foodRepository.save(food);
         }
 
         order.setIsFulfilled(true);
@@ -169,5 +197,53 @@ public class OrderServiceImpl implements OrderService {
         return getAllOrders().stream()
                 .filter(o -> !o.getIsFulfilled())
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns all orders for the current authenticated user.
+     *
+     * @return list of current user's orders
+     */
+    @Override
+    public List<OrderDto> getCurrentUserOrders() {
+        final User currentUser = userService.getCurrentUser();
+        if (currentUser == null) {
+            throw new IllegalStateException("No authenticated user found");
+        }
+        
+        final List<Order> orders = orderRepository.findByUser(currentUser);
+        return orders.stream().map(OrderMapper::mapToOrderDto).collect(Collectors.toList());
+    }
+
+    /**
+     * Returns fulfilled orders for the current authenticated user.
+     *
+     * @return list of current user's fulfilled orders
+     */
+    @Override
+    public List<OrderDto> getCurrentUserFulfilledOrders() {
+        final User currentUser = userService.getCurrentUser();
+        if (currentUser == null) {
+            throw new IllegalStateException("No authenticated user found");
+        }
+        
+        final List<Order> orders = orderRepository.findByUserAndIsFulfilled(currentUser, true);
+        return orders.stream().map(OrderMapper::mapToOrderDto).collect(Collectors.toList());
+    }
+
+    /**
+     * Returns unfulfilled orders for the current authenticated user.
+     *
+     * @return list of current user's unfulfilled orders
+     */
+    @Override
+    public List<OrderDto> getCurrentUserUnfulfilledOrders() {
+        final User currentUser = userService.getCurrentUser();
+        if (currentUser == null) {
+            throw new IllegalStateException("No authenticated user found");
+        }
+        
+        final List<Order> orders = orderRepository.findByUserAndIsFulfilled(currentUser, false);
+        return orders.stream().map(OrderMapper::mapToOrderDto).collect(Collectors.toList());
     }
 }

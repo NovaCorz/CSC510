@@ -1,68 +1,133 @@
-import React, { useState } from 'react';
-import BudgetQuestion from './components/BudgetQuestion';
-import DietaryRestrictions from './components/DietaryRestrictions';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Preferences from './pages/Preferences';
+import Recommendations from './pages/Recommendations';
+import Inventory from './pages/Inventory';
+import CreateOrder from './pages/CreateOrder';
+import Orders from './pages/Orders';
+import OrderManagement from './pages/OrderManagement';
+import InventoryManagement from './pages/InventoryManagement';
+import UserManagement from './pages/UserManagement';
+import Navigation from './components/Navigation';
+import { isAuthenticated } from './services/api';
+
+// Protected Route component
+const ProtectedRoute = ({ children }) => {
+  return isAuthenticated() ? children : <Navigate to="/" />;
+};
+
+// Layout component that includes navigation for authenticated pages
+const AppLayout = ({ children }) => {
+  return (
+    <div className="app-layout">
+      <Navigation />
+      <div className="app-content">
+        {children}
+      </div>
+    </div>
+  );
+};
 
 function App() {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [quizData, setQuizData] = useState({
-    budget: '',
-    customBudget: '',
-    dietaryRestrictions: [],
-    customDietary: ''
-  });
-
-  const handleNext = () => {
-    if (currentStep < 2) {
-      setCurrentStep(currentStep + 1);
-    }
-  };
-
-  const handlePrevious = () => {
-    if (currentStep > 1) {
-      setCurrentStep(currentStep - 1);
-    }
-  };
-
-  const updateQuizData = (field, value) => {
-    setQuizData(prev => ({
-      ...prev,
-      [field]: value
-    }));
-  };
-
-  const renderCurrentStep = () => {
-    switch (currentStep) {
-      case 1:
-        return (
-          <BudgetQuestion
-            budget={quizData.budget}
-            customBudget={quizData.customBudget}
-            onUpdate={updateQuizData}
-            onNext={handleNext}
-            onPrevious={handlePrevious}
-            canGoNext={quizData.budget !== '' || quizData.customBudget !== ''}
-          />
-        );
-      case 2:
-        return (
-          <DietaryRestrictions
-            restrictions={quizData.dietaryRestrictions}
-            customDietary={quizData.customDietary}
-            onUpdate={updateQuizData}
-            onNext={handleNext}
-            onPrevious={handlePrevious}
-            canGoNext={true}
-          />
-        );
-      default:
-        return null;
-    }
-  };
-
   return (
-    <div className="App">
-      {renderCurrentStep()}
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          {/* Public routes */}
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          
+          {/* Protected routes with navigation */}
+          <Route 
+            path="/preferences" 
+            element={
+              <ProtectedRoute>
+                <Preferences />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/recommendations" 
+            element={
+              <ProtectedRoute>
+                <AppLayout>
+                  <Recommendations />
+                </AppLayout>
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/inventory" 
+            element={
+              <ProtectedRoute>
+                <AppLayout>
+                  <Inventory />
+                </AppLayout>
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/create-order" 
+            element={
+              <ProtectedRoute>
+                <AppLayout>
+                  <CreateOrder />
+                </AppLayout>
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/orders" 
+            element={
+              <ProtectedRoute>
+                <AppLayout>
+                  <Orders />
+                </AppLayout>
+              </ProtectedRoute>
+            } 
+          />
+          
+          {/* Staff & Admin routes */}
+          <Route 
+            path="/order-management" 
+            element={
+              <ProtectedRoute>
+                <AppLayout>
+                  <OrderManagement />
+                </AppLayout>
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/inventory-management" 
+            element={
+              <ProtectedRoute>
+                <AppLayout>
+                  <InventoryManagement />
+                </AppLayout>
+              </ProtectedRoute>
+            } 
+          />
+          
+          {/* Admin-only routes */}
+          <Route 
+            path="/users" 
+            element={
+              <ProtectedRoute>
+                <AppLayout>
+                  <UserManagement />
+                </AppLayout>
+              </ProtectedRoute>
+            } 
+          />
+
+          {/* Catch all - redirect to login */}
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
