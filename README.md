@@ -6,7 +6,7 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17460388.svg)](https://zenodo.org/records/17460388)
 [![License](https://img.shields.io/github/license/NovaCorz/CSC510)](https://github.com/NovaCorz/CSC510/blob/main/LICENSE)
 [![GitHub Release](https://img.shields.io/github/release/NovaCorz/CSC510.svg)](https://github.com/NovaCorz/CSC510/releases)
-![Coverage](.github/badges/jacoco.svg)
+[![codecov](https://codecov.io/gh/NovaCorz/CSC510/branch/jrkuethe/docs/graph/badge.svg)](https://codecov.io/gh/NovaCorz/CSC510)
 ![Branches](.github/badges/branches.svg)
 [![Build main](https://github.com/NovaCorz/CSC510/actions/workflows/run-tests.yml/badge.svg)](https://github.com/NovaCorz/CSC510/actions/workflows/run-tests.yml)
 [![Open Issues](https://img.shields.io/github/issues/NovaCorz/CSC510)](https://github.com/NovaCorz/CSC510/issues)
