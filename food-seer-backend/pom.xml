@@ -112,25 +112,7 @@
   </dependencies>
 
   <build>
-    <plugins>
-      <!-- Spring Boot Maven Plugin - Required for mvn spring-boot:run -->
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>3.1.4</version>
-        <configuration>
-          <mainClass>FoodSeer.App</mainClass>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>repackage</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+    <pluginManagement>
       <plugins>
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
