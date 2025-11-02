@@ -56,8 +56,9 @@ jobs:
           mvn -B clean test
 
       - name: Check for JaCoCo report
+        working-directory: food-seer-backend
         run: |
-          if [ -f food-seer-backend/target/site/jacoco/jacoco.xml ]; then
+          if [ -f target/site/jacoco/jacoco.xml ]; then
             echo "✅ JaCoCo report found!"
           else
             echo "❌ JaCoCo report NOT found - check if JaCoCo plugin is active in pom.xml"
@@ -68,7 +69,7 @@ jobs:
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./food-seer-backend/target/site/jacoco/jacoco.xml
+          files: ./target/site/jacoco/jacoco.xml
           flags: unittests
           name: codecov-umbrella
           fail_ci_if_error: false
