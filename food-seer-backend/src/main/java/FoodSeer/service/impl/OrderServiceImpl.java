@@ -8,13 +8,11 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import FoodSeer.dto.FoodDto;
 import FoodSeer.dto.InventoryDto;
 import FoodSeer.dto.OrderDto;
 import FoodSeer.entity.Food;
 import FoodSeer.entity.Order;
 import FoodSeer.exception.ResourceNotFoundException;
-import FoodSeer.mapper.FoodMapper;
 import FoodSeer.mapper.OrderMapper;
 import FoodSeer.entity.User;
 import FoodSeer.repositories.FoodRepository;

@@ -3,6 +3,7 @@ package FoodSeer.service;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import FoodSeer.dto.FoodDto;
 import FoodSeer.dto.InventoryDto;
 import FoodSeer.dto.OrderDto;
 import FoodSeer.entity.Food;
+import FoodSeer.entity.Order;
 import FoodSeer.entity.User;
 import FoodSeer.mapper.FoodMapper;
 import FoodSeer.repositories.FoodRepository;
@@ -163,4 +165,213 @@ class OrderServiceImplTest {
         assertEquals(1, orderService.getAllFulfilledOrders().size());
         assertEquals(savedOrder.getId(), orderService.getOrderById(savedOrder.getId()).getId());
     }
+    
+    @Test
+    @Transactional
+    void testCreateOrderNoAuthenticatedUser() {
+        // No @WithMockUser here -> simulating not logged in
+        
+        final Food food = new Food("COFFEE", 5, 10, new ArrayList<>());
+        foodRepository.save(food);
+
+        OrderDto orderDto = new OrderDto(0L, "OrderNoUser");
+        orderDto.setFoods(new ArrayList<>(List.of(food)));
+
+        IllegalStateException ex = org.junit.jupiter.api.Assertions.assertThrows(
+                IllegalStateException.class, () -> orderService.createOrder(orderDto));
+
+        assertEquals("No authenticated user found", ex.getMessage());
+    }
+
+    @Test
+    @Transactional
+    @WithMockUser(username = "customer", roles = "CUSTOMER")
+    void testFulfillOrderNotEnoughStock() {
+        // Setup inventory with low stock
+        Food food = new Food("TEA", 1, 3, new ArrayList<>());
+        foodRepository.save(food);
+        inventoryService.createInventory(new InventoryDto(1L, new ArrayList<>(List.of(food))));
+
+        // Create order with TWO TEAs (but inventory only has 1)
+        OrderDto orderDto = new OrderDto(0L, "TeaOrder");
+        orderDto.setFoods(new ArrayList<>(List.of(food, food))); // ordering 2 units
+
+        OrderDto savedOrder = orderService.createOrder(orderDto);
+
+        IllegalArgumentException ex = org.junit.jupiter.api.Assertions.assertThrows(
+                IllegalArgumentException.class, () -> orderService.fulfillOrder(savedOrder.getId()));
+
+        assertEquals(
+            "Not enough stock to fulfill the order for TEA. Need: 2, Available: 1",
+            ex.getMessage()
+        );
+    }
+
+    @Test
+    @Transactional
+    void testGetCurrentUserOrdersNoUser() {
+        IllegalStateException ex = org.junit.jupiter.api.Assertions.assertThrows(
+                IllegalStateException.class, () -> orderService.getCurrentUserOrders());
+
+        assertEquals("No authenticated user found", ex.getMessage());
+    }
+
+    @Test
+    @Transactional
+    void testGetCurrentUserFulfilledOrdersNoUser() {
+        IllegalStateException ex = org.junit.jupiter.api.Assertions.assertThrows(
+                IllegalStateException.class, () -> orderService.getCurrentUserFulfilledOrders());
+
+        assertEquals("No authenticated user found", ex.getMessage());
+    }
+
+    @Test
+    @Transactional
+    void testGetCurrentUserUnfulfilledOrdersNoUser() {
+        IllegalStateException ex = org.junit.jupiter.api.Assertions.assertThrows(
+                IllegalStateException.class, () -> orderService.getCurrentUserUnfulfilledOrders());
+
+        assertEquals("No authenticated user found", ex.getMessage());
+    }
+    
+    @Test
+    @Transactional
+    @WithMockUser(username = "customer", roles = "CUSTOMER")
+    void testGetCurrentUserOrdersReturnsList() {
+        // Create food
+        Food food = new Food("COOKIE", 10, 3, new ArrayList<>());
+        foodRepository.save(food);
+
+        // Create order
+        OrderDto orderDto = new OrderDto(0L, "Order-Customer");
+        orderDto.setFoods(new ArrayList<>(List.of(food)));
+        orderService.createOrder(orderDto);
+
+        List<OrderDto> orders = orderService.getCurrentUserOrders();
+        assertEquals(1, orders.size());
+        assertEquals("Order-Customer", orders.get(0).getName());
+    }
+
+    @Test
+    @Transactional
+    @WithMockUser(username = "customer", roles = "CUSTOMER")
+    void testGetCurrentUserFulfilledOrdersReturnsOnlyFulfilled() {
+        // Inventory & food
+        Food food = new Food("PIE", 5, 4, new ArrayList<>());
+        foodRepository.save(food);
+        inventoryService.createInventory(new InventoryDto(1L, new ArrayList<>(List.of(food))));
+
+        // Create order
+        OrderDto orderDto = new OrderDto(0L, "PieOrder");
+        orderDto.setFoods(new ArrayList<>(List.of(food)));
+        OrderDto saved = orderService.createOrder(orderDto);
+
+        // Mark fulfilled manually
+        Order orderEntity = orderRepository.findById(saved.getId()).get();
+        orderEntity.setIsFulfilled(true);
+        orderRepository.save(orderEntity);
+
+        List<OrderDto> orders = orderService.getCurrentUserFulfilledOrders();
+        assertEquals(1, orders.size());
+        assertTrue(orders.get(0).getIsFulfilled());
+    }
+
+    @Test
+    @Transactional
+    @WithMockUser(username = "customer", roles = "CUSTOMER")
+    void testGetCurrentUserUnfulfilledOrdersReturnsOnlyUnfulfilled() {
+        Food food = new Food("LATTE", 10, 5, new ArrayList<>());
+        foodRepository.save(food);
+        inventoryService.createInventory(new InventoryDto(1L, new ArrayList<>(List.of(food))));
+
+        // Create order but do NOT fulfill
+        OrderDto orderDto = new OrderDto(0L, "LatteOrder");
+        orderDto.setFoods(new ArrayList<>(List.of(food)));
+        orderService.createOrder(orderDto);
+
+        List<OrderDto> orders = orderService.getCurrentUserUnfulfilledOrders();
+        assertEquals(1, orders.size());
+        assertFalse(orders.get(0).getIsFulfilled());
+    }
+
+    @Test
+    @Transactional
+    @WithMockUser(username = "customer", roles = "CUSTOMER")
+    void testGetAllUnfulfilledOrders() {
+        Food food = new Food("MUFFIN", 10, 3, new ArrayList<>());
+        foodRepository.save(food);
+        inventoryService.createInventory(new InventoryDto(1L, new ArrayList<>(List.of(food))));
+
+        // Create unfulfilled order
+        OrderDto orderDto = new OrderDto(0L, "MuffinOrder");
+        orderDto.setFoods(new ArrayList<>(List.of(food)));
+        orderService.createOrder(orderDto);
+
+        List<OrderDto> unfulfilled = orderService.getAllUnfulfilledOrders();
+        assertEquals(1, unfulfilled.size());
+        assertFalse(unfulfilled.get(0).getIsFulfilled());
+    }
+
+    @Test
+    @Transactional
+    @WithMockUser(username = "customer", roles = "CUSTOMER")
+    void testFoodAvailabilityTrue() {
+        // Set up food and inventory
+        Food food = new Food("BREAD", 5, 2, new ArrayList<>());
+        foodRepository.save(food);
+        inventoryService.createInventory(new InventoryDto(1L, new ArrayList<>(List.of(food))));
+
+        // Create order with 1 bread
+        OrderDto orderDto = new OrderDto(0L, "BreadOrder");
+        orderDto.setFoods(new ArrayList<>(List.of(food)));
+        OrderDto savedOrder = orderService.createOrder(orderDto);
+
+        // Fulfill order successfully (means availability returned true)
+        OrderDto fulfilled = orderService.fulfillOrder(savedOrder.getId());
+        assertTrue(fulfilled.getIsFulfilled());
+    }
+
+    @Test
+    @Transactional
+    @WithMockUser(username = "customer", roles = "CUSTOMER")
+    void testOrderMapper_mapToOrder() {
+        // Arrange: create a FoodDto list
+        FoodDto f1 = new FoodDto("Latte", 2, 5, List.of("MILK"));
+        FoodDto f2 = new FoodDto("Tea", 1, 3, List.of("NONE"));
+
+        OrderDto orderDto = new OrderDto(1L, "MorningOrder");
+        orderDto.setFoods(new ArrayList<>(List.of(
+                FoodMapper.mapToFood(f1),
+                FoodMapper.mapToFood(f2)
+        )));
+        orderDto.setIsFulfilled(true);
+
+        // Act: convert DTO to entity using mapper
+        Order mappedOrder = FoodSeer.mapper.OrderMapper.mapToOrder(orderDto);
+
+        // Assert: Check fields
+        assertAll(
+            () -> assertEquals(orderDto.getId(), mappedOrder.getId()),
+            () -> assertEquals(orderDto.getName(), mappedOrder.getName()),
+            () -> assertEquals(2, mappedOrder.getFoods().size()),
+            
+            // Food #1 check
+            () -> assertEquals("LATTE", mappedOrder.getFoods().get(0).getFoodName()),
+            () -> assertEquals(2, mappedOrder.getFoods().get(0).getAmount()),
+            () -> assertEquals(5, mappedOrder.getFoods().get(0).getPrice()),
+
+            // Food #2 check
+            () -> assertEquals("TEA", mappedOrder.getFoods().get(1).getFoodName()),
+            () -> assertEquals(1, mappedOrder.getFoods().get(1).getAmount()),
+            () -> assertEquals(3, mappedOrder.getFoods().get(1).getPrice()),
+
+            // Fulfillment flag
+            () -> assertTrue(mappedOrder.getIsFulfilled())
+        );
+
+        // Ensure we created NEW Food entities, not reusing objects
+        assertNotSame(orderDto.getFoods().get(0), mappedOrder.getFoods().get(0));
+        assertNotSame(orderDto.getFoods().get(1), mappedOrder.getFoods().get(1));
+    }
+
 }
