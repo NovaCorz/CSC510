@@ -40,6 +40,35 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
           cache: 'maven'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install frontend dependencies
+        working-directory: food-seer-frontend
+        run: npm ci
+
+      - name: Build frontend
+        working-directory: food-seer-frontend
+        run: npm run build
+
+      - name: Start frontend (React)
+        working-directory: food-seer-frontend
+        run: npm start &
+      
+      - name: Wait for frontend to be ready
+        run: |
+          echo "Waiting for frontend to start on port 3000..."
+          for i in {1..30}; do
+            if curl -s http://localhost:3000 > /dev/null; then
+              echo "Frontend is up!"
+              break
+            fi
+            echo "Still waiting..."
+            sleep 3
+          done
       
       - name: Install Chrome
         run: |
