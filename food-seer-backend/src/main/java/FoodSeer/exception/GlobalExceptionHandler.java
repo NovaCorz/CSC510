@@ -33,20 +33,20 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
-    /**
-     * Handles FoodSeerAPIException
-     *
-     * @param ex
-     *            The thrown exception
-     * @param request
-     *            The web request
-     * @return ResponseEntity containing ErrorDetails
-     */
-    @ExceptionHandler(FoodSeerAPIException.class)
-    public ResponseEntity<ErrorDetails> handleFoodSeerAPIException(FoodSeerAPIException ex, WebRequest request) {
-        ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
-        return new ResponseEntity<>(errorDetails, ex.getStatus());
-    }
+//    /**
+//     * Handles FoodSeerAPIException
+//     *
+//     * @param ex
+//     *            The thrown exception
+//     * @param request
+//     *            The web request
+//     * @return ResponseEntity containing ErrorDetails
+//     */
+//    @ExceptionHandler(FoodSeerAPIException.class)
+//    public ResponseEntity<ErrorDetails> handleFoodSeerAPIException(FoodSeerAPIException ex, WebRequest request) {
+//        ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
+//        return new ResponseEntity<>(errorDetails, ex.getStatus());
+//    }
 
     /**
      * Handles MethodArgumentNotValidException (validation errors)
