@@ -4,16 +4,6 @@ import { sendChatMessage, getCurrentUser, getAllFoods } from '../services/api';
 
 const Chatbot = () => {
   const navigate = useNavigate();
-  const [messages, setMessages] = useState([]);
-  const [inputMessage, setInputMessage] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [conversationStep, setConversationStep] = useState(0);
-  const [userResponses, setUserResponses] = useState({
-    mood: '',
-    hunger: '',
-    preference: ''
-  });
-  const [recommendedFood, setRecommendedFood] = useState(null);
   const messagesEndRef = useRef(null);
 
   const QUESTIONS = [
@@ -22,8 +12,50 @@ const Chatbot = () => {
     "What kind of food are you in the mood for? (e.g., something light, comfort food, healthy, sweet)"
   ];
 
+  // Load state from localStorage or use defaults
+  const loadState = () => {
+    try {
+      const saved = localStorage.getItem('chatbotState');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        return {
+          messages: parsed.messages || [],
+          conversationStep: parsed.conversationStep || 0,
+          userResponses: parsed.userResponses || { mood: '', hunger: '', preference: '' },
+          recommendedFood: parsed.recommendedFood || null
+        };
+      }
+    } catch (error) {
+      console.error('Error loading chatbot state:', error);
+    }
+    return null;
+  };
+
+  const savedState = loadState();
+  const [messages, setMessages] = useState(savedState?.messages || []);
+  const [inputMessage, setInputMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [conversationStep, setConversationStep] = useState(savedState?.conversationStep || 0);
+  const [userResponses, setUserResponses] = useState(savedState?.userResponses || {
+    mood: '',
+    hunger: '',
+    preference: ''
+  });
+  const [recommendedFood, setRecommendedFood] = useState(savedState?.recommendedFood || null);
+
+  // Save state to localStorage whenever it changes
   useEffect(() => {
-    // Start with the first question
+    const state = {
+      messages,
+      conversationStep,
+      userResponses,
+      recommendedFood
+    };
+    localStorage.setItem('chatbotState', JSON.stringify(state));
+  }, [messages, conversationStep, userResponses, recommendedFood]);
+
+  useEffect(() => {
+    // Start with the first question if no saved state
     if (messages.length === 0) {
       setMessages([{
         role: 'assistant',
@@ -178,18 +210,30 @@ Format your response as: "I recommend [FOOD NAME]! [Explanation]"`;
 
   const handleOrderFood = () => {
     if (recommendedFood) {
-      navigate('/create-order', { state: { preselectedFood: recommendedFood } });
+      // Navigate to create order page with the recommended food
+      // The CreateOrder page will add it to the cart automatically
+      navigate('/create-order', { state: { addToCart: recommendedFood } });
     }
   };
 
   const handleStartOver = () => {
-    setMessages([{
-      role: 'assistant',
-      content: QUESTIONS[0]
-    }]);
-    setConversationStep(0);
-    setUserResponses({ mood: '', hunger: '', preference: '' });
-    setRecommendedFood(null);
+    const newState = {
+      messages: [{
+        role: 'assistant',
+        content: QUESTIONS[0]
+      }],
+      conversationStep: 0,
+      userResponses: { mood: '', hunger: '', preference: '' },
+      recommendedFood: null
+    };
+    
+    setMessages(newState.messages);
+    setConversationStep(newState.conversationStep);
+    setUserResponses(newState.userResponses);
+    setRecommendedFood(newState.recommendedFood);
+    
+    // Save the reset state to localStorage
+    localStorage.setItem('chatbotState', JSON.stringify(newState));
   };
 
   return (
