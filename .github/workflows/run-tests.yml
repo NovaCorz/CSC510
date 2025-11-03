@@ -52,11 +52,11 @@ jobs:
 
       - name: Build frontend
         working-directory: food-seer-frontend
-        run: npm run build
+        run: CI=false npm run build
 
       - name: Start frontend (React)
         working-directory: food-seer-frontend
-        run: npm start &
+        run: CI=false npm start &
       
       - name: Wait for frontend to be ready
         run: |
