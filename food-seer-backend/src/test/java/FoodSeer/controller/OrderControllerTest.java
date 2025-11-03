@@ -18,7 +18,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
 import FoodSeer.TestUtils;
-import FoodSeer.dto.FoodDto;
 import FoodSeer.dto.InventoryDto;
 import FoodSeer.dto.OrderDto;
 import FoodSeer.entity.Food;
@@ -26,7 +25,6 @@ import FoodSeer.entity.User;
 import FoodSeer.repositories.FoodRepository;
 import FoodSeer.repositories.OrderRepository;
 import FoodSeer.repositories.UserRepository;
-import FoodSeer.service.FoodService;
 import FoodSeer.service.InventoryService;
 import FoodSeer.service.OrderService;
 
@@ -48,10 +46,6 @@ class OrderControllerTest {
     /** Repository for food items */
     @Autowired
     private FoodRepository foodRepository;
-
-    /** Service for food */
-    @Autowired
-    private FoodService foodService;
 
     /** Service for orders */
     @Autowired
@@ -172,5 +166,138 @@ class OrderControllerTest {
 
         mvc.perform(get("/api/orders/unfulfilledOrders"))
                 .andExpect(status().isOk());
+    }
+    
+    @Test
+    @Transactional
+    @WithMockUser(username = "staff", roles = "STAFF")
+    void testFulfillOrder_OrderNotFound() throws Exception {
+        OrderDto fake = new OrderDto(999L, "FakeOrder");
+
+        mvc.perform(post("/api/orders/fulfillOrder")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(TestUtils.asJsonString(fake)))
+            .andExpect(status().isPreconditionFailed()); // 412
+    }
+
+    @Test
+    @Transactional
+    @WithMockUser(username = "staff", roles = "STAFF")
+    void testFulfillOrder_AlreadyFulfilled() throws Exception {
+        Food food = foodRepository.findAll().get(0);
+
+        OrderDto o = new OrderDto(0L, "FulfilledTest");
+        o.setFoods(List.of(food));
+        OrderDto saved = orderService.createOrder(o);
+
+        // Manually mark it fulfilled in DB first
+        var entity = orderRepository.findById(saved.getId()).get();
+        entity.setIsFulfilled(true);
+        orderRepository.save(entity);
+
+        mvc.perform(post("/api/orders/fulfillOrder")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(TestUtils.asJsonString(saved)))
+            .andExpect(status().isGone()); // 410
+    }
+
+    
+    @Test
+    @Transactional
+    @WithMockUser(username = "staff", roles = "STAFF")
+    void testFulfillOrder_BadRequest() throws Exception {
+        Food food = foodRepository.findAll().get(0);
+        food.setAmount(0); // no stock, will throw inside service
+        foodRepository.save(food);
+
+        OrderDto o = new OrderDto(0L, "FailOrder");
+        o.setFoods(List.of(food));
+        OrderDto saved = orderService.createOrder(o);
+
+        mvc.perform(post("/api/orders/fulfillOrder")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(TestUtils.asJsonString(saved)))
+            .andExpect(status().isBadRequest()); // 400
+    }
+
+    @Test
+    @Transactional
+    @WithMockUser(username = "customer", roles = "CUSTOMER")
+    void testGetOrder_NotFound() throws Exception {
+        mvc.perform(get("/api/orders/999"))
+           .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @Transactional
+    void testGetMyOrders_Unauthorized() throws Exception {
+        mvc.perform(get("/api/orders/my-orders"))
+            .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @Transactional
+    void testGetMyFulfilledOrders_Unauthorized() throws Exception {
+        mvc.perform(get("/api/orders/my-orders/fulfilled"))
+            .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @Transactional
+    void testGetMyUnfulfilledOrders_Unauthorized() throws Exception {
+        mvc.perform(get("/api/orders/my-orders/unfulfilled"))
+            .andExpect(status().isUnauthorized());
+    }
+    
+    @Test
+    @Transactional
+    @WithMockUser(username = "customer", roles = "CUSTOMER")
+    void testGetMyOrders_Success() throws Exception {
+        // Create an order for the customer user
+        Food food = foodRepository.findAll().get(0);
+
+        OrderDto orderDto = new OrderDto(0L, "MyOrderTest");
+        orderDto.setFoods(new ArrayList<>(List.of(food)));
+        orderService.createOrder(orderDto);
+
+        mvc.perform(get("/api/orders/my-orders"))
+            .andExpect(status().isOk());
+    }
+
+    
+    @Test
+    @Transactional
+    @WithMockUser(username = "customer", roles = "CUSTOMER")
+    void testGetMyFulfilledOrders_Success() throws Exception {
+        // Create order
+        Food food = foodRepository.findAll().get(0);
+
+        OrderDto orderDto = new OrderDto(0L, "FulfilledOrderTest");
+        orderDto.setFoods(new ArrayList<>(List.of(food)));
+        OrderDto savedOrder = orderService.createOrder(orderDto);
+
+        // Mark fulfilled
+        var entity = orderRepository.findById(savedOrder.getId()).get();
+        entity.setIsFulfilled(true);
+        orderRepository.save(entity);
+
+        mvc.perform(get("/api/orders/my-orders/fulfilled"))
+            .andExpect(status().isOk());
+    }
+
+    
+    @Test
+    @Transactional
+    @WithMockUser(username = "customer", roles = "CUSTOMER")
+    void testGetMyUnfulfilledOrders_Success() throws Exception {
+        // Create order (not fulfilled)
+        Food food = foodRepository.findAll().get(0);
+
+        OrderDto orderDto = new OrderDto(0L, "UnfulfilledOrderTest");
+        orderDto.setFoods(new ArrayList<>(List.of(food)));
+        orderService.createOrder(orderDto);
+
+        mvc.perform(get("/api/orders/my-orders/unfulfilled"))
+            .andExpect(status().isOk());
     }
 }
