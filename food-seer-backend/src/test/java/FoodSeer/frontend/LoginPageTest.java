@@ -8,9 +8,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import FoodSeer.service.impl.DataInitializer;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import jakarta.transaction.Transactional;
 
@@ -30,8 +33,12 @@ public class LoginPageTest {
     @Value("${app.admin-user-password}")
     private String adminPassword;
 
+    @Autowired
+    private DataInitializer dataInitializer;
+
     @BeforeEach
     public void setUp() {
+        dataInitializer.onApplicationReady();
         WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();
