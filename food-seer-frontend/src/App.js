@@ -10,6 +10,7 @@ import Orders from './pages/Orders';
 import OrderManagement from './pages/OrderManagement';
 import InventoryManagement from './pages/InventoryManagement';
 import UserManagement from './pages/UserManagement';
+import Chatbot from './pages/Chatbot';
 import Navigation from './components/Navigation';
 import { isAuthenticated } from './services/api';
 
@@ -45,6 +46,16 @@ function App() {
             element={
               <ProtectedRoute>
                 <Preferences />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/chatbot" 
+            element={
+              <ProtectedRoute>
+                <AppLayout>
+                  <Chatbot />
+                </AppLayout>
               </ProtectedRoute>
             } 
           />
