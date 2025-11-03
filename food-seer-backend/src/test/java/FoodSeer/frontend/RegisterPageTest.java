@@ -32,7 +32,7 @@ public class RegisterPageTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
-        // options.addArguments("--headless");
+        options.addArguments("--headless");
         driver = new ChromeDriver(options);
 
         wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(2));
