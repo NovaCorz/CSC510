@@ -3,10 +3,28 @@ import React, { useState } from 'react';
 const DietaryRestrictions = ({ restrictions, onUpdate, onNext, onPrevious, canGoNext }) => {
   const [selectedRestrictions, setSelectedRestrictions] = useState(restrictions);
 
-  const dietaryOptions = [
-    { value: 'vegan', label: 'Vegan', description: 'No animal products' },
-    { value: 'vegetarian', label: 'Vegetarian', description: 'No meat or fish' },
-    { value: 'gluten-free', label: 'Gluten Free', description: 'No gluten or wheat' }
+  // Comprehensive allergen options matching backend
+  const allergenOptions = [
+    { value: 'MILK', label: 'Milk/Dairy' },
+    { value: 'LACTOSE', label: 'Lactose' },
+    { value: 'EGGS', label: 'Eggs' },
+    { value: 'FISH', label: 'Fish' },
+    { value: 'SHELLFISH', label: 'Shellfish' },
+    { value: 'TREE-NUTS', label: 'Tree Nuts' },
+    { value: 'PEANUTS', label: 'Peanuts' },
+    { value: 'WHEAT', label: 'Wheat' },
+    { value: 'GLUTEN', label: 'Gluten' },
+    { value: 'SOY', label: 'Soy' },
+    { value: 'SESAME', label: 'Sesame' },
+    { value: 'CORN', label: 'Corn' },
+    { value: 'SULFITES', label: 'Sulfites' },
+    { value: 'MUSTARD', label: 'Mustard' },
+    { value: 'MEAT', label: 'Meat (All)' },
+    { value: 'BEEF', label: 'Beef' },
+    { value: 'PORK', label: 'Pork' },
+    { value: 'POULTRY', label: 'Poultry' },
+    { value: 'GELATIN', label: 'Gelatin' },
+    { value: 'CAFFEINE', label: 'Caffeine' }
   ];
 
   const handleRestrictionChange = (value) => {
@@ -28,29 +46,37 @@ const DietaryRestrictions = ({ restrictions, onUpdate, onNext, onPrevious, canGo
   };
 
   return (
-    <div className="quiz-container">
+    <div className="quiz-container allergen-selection">
       <div className="icon-container">
         <div className="icon-carrot">🥕</div>
       </div>
       
-      <h1 className="question-title">Do you have any dietary restrictions?</h1>
+      <h1 className="question-title">Do you have any allergies or dietary restrictions?</h1>
       <p className="question-subtitle">Select all that apply, or skip to see all options</p>
       
-      <div className="options-container">
-        {dietaryOptions.map((option) => (
-          <div
-            key={option.value}
-            className={`option-card ${selectedRestrictions.includes(option.value) ? 'selected' : ''}`}
-            onClick={() => handleRestrictionChange(option.value)}
-          >
-            <div className={`checkbox-button ${selectedRestrictions.includes(option.value) ? 'selected' : ''}`}></div>
-            <div className="option-text">
-              <div className="option-label">{option.label}</div>
-              <div className="option-description">{option.description}</div>
-            </div>
-          </div>
-        ))}
+      <div className="allergens-scroll-container">
+        <div className="allergens-selection-grid">
+          {allergenOptions.map((option) => (
+            <label
+              key={option.value}
+              className={`allergen-option ${selectedRestrictions.includes(option.value) ? 'selected' : ''}`}
+            >
+              <input
+                type="checkbox"
+                checked={selectedRestrictions.includes(option.value)}
+                onChange={() => handleRestrictionChange(option.value)}
+              />
+              <span>{option.label}</span>
+            </label>
+          ))}
+        </div>
       </div>
+
+      {selectedRestrictions.length > 0 && (
+        <div className="selected-restrictions-summary">
+          <strong>Selected ({selectedRestrictions.length}):</strong> {selectedRestrictions.join(', ')}
+        </div>
+      )}
       
       <div className="navigation">
         <button className="previous-button" onClick={onPrevious}>

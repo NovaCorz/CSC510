@@ -11,11 +11,13 @@ import FoodSeer.dto.FoodDto;
 import FoodSeer.dto.InventoryDto;
 import FoodSeer.entity.Food;
 import FoodSeer.entity.Inventory;
+import FoodSeer.entity.Order;
 import FoodSeer.exception.ResourceNotFoundException;
 import FoodSeer.mapper.FoodMapper;
 import FoodSeer.mapper.InventoryMapper;
 import FoodSeer.repositories.FoodRepository;
 import FoodSeer.repositories.InventoryRepository;
+import FoodSeer.repositories.OrderRepository;
 import FoodSeer.service.FoodService;
 import FoodSeer.service.InventoryService;
 import jakarta.transaction.Transactional;
@@ -37,6 +39,10 @@ public class FoodServiceImpl implements FoodService {
     /** Connection to the repository to work with the DAO + database */
     @Autowired
     private InventoryService     inventoryService;
+    
+    /** Connection to the order repository */
+    @Autowired
+    private OrderRepository orderRepository;
 
     /**
      * Creates an food with the given information. A created food
@@ -135,11 +141,40 @@ public class FoodServiceImpl implements FoodService {
      *            food's id
      * @throws ResourceNotFoundException
      *             if the food doesn't exist
+     * @throws IllegalStateException
+     *             if the food is part of an unfulfilled order
      */
     @Override
+    @Transactional
     public void deleteFood ( final Long foodId ) {
         final Food food = foodRepository.findById( foodId ).orElseThrow(
                 () -> new ResourceNotFoundException( "Food does not exist with id " + foodId ) );
+        
+        // Find all orders containing this food
+        final List<Order> ordersWithFood = orderRepository.findOrdersContainingFood(food);
+        
+        // Check if any unfulfilled orders contain this food
+        final List<Order> unfulfilledOrders = ordersWithFood.stream()
+                .filter(order -> !order.getIsFulfilled())
+                .collect(Collectors.toList());
+        
+        if (!unfulfilledOrders.isEmpty()) {
+            throw new IllegalStateException("Cannot delete food that is part of unfulfilled orders. " +
+                    "There are " + unfulfilledOrders.size() + " unfulfilled order(s) containing this food.");
+        }
+        
+        // Remove the food from all fulfilled orders before deletion
+        for (final Order order : ordersWithFood) {
+            // Remove the food from the order's foods list
+            order.getFoods().removeIf(f -> f.getId().equals(food.getId()));
+            // Save and flush to update the join table immediately
+            orderRepository.saveAndFlush(order);
+        }
+        
+        // Flush all pending changes to ensure join table is updated
+        orderRepository.flush();
+        
+        // Now safe to delete the food
         foodRepository.delete( food );
     }
 

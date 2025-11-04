@@ -199,6 +199,11 @@ export const deleteFood = async (id) => {
     });
     
     if (!response.ok) {
+      const errorText = await response.text();
+      if (response.status === 409) {
+        // Conflict: food is part of unfulfilled orders
+        throw new Error(errorText);
+      }
       throw new Error('Failed to delete food');
     }
     
@@ -443,7 +448,9 @@ export const deleteUser = async (id) => {
       throw new Error('Failed to delete user');
     }
     
-    return await response.json();
+    // Check if response has content before parsing JSON
+    const text = await response.text();
+    return text ? JSON.parse(text) : { success: true };
   } catch (error) {
     console.error('Delete user error:', error);
     throw error;
