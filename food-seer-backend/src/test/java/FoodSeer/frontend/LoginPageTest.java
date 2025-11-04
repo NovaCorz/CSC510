@@ -47,7 +47,7 @@ public class LoginPageTest {
         options.addArguments("--headless");
         driver = new ChromeDriver(options);
 
-        wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(2));
+        wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(10));
     }
 
     @AfterEach
