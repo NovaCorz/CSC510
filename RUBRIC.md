@@ -5,11 +5,11 @@
 |Question 1.2| Does your website and documentation clearly describe the type of user who should use your software?| ✅   | ❌  |          |
 |Question 1.3| Do you publish case studies to show how your software has been used by yourself and others?| ✅   | ❌  |          |
 | **Q2 - Identity**                | |  |   |   |
-|Question 2.1| Is the name of your project/software unique?| ✅   | ❌  |          |
-|Question 2.2| Is your project/software name free from trademark violations?| ✅   | ❌  |          |
+|Question 2.1| Is the name of your project/software unique?| ✅   |   |  Yes, there are no other products that we can find with the name Food Seer        |
+|Question 2.2| Is your project/software name free from trademark violations?| ✅   |   |    Yes, we did not use any trademarked artifacts      |
 | **Q3 - Availability**            | |  |   |   |
 |Question 3.1| Is your software available as a package that can be deployed without building it?| ✅   | ❌  |          |
-|Question 3.2| Is your software available for free?| ✅   | ❌  |          |
+|Question 3.2| Is your software available for free?| ✅   |   |   Yes, our software is available for free       |
 |Question 3.3| Is your source code publicly available to download, either as a downloadable bundle or via access to a source code repository?| ✅   | ❌  |          |
 | Question 3.4 | Is your software hosted in an established, third-party repository like [GitHub](https://github.com), [BitBucket](https://bitbucket.org), [LaunchPad](https://launchpad.net), or [SourceForge](https://sourceforge.net)? | ✅ | ❌ | |
 | **Q4 - Documentation**           | |  |   |   |
