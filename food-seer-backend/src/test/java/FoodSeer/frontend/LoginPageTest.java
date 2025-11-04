@@ -34,7 +34,7 @@ public class LoginPageTest {
     private WebDriverWait wait;
 
     @Value("${app.admin-user-password}")
-    private String adminPassword;
+    private String adminPassword = "admin";
 
     @Autowired
     private DataInitializer dataInitializer;
