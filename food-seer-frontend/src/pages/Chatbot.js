@@ -5,6 +5,7 @@ import { sendChatMessage, getCurrentUser, getAllFoods } from '../services/api';
 const Chatbot = () => {
   const navigate = useNavigate();
   const messagesEndRef = useRef(null);
+  const [currentUserId, setCurrentUserId] = useState(null);
 
   const QUESTIONS = [
     "Hi! I'm your FoodSeer assistant. How are you feeling today? (e.g., tired, energetic, stressed, happy)",
@@ -12,10 +13,12 @@ const Chatbot = () => {
     "What kind of food are you in the mood for? (e.g., something light, comfort food, healthy, sweet)"
   ];
 
-  // Load state from localStorage or use defaults
-  const loadState = () => {
+  // Load state from localStorage or use defaults (user-specific)
+  const loadState = (userId) => {
+    if (!userId) return null;
+    
     try {
-      const saved = localStorage.getItem('chatbotState');
+      const saved = localStorage.getItem(`chatbotState_${userId}`);
       if (saved) {
         const parsed = JSON.parse(saved);
         return {
@@ -31,28 +34,55 @@ const Chatbot = () => {
     return null;
   };
 
-  const savedState = loadState();
-  const [messages, setMessages] = useState(savedState?.messages || []);
+  const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [conversationStep, setConversationStep] = useState(savedState?.conversationStep || 0);
-  const [userResponses, setUserResponses] = useState(savedState?.userResponses || {
+  const [conversationStep, setConversationStep] = useState(0);
+  const [userResponses, setUserResponses] = useState({
     mood: '',
     hunger: '',
     preference: ''
   });
-  const [recommendedFood, setRecommendedFood] = useState(savedState?.recommendedFood || null);
+  const [recommendedFood, setRecommendedFood] = useState(null);
+  const [stateLoaded, setStateLoaded] = useState(false);
 
-  // Save state to localStorage whenever it changes
+  // Load user and their chatbot state on mount
   useEffect(() => {
+    const loadUserAndState = async () => {
+      try {
+        const user = await getCurrentUser();
+        setCurrentUserId(user.id);
+        
+        // Load user-specific chatbot state
+        const savedState = loadState(user.id);
+        if (savedState) {
+          setMessages(savedState.messages);
+          setConversationStep(savedState.conversationStep);
+          setUserResponses(savedState.userResponses);
+          setRecommendedFood(savedState.recommendedFood);
+        }
+        setStateLoaded(true);
+      } catch (error) {
+        console.error('Error loading user:', error);
+        navigate('/');
+      }
+    };
+
+    loadUserAndState();
+  }, [navigate]);
+
+  // Save state to localStorage whenever it changes (user-specific)
+  useEffect(() => {
+    if (!currentUserId || !stateLoaded) return;
+    
     const state = {
       messages,
       conversationStep,
       userResponses,
       recommendedFood
     };
-    localStorage.setItem('chatbotState', JSON.stringify(state));
-  }, [messages, conversationStep, userResponses, recommendedFood]);
+    localStorage.setItem(`chatbotState_${currentUserId}`, JSON.stringify(state));
+  }, [messages, conversationStep, userResponses, recommendedFood, currentUserId, stateLoaded]);
 
   useEffect(() => {
     // Start with the first question if no saved state
@@ -75,29 +105,24 @@ const Chatbot = () => {
     const dietaryRestrictions = userData?.dietaryRestrictions || '';
     
     // Convert dietary restrictions to array if it's a string
-    const allergies = Array.isArray(dietaryRestrictions) 
-      ? dietaryRestrictions 
-      : (dietaryRestrictions ? [dietaryRestrictions] : []);
+    const allergies = dietaryRestrictions 
+      ? dietaryRestrictions.split(',').map(a => a.trim().toLowerCase()).filter(a => a.length > 0)
+      : [];
     
     // Filter foods based on budget and allergies
     const availableFoods = foods.filter(food => {
-      // Budget filtering
+      // Budget filtering (cumulative)
       if (budget === 'budget' && food.price > 10) return false;
       if (budget === 'moderate' && food.price > 20) return false;
       if (budget === 'premium' && food.price > 35) return false;
       
-      // Allergy filtering
-      if (allergies.includes('vegan') && 
-          food.allergies.some(a => ['dairy', 'eggs', 'meat', 'fish', 'shellfish', 'beef', 'chicken', 'pork'].includes(a.toLowerCase()))) {
-        return false;
-      }
-      if (allergies.includes('vegetarian') && 
-          food.allergies.some(a => ['meat', 'fish', 'shellfish', 'beef', 'chicken', 'pork'].includes(a.toLowerCase()))) {
-        return false;
-      }
-      if (allergies.includes('gluten-free') && 
-          food.allergies.some(a => a.toLowerCase().includes('gluten') || a.toLowerCase().includes('wheat'))) {
-        return false;
+      // Allergy filtering - exclude foods that contain any of user's allergens
+      if (allergies.length > 0 && food.allergies && food.allergies.length > 0) {
+        const foodAllergies = food.allergies.map(a => a.toLowerCase());
+        // If any user allergen matches any food allergen, exclude this food
+        if (allergies.some(userAllergen => foodAllergies.includes(userAllergen))) {
+          return false;
+        }
       }
       
       return true;
@@ -232,8 +257,10 @@ Format your response as: "I recommend [FOOD NAME]! [Explanation]"`;
     setUserResponses(newState.userResponses);
     setRecommendedFood(newState.recommendedFood);
     
-    // Save the reset state to localStorage
-    localStorage.setItem('chatbotState', JSON.stringify(newState));
+    // Clear user-specific chatbot state
+    if (currentUserId) {
+      localStorage.setItem(`chatbotState_${currentUserId}`, JSON.stringify(newState));
+    }
   };
 
   return (
