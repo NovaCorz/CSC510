@@ -114,7 +114,7 @@ but nevertheless, here is a track record that everyone is contributing a lot)|[e
 |Evidence that the whole team is using the same tools (e.g. tutor can ask anyone to share screen, they demonstrate the system running on their computer)| |
 |Evidence that the members of the team are working across multiple places in the code base| [Yes](https://github.com/NovaCorz/CSC510/branches) |3
 |Short release cycles | [(hard to see in short projects) project members are committing often enough so that everyone can get your work](https://github.com/NovaCorz/CSC510/commits/main/)|3 |
-|The file .gitignore lists what files should not be saved to the repo. See [examples](https://github.com/github/gitignore)|in GH| |
+|The file .gitignore lists what files should not be saved to the repo. See [examples](https://github.com/github/gitignore)|[in GH](https://github.com/NovaCorz/CSC510/blob/main/.gitignore)| 3|
 |The file INSTALL.md lists how to install the code|[in GH](https://github.com/NovaCorz/CSC510/blob/main/INSTALL.md)|3 |
 |The file LICENSE.md lists rules of usage for this repo|[in GH](https://github.com/NovaCorz/CSC510/blob/main/LICENSE)|3|
 |The file CODE-OF-CONDUCT.md lists rules of behavior for this repo; e.g. see [example](https://github.com/probot/template/blob/master/CODE_OF_CONDUCT.md)|[in GH](https://github.com/NovaCorz/CSC510/blob/main/CODE-OF-CONDUCT.md)|3|
@@ -126,7 +126,7 @@ but nevertheless, here is a track record that everyone is contributing a lot)|[e
 |Badges showing your code formatters. |[config files in GH showing your this formatter's  config, badges in README](https://github.com/NovaCorz/CSC510/blob/main/README.md)|3|
 |Badges showing your syntax checkers. |[config files iin  GH showing this checker's config, badges in README](https://github.com/NovaCorz/CSC510/blob/main/README.md)  |3|
 |Badges showing your code coverage tools|[config files in GH, badges in README](https://github.com/NovaCorz/CSC510/blob/main/README.md)|3 |
-|Badges showing any other Other automated analysis tools|[config files in GH, badges in README]((https://github.com/NovaCorz/CSC510/blob/main/README.md))|3|
+|Badges showing any other Other automated analysis tools|[config files in GH, badges in README](https://github.com/NovaCorz/CSC510/blob/main/README.md)|3|
 | ||
 
 
