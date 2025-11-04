@@ -92,7 +92,7 @@
 
 |Notes|Evidence|Score|
 |-----|---------|--|
-|Workload is spread over the whole team (one team member is often Xtimes more productive than the others... --| |
+|Workload is spread over the whole team (one team member is often Xtimes more productive than the others... --| [Yes](https://github.com/NovaCorz/CSC510/graphs/contributors) Some members did not have git config setup correctly, so their contributions are not accurate | 3
 but nevertheless, here is a track record that everyone is contributing a lot)|evidence in GH| |
 |Number of commits|in GH| |
 |Number of commits: by different people|in GH| |
