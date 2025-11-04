@@ -11,4 +11,4 @@ app.jwt-secret=
 # Expiration time in milliseconds - 7 days
 app.jwt-expiration-milliseconds=604800000
 # Plain text password for default admin user
-app.admin-user-password=
+# app.admin-user-password=
