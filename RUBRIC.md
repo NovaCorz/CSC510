@@ -104,29 +104,29 @@ but nevertheless, here is a track record that everyone is contributing a lot)|[e
 |Docs: why: docs tell a story, motivate the whole thing, deliver a punchline that makes you want to rush out and use the thing| |
 |Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code.| |
 |Use of version control tools| |
-|Test cases exist|dozens of tests and those test cases are more than 30% of the code base| |
-|Test cases are routinely executed|E.g. travis-com.com or github actions or something| |
-|Issues are discussed before they are closed|even if you discuss in slack, need a sumamry statement here| |
-|Chat channel: exists|Link or screenshots| |
-|Test cases: a large proportion of the issues related to handling failing cases.|If a test case fails, open an issue and fix it| |
+|Test cases exist|[dozens of tests and those test cases are more than 30% of the code base](https://github.com/NovaCorz/CSC510/actions) [And](https://app.codecov.io/gh/NovaCorz/CSC510)|3 |
+|Test cases are routinely executed|[E.g. travis-com.com or github actions or something](https://github.com/NovaCorz/CSC510/actions)|3 |
+|Issues are discussed before they are closed|[even if you discuss in slack, need a sumamry statement here](https://github.com/NovaCorz/CSC510/tree/dev/collaboration-proof) [And here](https://github.com/NovaCorz/CSC510/issues)|3 |
+|Chat channel: exists|[Link or screenshots](https://github.com/NovaCorz/CSC510/tree/main/collaboration-proof)|3 |
+|Test cases: a large proportion of the issues related to handling failing cases.|[If a test case fails, open an issue and fix it](https://github.com/NovaCorz/CSC510/issues)|3 |
 |Evidence that the whole team is using the same tools: everyone can get to all tools and files| |
 |Evidence that the whole team is using the same tools (e.g. config files in the repo, updated by lots of different people)| |
 |Evidence that the whole team is using the same tools (e.g. tutor can ask anyone to share screen, they demonstrate the system running on their computer)| |
-|Evidence that the members of the team are working across multiple places in the code base| |
-|Short release cycles | (hard to see in short projects) project members are committing often enough so that everyone can get your work| |
+|Evidence that the members of the team are working across multiple places in the code base| [Yes](https://github.com/NovaCorz/CSC510/branches) |3
+|Short release cycles | [(hard to see in short projects) project members are committing often enough so that everyone can get your work](https://github.com/NovaCorz/CSC510/commits/main/)|3 |
 |The file .gitignore lists what files should not be saved to the repo. See [examples](https://github.com/github/gitignore)|in GH| |
-|The file INSTALL.md lists how to install the code|in GH| |
-|The file LICENSE.md lists rules of usage for this repo|in GH|:white_check_mark:|
-|The file CODE-OF-CONDUCT.md lists rules of behavior for this repo; e.g. see [example](https://github.com/probot/template/blob/master/CODE_OF_CONDUCT.md)|in GH|:white_check_mark:|
-|The file CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up; e.g. see [example](https://github.com/probot/template/blob/master/CONTRIBUTING.md)|in GH| |
-|The file README.md contains all the following|in GH| |
+|The file INSTALL.md lists how to install the code|[in GH](https://github.com/NovaCorz/CSC510/blob/main/INSTALL.md)|3 |
+|The file LICENSE.md lists rules of usage for this repo|[in GH](https://github.com/NovaCorz/CSC510/blob/main/LICENSE)|3|
+|The file CODE-OF-CONDUCT.md lists rules of behavior for this repo; e.g. see [example](https://github.com/probot/template/blob/master/CODE_OF_CONDUCT.md)|[in GH](https://github.com/NovaCorz/CSC510/blob/main/CODE-OF-CONDUCT.md)|3|
+|The file CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up; e.g. see [example](https://github.com/probot/template/blob/master/CONTRIBUTING.md)|[in GH](https://github.com/NovaCorz/CSC510/blob/main/CONTRIBUTING.md)|3 |
+|The file README.md contains all the following|[in GH](https://github.com/NovaCorz/CSC510/blob/main/README.md)| 3|
 |Video|2min video of new functionality, showing a significant delta from prior.| |
-|DOI badge: exists. To get a Digitial Object Indentifier, regiser the project at [Zenodo](https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content). DOI badges look like this: ![Zenodo doi badge](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.1234567-blue.svg) |in GH|:white_check_mark:|
-|Badges showing your style checkers |config files in GH showing your config, badges in README| |
-|Badges showing your code formatters. |config files in GH showing your this formatter's  config, badges in README||
-|Badges showing your syntax checkers. |config files iin  GH showing this checker's config, badges in README  ||
-|Badges showing your code coverage tools|config files in GH, badges in README| |
-|Badges showing any other Other automated analysis tools|config files in GH, badges in README||
+|DOI badge: exists. To get a Digitial Object Indentifier, regiser the project at [Zenodo](https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content). DOI badges look like this: ![Zenodo doi badge](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.1234567-blue.svg) |[in GH](https://github.com/NovaCorz/CSC510/blob/main/README.md)|3| 
+|Badges showing your style checkers |[config files in GH showing your config, badges in README](https://github.com/NovaCorz/CSC510/blob/main/README.md)|3 |
+|Badges showing your code formatters. |[config files in GH showing your this formatter's  config, badges in README](https://github.com/NovaCorz/CSC510/blob/main/README.md)|3|
+|Badges showing your syntax checkers. |[config files iin  GH showing this checker's config, badges in README](https://github.com/NovaCorz/CSC510/blob/main/README.md)  |3|
+|Badges showing your code coverage tools|[config files in GH, badges in README](https://github.com/NovaCorz/CSC510/blob/main/README.md)|3 |
+|Badges showing any other Other automated analysis tools|[config files in GH, badges in README]((https://github.com/NovaCorz/CSC510/blob/main/README.md))|3|
 | ||
 
 
