@@ -95,7 +95,7 @@
 |Workload is spread over the whole team (one team member is often Xtimes more productive than the others... --| [Yes](https://github.com/NovaCorz/CSC510/graphs/contributors) Some members did not have git config setup correctly, so their contributions are not accurate | 3
 but nevertheless, here is a track record that everyone is contributing a lot)|[evidence in GH](https://github.com/NovaCorz/CSC510/tree/main/collaboration-proof)|3 |
 |Number of commits|[in GH](https://github.com/NovaCorz/CSC510/commits/main/)|3 |
-|Number of commits: by different people|[in GH]((https://github.com/NovaCorz/CSC510/tree/main/collaboration-proof))| 3|
+|Number of commits: by different people|[in GH](https://github.com/NovaCorz/CSC510/tree/main/collaboration-proof)| 3|
 |Issues reports: there are **many**| [Yes](https://github.com/NovaCorz/CSC510/issues) |3
 |Issues are being closed|[evidence in GH](https://github.com/NovaCorz/CSC510/issues)|3 |
 |Docs: doco generated, format not ugly |in GH| |
