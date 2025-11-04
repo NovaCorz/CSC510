@@ -10,8 +10,8 @@
 | **Q3 - Availability**            | |  |   |   |
 |Question 3.1| Is your software available as a package that can be deployed without building it?| ✅   | ❌  |          |
 |Question 3.2| Is your software available for free?| ✅   |   |   Yes, our software is available for free       |
-|Question 3.3| Is your source code publicly available to download, either as a downloadable bundle or via access to a source code repository?| ✅   | ❌  |          |
-| Question 3.4 | Is your software hosted in an established, third-party repository like [GitHub](https://github.com), [BitBucket](https://bitbucket.org), [LaunchPad](https://launchpad.net), or [SourceForge](https://sourceforge.net)? | ✅ | ❌ | |
+|Question 3.3| Is your source code publicly available to download, either as a downloadable bundle or via access to a source code repository?| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/tree/main)        |
+| Question 3.4 | Is your software hosted in an established, third-party repository like [GitHub](https://github.com), [BitBucket](https://bitbucket.org), [LaunchPad](https://launchpad.net), or [SourceForge](https://sourceforge.net)? | ✅ |  | [Yes](https://github.com/NovaCorz/CSC510/tree/main) |
 | **Q4 - Documentation**           | |  |   |   |
 |Question 4.1| Is your documentation clearly available on your website or within your software?| ✅   | ❌  |          |
 |Question 4.2| Does your documentation include a "quick start" guide, that provides a short overview of how to use your software with some basic examples of use?| ✅   | ❌  |          |
@@ -40,10 +40,10 @@
 |Question 9.1| Does your software adhere to appropriate accessibility conventions or standards?| ✅   | ❌  |          |
 |Question 9.2| Does your documentation adhere to appropriate accessibility conventions or standards?| ✅   | ❌  |          |
 | **Q10 - Source Code Management** | |  |   |   |
-|Question 10.1| Is your source code stored in a repository under revision control?| ✅   | ❌  |          |
-|Question 10.2| Is each source code release a snapshot of the repository?| ✅   | ❌  |          |
+|Question 10.1| Is your source code stored in a repository under revision control?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/tree/main)         |
+|Question 10.2| Is each source code release a snapshot of the repository?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/tree/main)         |
 |Question 10.3| Are releases tagged in the repository?| ✅   | ❌  |          |
-|Question 10.4| Is there a branch of the repository that is always stable? (i.e. tests always pass, code always builds successfully)| ✅   | ❌  |          |
+|Question 10.4| Is there a branch of the repository that is always stable? (i.e. tests always pass, code always builds successfully)| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/tree/main)        |
 |Question 10.5| Do you back-up your repository?| ✅   | ❌  |          |
 | **Q11 - Building & Installing**  | |  |   |   |
 |Question 11.1| Do you provide publicly-available instructions for building your software from the source code?| ✅   | ❌  |          |
@@ -53,19 +53,18 @@
 |Question 11.5| Does your documentation list the version number for all third-party dependencies?| ✅   | ❌  |          |
 |Question 11.6| Does your software list the web address, and licences for all third-party dependencies and say whether the dependencies are mandatory or optional?| ✅   | ❌  |          |
 |Question 11.7| Can you download dependencies using a dependency management tool or package manager?| ✅   | ❌  |          |
-|Question 11.8| Do you have tests that can be run after your software has been built or deployed to show whether the build or deployment has been successful?| ✅   | ❌  |          |
+|Question 11.8| Do you have tests that can be run after your software has been built or deployed to show whether the build or deployment has been successful?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/actions)          |
 | **Q12 - Testing**                | |  |   |   |
-|Question 12.1| Do you have an automated test suite for your software?| ✅   | ❌  |          |
-|Question 12.2| Do you have a framework to periodically (e.g. nightly) run your tests on the latest version of the source code?| ✅   | ❌  |          |
-|Question 12.3| Do you use continuous integration, automatically running tests whenever changes are made to your source code?| ✅   | ❌  |          |
-|Question 12.4| Are your test results publicly visible?| ✅   | ❌  |          |
+|Question 12.1| Do you have an automated test suite for your software?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/actions)         |
+|Question 12.2| Do you have a framework to periodically (e.g. nightly) run your tests on the latest version of the source code?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/actions)         |
+|Question 12.3| Do you use continuous integration, automatically running tests whenever changes are made to your source code?| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/actions)        |
+|Question 12.4| Are your test results publicly visible?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/actions)         |
 |Question 12.5| Are all manually-run tests documented?| ✅   | ❌  |          |
 | **Q13 - Community Engagement**   |  |  |   |   |                                                                                                                                                                                           
 |Question 13.1| Does your project have resources (e.g. blog, Twitter, RSS feed, Facebook page, wiki, mailing list) that are regularly updated with information about your software?| ✅   | ❌  |          |
 |Question 13.2| Does your website state how many projects and users are associated with your project?| ✅   | ❌  |          |
 |Question 13.3| Do you provide success stories on your website?| ✅   | ❌  |          |
 |Question 13.4| Do you list your important partners and collaborators on your website?| ✅   | ❌  |          |
-|~Question 13.5~| ~Do you list your project's publications on your website or link to a resource where these are available?~ | ✅   | ❌  |          |
 |Question 13.6| Do you list third-party publications that refer to your software on your website or link to a resource where these are available?| ✅   | ❌  |          |
 |Question 13.7| Can users subscribe to notifications to changes to your source code repository?| ✅   | ❌  |          |
 |Question 13.8| If your software is developed as an open source project (and, not just a project developing open source software), do you have a governance model?| ✅   | ❌  |          |
