@@ -1,12 +1,15 @@
 package FoodSeer.frontend;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,12 +45,14 @@ public class LoginPageTest {
         WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--headless");
+        options.addArguments("--headless=new");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--window-size=1920,1080");
+        options.addArguments("--disable-extensions");
+        options.addArguments("--disable-software-rasterizer");
         driver = new ChromeDriver(options);
 
-        wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(20));
     }
 
     @AfterEach
@@ -73,6 +78,7 @@ public class LoginPageTest {
         // Assert login failed by checking we are still on the login page
         wait.until(d -> d.getCurrentUrl().equals("http://localhost:3000/"));
         assertEquals(driver.getCurrentUrl(), baseUrl);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("error-message")));
         assertEquals(driver.findElement(By.className("error-message")).getText(), "Invalid username or password");
     }
 
@@ -116,7 +122,7 @@ public class LoginPageTest {
 
     private void attemptLogin(String username, String password) {
         driver.get(baseUrl);
-        driver.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(2));
+        wait.until(ExpectedConditions.elementToBeClickable(By.className("login-button")));
 
         System.out.println("Loaded page title: " + driver.getTitle());
         System.out.println("Current URL: " + driver.getCurrentUrl());
