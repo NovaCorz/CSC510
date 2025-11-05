@@ -36,25 +36,25 @@ Inside of this newly created application.properties file change the following
 
 ### 3. How to Set Up Ollama
 
-### Step 1: Download Ollama
+#### Step 1: Download Ollama
 
-#### For Windows:
+##### For Windows:
 1. Go to https://ollama.com/download
 2. Click "Download for Windows"
 3. Run the installer (`OllamaSetup.exe`)
 4. Follow the installation wizard
 
-#### For Mac:
+##### For Mac:
 1. Go to https://ollama.com/download
 2. Click "Download for macOS"
 3. Open the `.dmg` file and drag Ollama to Applications
 
-#### For Linux:
+##### For Linux:
 ```bash
 curl -fsSL https://ollama.com/install.sh | sh
 ```
 
-### Step 2: Pull the gemma3:1b Model
+#### Step 2: Pull the gemma3:1b Model
 
 After installation, open a terminal and run:
 
@@ -64,7 +64,7 @@ ollama pull gemma3:1b
 
 This will download the model (~1GB). Wait for it to complete.
 
-### Step 3: Start Ollama Server
+#### Step 3: Start Ollama Server
 
 Ollama should start automatically after installation. To verify it's running:
 
