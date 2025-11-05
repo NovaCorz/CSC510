@@ -39,3 +39,73 @@ Before you begin, please take a moment to read our [Code of Conduct](https://git
 
 ## Coding Standards
 
+To maintain code quality across the Food Seer project, please follow these coding standards for both backend (Java) and frontend (JavaScript/React) development:
+
+### Backend (Java) Standards
+
+- **Code Formatting**: We use **Google Java Format** for consistent code style. Format your code before submitting:
+```bash
+# Using Maven plugin
+mvn com.coveo:fmt-maven-plugin:format
+
+# Or download and use google-java-format JAR
+java -jar google-java-format.jar --replace $(find . -name "*.java")
+```
+
+- **Linting**: We use **Checkstyle** to enforce Java coding conventions. Run Checkstyle locally and resolve any reported issues:
+```bash
+# Using Maven
+mvn checkstyle:check
+
+# View the report
+open target/site/checkstyle.html
+```
+
+- **Static Analysis**: **SpotBugs** is used to identify potential bugs and code quality issues:
+```bash
+# Using Maven
+mvn spotbugs:check
+
+# Generate GUI report
+mvn spotbugs:gui
+```
+
+- **Code Quality Standards**:
+  - Follow Java naming conventions (camelCase for methods/variables, PascalCase for classes)
+  - Maximum method complexity: 10 (cyclomatic complexity)
+  - Maximum line length: 120 characters
+  - All public methods must have Javadoc comments
+  - Use meaningful variable and method names
+
+### Frontend (JavaScript/React) Standards
+
+- **Code Formatting**: We use **Prettier** for automatic formatting. Run Prettier before submitting your code:
+```bash
+# Format all files
+npm run format
+
+# Or run Prettier directly
+npx prettier --write "src/**/*.{js,jsx,ts,tsx,json,css,md}"
+```
+
+- **Linting**: We use **ESLint** to enforce code quality and catch potential errors:
+```bash
+# Run ESLint
+npm run lint
+
+# Fix auto-fixable issues
+npm run lint:fix
+```
+
+- **Type Checking** (if using TypeScript):
+```bash
+# Run type checking
+npm run type-check
+```
+
+- **Code Quality Standards**:
+  - Follow Airbnb JavaScript Style Guide
+  - Use functional components with hooks (avoid class components)
+  - Maximum function complexity: 10
+  - Maximum line length: 100 characters
+  - Prop validation required for all components (PropTypes or TypeScript)
