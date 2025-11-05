@@ -34,6 +34,53 @@ Inside of this newly created application.properties file change the following
 - app.jwt-secret: Using https://emn178.github.io/online-tools/sha256.html make a jwt secret
 - app.admin-user-password: To whatever you want the default admin password to be.
 
+## How to Set Up Ollama
+
+### Step 1: Download Ollama
+
+#### For Windows:
+1. Go to https://ollama.com/download
+2. Click "Download for Windows"
+3. Run the installer (`OllamaSetup.exe`)
+4. Follow the installation wizard
+
+#### For Mac:
+1. Go to https://ollama.com/download
+2. Click "Download for macOS"
+3. Open the `.dmg` file and drag Ollama to Applications
+
+#### For Linux:
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+```
+
+### Step 2: Pull the gemma3:1b Model
+
+After installation, open a terminal and run:
+
+```bash
+ollama pull gemma3:1b
+```
+
+This will download the model (~1GB). Wait for it to complete.
+
+### Step 3: Start Ollama Server
+
+Ollama should start automatically after installation. To verify it's running:
+
+```bash
+ollama list
+```
+
+You should see `gemma3:1b` in the list.
+
+If Ollama isn't running, start it:
+```bash
+ollama serve
+```
+
+The server will run on `http://localhost:11434` by default.
+
 ### 3. Build and Run Backend
 
 ```bash
@@ -44,7 +91,7 @@ mvn spring-boot:run
 
 The backend will start on `http://localhost:8080`
 
-### 3. Verify Backend
+### 4. Verify Backend
 
 The application automatically creates an admin user with credentials:
 - Username: `admin`
