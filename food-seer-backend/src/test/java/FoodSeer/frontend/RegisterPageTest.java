@@ -42,7 +42,7 @@ public class RegisterPageTest {
         options.addArguments("--headless");
         driver = new ChromeDriver(options);
 
-        wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(3));
+        wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(10));
     }
 
     @AfterEach

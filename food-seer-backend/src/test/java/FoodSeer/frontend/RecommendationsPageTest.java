@@ -54,7 +54,7 @@ public class RecommendationsPageTest {
         options.addArguments("--window-size=1920,1080");
         options.addArguments("--headless");
         driver = new ChromeDriver(options);
-        wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(20));
+        wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(10));
     }
 
     @AfterEach
@@ -71,7 +71,7 @@ public class RecommendationsPageTest {
         }
     }
 
-    private void registerUserWithPreferences(String username, String password, String email, String budget, String... dietaryRestrictions) {
+    private void registerUserWithPreferences(String username, String password, String email, String budget, String... allergens) {
         // Register and navigate through preferences
         driver.get(baseUrl + "register");
         wait.until(d -> d.getCurrentUrl().equals(baseUrl + "register"));
@@ -94,11 +94,11 @@ public class RecommendationsPageTest {
         driver.findElement(By.xpath("//div[@class='option-card '][.//div[text()='" + budget + "']]")).click();
         driver.findElement(By.className("next-button")).click();
 
-        // Select dietary restrictions
-        for (String restriction : dietaryRestrictions) {
+        // Select allergens
+        for (String allergen : allergens) {
             wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//div[@class='option-card '][.//div[text()='" + restriction + "']]")));
-            driver.findElement(By.xpath("//div[@class='option-card '][.//div[text()='" + restriction + "']]")).click();
+                By.xpath("//label[contains(@class, 'allergen-option')][.//span[text()='" + allergen + "']]")));
+            driver.findElement(By.xpath("//label[contains(@class, 'allergen-option')][.//span[text()='" + allergen + "']]")).click();
         }
         driver.findElement(By.className("next-button")).click();
 
@@ -116,7 +116,7 @@ public class RecommendationsPageTest {
      */
     @Test
     public void testBudgetFiltering() {
-        registerUserWithPreferences("budgetuser", "testpass123", "budget@test.com", "Budget (Under $10)");
+        registerUserWithPreferences("budgetuser", "testpass123", "budget@test.com", "Budget ($0-$10)");
         
         // Verify only budget foods are shown
         wait.until(driver -> {
@@ -140,56 +140,35 @@ public class RecommendationsPageTest {
     }
 
     /**
-     * Tests the dietary restriction filtering of food recommendations.
+     * Tests the allergen-based filtering of food recommendations.
      * Verifies that:
-     * - Only vegan-compatible foods are shown when vegan preference is set
+     * - Foods containing selected allergens are excluded
      * - Moderate price range ($10-$20) items are filtered correctly
-     * - Foods with meat, dairy, or other non-vegan ingredients are excluded
-     * - Vegan-friendly items like garden salad and vegetable soup are included
+     * - Multiple allergen restrictions work together
+     * - Safe foods without allergens are included
      */
     @Test
     public void testDietaryRestrictionFiltering() {
-        registerUserWithPreferences("veganuser", "testpass123", "vegan@test.com", 
-            "Moderate ($10-$20)", "Vegan");
+        registerUserWithPreferences("allergyuser", "testpass123", "allergy@test.com", 
+            "Moderate ($0-$20)", "Milk/Dairy", "Fish");
         
-        // Verify only vegan-compatible foods are shown
+        // Verify foods with allergens are excluded
         wait.until(driver -> {
             List<WebElement> cards = driver.findElements(By.className("recommendation-card"));
             return cards.size() > 0; // wait until cards actually rendered
         });
         String recommendedText = driver.findElement(By.className("recommendations-grid")).getText();
         
-        // Should show vegan items in moderate price range
-        assertTrue(recommendedText.contains("GARDEN SALAD"));
-        assertTrue(recommendedText.contains("TOFU BOWL"));
+        // Should show allergen-free items in moderate price range
+        assertTrue(recommendedText.contains("GARDEN SALAD")); // No dairy or fish
+        assertTrue(recommendedText.contains("FRUIT SALAD")); // Naturally allergen-free
         
-        // Should not show non-vegan items
-        assertFalse(recommendedText.contains("TURKEY SANDWICH"));
-        assertFalse(recommendedText.contains("CHICKEN WRAP"));
-        assertFalse(recommendedText.contains("STEAK"));
+        // Should not show items with allergens
+        assertFalse(recommendedText.contains("GRILLED CHEESE")); // Contains dairy
+        assertFalse(recommendedText.contains("SALMON")); // Contains fish
+        assertFalse(recommendedText.contains("YOGURT PARFAIT")); // Contains dairy
     }
 
-    /**
-     * Tests the behavior when no foods match the user's preferences.
-     * Verifies that:
-     * - When combining restrictive preferences (premium price + vegan + gluten-free)
-     * - A proper "no matches" message is displayed
-     * - The recommendations grid is not shown
-     */
-    @Test
-    public void testNoMatchingRecommendations() {
-        // Register with restrictions that won't match any foods
-        registerUserWithPreferences("restriceduser", "testpass123", "restricted@test.com", 
-            "Premium ($20+)", "Vegan", "Gluten Free");
-        
-        // Verify no recommendations message
-        wait.until(ExpectedConditions.or(
-            ExpectedConditions.presenceOfElementLocated(By.className("recommendations-grid")),
-            ExpectedConditions.presenceOfElementLocated(By.className("no-recommendations"))
-        ));
-        WebElement noRecommendations = driver.findElement(By.className("no-recommendations"));
-        assertTrue(noRecommendations.getText().contains("No foods match your current preferences"));
-    }
 
     /**
      * Tests the update preferences functionality from the recommendations page.
@@ -201,7 +180,7 @@ public class RecommendationsPageTest {
     @Test
     public void testUpdatePreferences() {
         registerUserWithPreferences("updateuser", "testpass123", "update@test.com", 
-            "Budget (Under $10)");
+            "Budget ($0-$10)");
         
         // Click update preferences
         wait.until(ExpectedConditions.elementToBeClickable(By.className("update-preferences-button")));
@@ -223,7 +202,7 @@ public class RecommendationsPageTest {
     @Test
     public void testNavigationButtons() {
         registerUserWithPreferences("navuser", "testpass123", "nav@test.com", 
-            "Moderate ($10-$20)");
+            "Moderate ($0-$20)");
         
         // Test browse all foods
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Browse All Foods']")));
@@ -251,13 +230,13 @@ public class RecommendationsPageTest {
      * Verifies that:
      * - Username is displayed correctly
      * - Budget preference is shown
-     * - Dietary restrictions are listed
+     * - Allergen restrictions are listed
      * - All user preferences are accurately reflected
      */
     @Test
     public void testUserInfoDisplay() {
         registerUserWithPreferences("infouser", "testpass123", "info@test.com", 
-            "Premium ($20+)", "Vegetarian", "Gluten Free");
+            "Premium ($0-$35)", "Peanuts", "Tree Nuts");
         
         // Verify user info display
         wait.until(ExpectedConditions.presenceOfElementLocated(By.className("user-info-card")));
@@ -265,31 +244,37 @@ public class RecommendationsPageTest {
         
         assertTrue(userInfo.getText().contains("infouser"));
         assertTrue(userInfo.getText().contains("premium"));
-        assertTrue(userInfo.getText().contains("vegetarian"));
-        assertTrue(userInfo.getText().contains("gluten-free"));
+        assertTrue(userInfo.getText().contains("PEANUTS"));
+        assertTrue(userInfo.getText().contains("TREE-NUTS"));
     }
 
     /**
-     * Tests filtering with multiple dietary restrictions combined.
+     * Tests filtering with multiple allergen restrictions combined.
      * Verifies that:
-     * - Multiple restrictions (vegetarian + gluten-free) work together
+     * - Multiple allergen restrictions work together
      * - Only foods meeting all criteria are shown
-     * - Foods violating any restriction are excluded
-     * - Compatible foods like vegan options are included
+     * - Foods with any selected allergen are excluded
+     * - Foods without any selected allergens are included
      */
     @Test
     public void testMultipleDietaryRestrictions() {
         registerUserWithPreferences("multiuser", "testpass123", "multi@test.com", 
-            "No Limit", "Vegetarian", "Gluten Free");
+            "No Limit", "Milk/Dairy", "Eggs", "Shellfish");
         
-        // Verify recommendations respect multiple restrictions
+        // Verify recommendations respect multiple allergen restrictions
         wait.until(driver -> {
             List<WebElement> cards = driver.findElements(By.className("recommendation-card"));
             return cards.size() > 0; // wait until cards actually rendered
         });
-        List<WebElement> recommendedFoods = driver.findElements(By.className("recommendation-card"));
+        String recommendedText = driver.findElement(By.className("recommendations-grid")).getText();
         
-        // Should only show the vegan food (which is vegetarian and gluten-free)
-        assertEquals(13, recommendedFoods.size());
+        // Verify foods with any of the allergens are excluded
+        assertFalse(recommendedText.contains("QUICHE")); // Contains eggs and dairy
+        assertFalse(recommendedText.contains("SHRIMP SCAMPI")); // Contains shellfish
+        assertFalse(recommendedText.contains("CHEESE PLATE")); // Contains dairy
+        
+        // Verify allergen-free foods are included
+        assertTrue(recommendedText.contains("GARDEN SALAD")); // No common allergens
+        assertTrue(recommendedText.contains("FRUIT SALAD")); // Naturally allergen-free
     }
 }

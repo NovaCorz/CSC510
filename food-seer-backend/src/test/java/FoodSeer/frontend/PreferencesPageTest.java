@@ -40,7 +40,7 @@ public class PreferencesPageTest {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--headless");
         driver = new ChromeDriver(options);
-        wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(20));
+        wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(10));
 
         registerAndLogin("preftest", "testpass123", "preftest@test.com");
     }
@@ -63,7 +63,7 @@ public class PreferencesPageTest {
      * Tests the complete flow of setting user preferences.
      * Verifies that:
      * - User can select budget preference (Under $10)
-     * - User can select multiple dietary restrictions (Vegetarian, Gluten Free)
+     * - User can select multiple allergen restrictions
      * - Preferences are saved correctly in the database
      * - User is redirected to recommendations after completing
      */
@@ -73,18 +73,23 @@ public class PreferencesPageTest {
         wait.until(d -> d.getCurrentUrl().equals(baseUrl + "preferences"));
         
         // Test budget selection
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='option-card '][.//div[text()='Budget (Under $10)']]")));
-        driver.findElement(By.xpath("//div[@class='option-card '][.//div[text()='Budget (Under $10)']]")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='option-card '][.//div[text()='Budget ($0-$10)']]")));
+        driver.findElement(By.xpath("//div[@class='option-card '][.//div[text()='Budget ($0-$10)']]")).click();
         
         // Click next to go to dietary restrictions
         WebElement nextButton = driver.findElement(By.className("next-button"));
         assertTrue(nextButton.isEnabled());
         nextButton.click();
         
-        // Select dietary restrictions
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='option-card '][.//div[text()='Vegetarian']]")));
-        driver.findElement(By.xpath("//div[@class='option-card '][.//div[text()='Vegetarian']]")).click();
-        driver.findElement(By.xpath("//div[@class='option-card '][.//div[text()='Gluten Free']]")).click();
+        // Select dietary restrictions using new allergen system
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[contains(@class, 'allergen-option')]")));
+        driver.findElement(By.xpath("//label[contains(@class, 'allergen-option')][.//span[text()='Gluten']]")).click();
+        driver.findElement(By.xpath("//label[contains(@class, 'allergen-option')][.//span[text()='Milk/Dairy']]")).click();
+        
+        // Verify selections are shown in summary
+        WebElement summary = driver.findElement(By.className("selected-restrictions-summary"));
+        assertTrue(summary.getText().contains("GLUTEN"));
+        assertTrue(summary.getText().contains("MILK"));
         
         // Finish and save preferences
         WebElement finishButton = driver.findElement(By.className("next-button"));
@@ -98,15 +103,15 @@ public class PreferencesPageTest {
         // Verify preferences were saved
         User updatedUser = userRepository.findByUsername("preftest").orElseThrow();
         assertEquals("budget", updatedUser.getCostPreference());
-        assertTrue(updatedUser.getDietaryRestrictions().contains("vegetarian"));
-        assertTrue(updatedUser.getDietaryRestrictions().contains("gluten-free"));
+        assertTrue(updatedUser.getDietaryRestrictions().contains("GLUTEN"));
+        assertTrue(updatedUser.getDietaryRestrictions().contains("MILK"));
     }
 
     /**
      * Tests that existing user preferences are loaded correctly.
      * Verifies that:
      * - Previously selected budget option is pre-selected
-     * - Previously chosen dietary restrictions are pre-selected
+     * - Previously chosen allergen restrictions are pre-selected
      * - UI reflects the correct state when revisiting preferences
      * - All selections persist between page navigations
      */
@@ -114,14 +119,16 @@ public class PreferencesPageTest {
     public void testLoadExistingPreferences() {
         
         // Set preferences
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='option-card '][.//div[text()='Premium ($20+)']]")));
-        driver.findElement(By.xpath("//div[@class='option-card '][.//div[text()='Premium ($20+)']]")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='option-card '][.//div[text()='Premium ($0-$35)']]")));
+        driver.findElement(By.xpath("//div[@class='option-card '][.//div[text()='Premium ($0-$35)']]")).click();
         driver.findElement(By.className("next-button")).click();
         
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='option-card '][.//div[text()='Vegan']]")));
-        driver.findElement(By.xpath("//div[@class='option-card '][.//div[text()='Vegan']]")).click();
-        driver.findElement(By.xpath("//div[@class='option-card '][.//div[text()='Gluten Free']]")).click();
+        // Select allergen restrictions
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[contains(@class, 'allergen-option')]")));
+        driver.findElement(By.xpath("//label[contains(@class, 'allergen-option')][.//span[text()='Fish']]")).click();
+        driver.findElement(By.xpath("//label[contains(@class, 'allergen-option')][.//span[text()='Shellfish']]")).click();
         driver.findElement(By.className("next-button")).click();
+        
         // Wait here
         wait.until(d -> !d.getCurrentUrl().equals(baseUrl + "preferences"));
         // Go back to preferences page to check if they loaded
@@ -129,19 +136,26 @@ public class PreferencesPageTest {
         wait.until(d -> d.getCurrentUrl().equals(baseUrl + "preferences"));
         
         // Verify budget selection is pre-selected
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='option-card selected'][.//div[text()='Premium ($20+)']]")));
-        WebElement budgetHigh = driver.findElement(By.xpath("//div[@class='option-card selected'][.//div[text()='Premium ($20+)']]"));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='option-card selected'][.//div[text()='Premium ($0-$35)']]")));
+        WebElement budgetHigh = driver.findElement(By.xpath("//div[@class='option-card selected'][.//div[text()='Premium ($0-$35)']]"));
         assertTrue(budgetHigh != null);
         
         // Go to dietary restrictions
         driver.findElement(By.className("next-button")).click();
         
-        // Verify dietary restrictions are pre-selected
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='option-card selected'][.//div[text()='Vegan']]")));
-        WebElement veganCheckbox = driver.findElement(By.xpath("//div[@class='option-card selected'][.//div[text()='Vegan']]"));
-        WebElement kosherCheckbox = driver.findElement(By.xpath("//div[@class='option-card selected'][.//div[text()='Gluten Free']]"));
-        assertTrue(veganCheckbox != null);
-        assertTrue(kosherCheckbox != null);
+        // Verify allergen restrictions are pre-selected
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[contains(@class, 'allergen-option') and contains(@class, 'selected')]")));
+        
+        // Check that the allergens are selected
+        WebElement fishOption = driver.findElement(By.xpath("//label[contains(@class, 'allergen-option') and contains(@class, 'selected')][.//span[text()='Fish']]"));
+        WebElement shellfishOption = driver.findElement(By.xpath("//label[contains(@class, 'allergen-option') and contains(@class, 'selected')][.//span[text()='Shellfish']]"));
+        assertTrue(fishOption != null);
+        assertTrue(shellfishOption != null);
+        
+        // Verify summary shows selected restrictions
+        WebElement summary = driver.findElement(By.className("selected-restrictions-summary"));
+        assertTrue(summary.getText().contains("FISH"));
+        assertTrue(summary.getText().contains("SHELLFISH"));
     }
 
     /**
@@ -157,28 +171,74 @@ public class PreferencesPageTest {
         wait.until(d -> d.getCurrentUrl().equals(baseUrl + "preferences"));
         
         // Start at budget step
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='option-card '][.//div[text()='Moderate ($10-$20)']]")));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='option-card '][.//div[text()='Moderate ($0-$20)']]")));
         WebElement nextButton = driver.findElement(By.className("next-button"));
         assertTrue(!nextButton.isEnabled()); // Should be disabled until selection made
         
         // Select budget and go next
-        driver.findElement(By.xpath("//div[@class='option-card '][.//div[text()='Moderate ($10-$20)']]")).click();
+        driver.findElement(By.xpath("//div[@class='option-card '][.//div[text()='Moderate ($0-$20)']]")).click();
         assertTrue(nextButton.isEnabled());
         nextButton.click();
         
         // At dietary restrictions step
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='option-card '][.//div[text()='Vegetarian']]")));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[contains(@class, 'allergen-option')][.//span[text()='Fish']]")));
         
         // Go back to budget step
         WebElement prevButton = driver.findElement(By.className("previous-button"));
         prevButton.click();
         
         // Verify we're back at budget step and selection is preserved
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='option-card selected'][.//div[text()='Moderate ($10-$20)']]")));
-        WebElement budgetMedium = driver.findElement(By.xpath("//div[@class='option-card selected'][.//div[text()='Moderate ($10-$20)']]"));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='option-card selected'][.//div[text()='Moderate ($0-$20)']]")));
+        WebElement budgetMedium = driver.findElement(By.xpath("//div[@class='option-card selected'][.//div[text()='Moderate ($0-$20)']]"));
         assertTrue(budgetMedium != null);
     }
 
+    /**
+     * Tests allergen group interactions.
+     * Verifies that:
+     * - Multiple allergens can be selected
+     * - Selected allergens appear in summary
+     * - Related allergens can be combined (e.g., all meat types)
+     * - Allergen selections persist after page navigation
+     */
+    @Test
+    public void testAllergenGroups() {
+        wait.until(d -> d.getCurrentUrl().equals(baseUrl + "preferences"));
+        
+        // Set budget and go to allergens
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='option-card '][.//div[text()='Moderate ($0-$20)']]")));
+        driver.findElement(By.xpath("//div[@class='option-card '][.//div[text()='Moderate ($0-$20)']]")).click();
+        driver.findElement(By.className("next-button")).click();
+        
+        // Test meat group
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[contains(@class, 'allergen-option')]")));
+        driver.findElement(By.xpath("//label[contains(@class, 'allergen-option')][.//span[text()='Meat (All)']]")).click();
+        
+        // Verify selection is reflected in summary
+        WebElement summary = driver.findElement(By.className("selected-restrictions-summary"));
+        assertTrue(summary.getText().contains("MEAT"));
+        
+        // Add dairy allergy
+        driver.findElement(By.xpath("//label[contains(@class, 'allergen-option')][.//span[text()='Milk/Dairy']]")).click();
+        assertTrue(summary.getText().contains("MILK"));
+        
+        // Complete preferences
+        driver.findElement(By.className("next-button")).click();
+        wait.until(d -> d.getCurrentUrl().equals(baseUrl + "recommendations"));
+        
+        // Return to preferences to verify persistence
+        driver.get(baseUrl + "preferences");
+        wait.until(d -> d.getCurrentUrl().equals(baseUrl + "preferences"));
+        driver.findElement(By.className("next-button")).click();
+        
+        // Verify all selections are still present
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[contains(@class, 'allergen-option')]")));
+        WebElement meatOption = driver.findElement(By.xpath("//label[contains(@class, 'allergen-option') and contains(@class, 'selected')][.//span[text()='Meat (All)']]"));
+        WebElement dairyOption = driver.findElement(By.xpath("//label[contains(@class, 'allergen-option') and contains(@class, 'selected')][.//span[text()='Milk/Dairy']]"));
+        assertTrue(meatOption != null);
+        assertTrue(dairyOption != null);
+    }
+    
     private void registerAndLogin(String username, String password, String email) {
         // Go to register page
         driver.get(baseUrl + "register");
