@@ -36,7 +36,7 @@ Inside of this newly created application.properties file change the following
 
 ### 3. How to Set Up Ollama
 
-## Step 1: Download Ollama
+### Step 1: Download Ollama
 
 #### For Windows:
 1. Go to https://ollama.com/download
@@ -92,7 +92,7 @@ mvn spring-boot:run
 
 The backend will start on `http://localhost:8080`
 
-### 4. Verify Backend
+### 5. Verify Backend
 
 The application automatically creates an admin user with credentials:
 - Username: `admin`
@@ -105,7 +105,7 @@ curl -X POST http://localhost:8080/auth/login \
   -d '{"username":"admin","password":"admin123"}'
 ```
 
-## 5. Frontend Setup
+## Frontend Setup
 
 ### 1. Install Dependencies
 
