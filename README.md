@@ -244,6 +244,22 @@ This project is **self-developed and unfunded**, created as part of academic cou
 - Future support may include community contributions or academic extensions
 
 
+## 📎 Recommended Citation
+
+If you use Food Seer in academic work, research, or presentations, please cite our project as follows:
+
+**APA Format**
+> Kuethe, J., Goins, C., Parr, A., & Sauhta, M. (2025). *Food Seer: Smart Meal Recommendation System*. GitHub Repository. https://github.com/NovaCorz/CSC510
+
+**BibTeX**
+```bibtex
+@software{foodseer2025,
+  author       = {Kuethe, Justin and Goins, Chase and Parr, Andrew and Sauhta, Mukul},
+  title        = {Food Seer: Smart Meal Recommendation System},
+  year         = {2025},
+  publisher    = {GitHub},
+  url          = {https://github.com/NovaCorz/CSC510},
+}
 
 
 ## ⚠️ Disclaimer
