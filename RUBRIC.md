@@ -47,8 +47,8 @@
 |Question 10.5| Do you back-up your repository?| ✅   | ❌  |          |
 | **Q11 - Building & Installing**  | |  |   |   |
 |Question 11.1| Do you provide publicly-available instructions for building your software from the source code?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/blob/main/INSTALL.md)          |
-|Question 11.2| Can you build, or package, your software using an automated tool?| ✅   | ❌  |          |
-|Question 11.3| Do you provide publicly-available instructions for deploying your software?| ✅   | ❌  |          |
+|Question 11.2| Can you build, or package, your software using an automated tool?| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/blob/main/INSTALL.md)        |
+|Question 11.3| Do you provide publicly-available instructions for deploying your software?| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/blob/main/INSTALL.md)        |
 |Question 11.4| Does your documentation list all third-party dependencies?| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/blob/main/INSTALL.md#dependencies)         |
 |Question 11.5| Does your documentation list the version number for all third-party dependencies?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/blob/main/INSTALL.md#dependencies)          |
 |Question 11.6| Does your software list the web address, and licences for all third-party dependencies and say whether the dependencies are mandatory or optional?| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/blob/main/INSTALL.md#dependencies)         |
