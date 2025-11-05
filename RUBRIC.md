@@ -29,7 +29,7 @@
 |Question 5.5| Does your project have a ticketing system to manage bug reports and feature requests?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/issues)         |
 |Question 5.6| Is your project's ticketing system publicly visible to your users, so they can view bug reports and feature requests?| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/issues)        |
 | **Q6 - Maintainability**         | |  |   |   |
-|Question 6.1| Is your software’s architecture and design modular?| ✅   | ❌  |          |
+|Question 6.1| Is your software’s architecture and design modular?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/tree/main/doc)         |
 |Question 6.2| Does your software use an accepted coding standard or convention?| ✅   |   | [Yes, badges show in README](https://github.com/NovaCorz/CSC510/blob/main/README.md)         |
 | **Q7 - Open Standards**          | |  |   |   |
 |Question 7.1| Does your software allow data to be imported and exported using open data formats?| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/tree/main/doc)        |
