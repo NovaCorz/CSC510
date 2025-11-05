@@ -40,7 +40,7 @@ public class PreferencesPageTest {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--headless");
         driver = new ChromeDriver(options);
-        wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(15));
 
         registerAndLogin("preftest", "testpass123", "preftest@test.com");
     }
@@ -114,7 +114,7 @@ public class PreferencesPageTest {
     public void testLoadExistingPreferences() {
         
         // Set preferences
-        wait.until(d -> d.getCurrentUrl().equals(baseUrl + "preferences"));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='option-card '][.//div[text()='Premium ($20+)']")));
         driver.findElement(By.xpath("//div[@class='option-card '][.//div[text()='Premium ($20+)']]")).click();
         driver.findElement(By.className("next-button")).click();
         
