@@ -1,0 +1,11 @@
+FoodSeer
+FoodSeer.config
+FoodSeer.controller
+FoodSeer.dto
+FoodSeer.entity
+FoodSeer.exception
+FoodSeer.mapper
+FoodSeer.repositories
+FoodSeer.security
+FoodSeer.service
+FoodSeer.service.impl
