@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { getAllFoods, createOrder, getCurrentUser } from '../services/api';
 
 const CreateOrder = () => {
@@ -9,7 +9,9 @@ const CreateOrder = () => {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [notification, setNotification] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const fetchFoods = async () => {
@@ -28,6 +30,38 @@ const CreateOrder = () => {
 
     fetchFoods();
   }, [navigate]);
+
+  // Handle food from chatbot recommendation
+  useEffect(() => {
+    if (location.state?.addToCart && foods.length > 0) {
+      const recommendedFood = location.state.addToCart;
+      
+      // Check if the food is in stock
+      const foodInStock = foods.find(f => f.id === recommendedFood.id);
+      
+      if (foodInStock) {
+        // Add to cart
+        setCart(prev => ({
+          ...prev,
+          [foodInStock.id]: {
+            food: foodInStock,
+            quantity: (prev[foodInStock.id]?.quantity || 0) + 1
+          }
+        }));
+        
+        // Show notification
+        setNotification(`✅ ${foodInStock.foodName} has been added to your cart!`);
+        setTimeout(() => setNotification(null), 5000);
+      } else {
+        // Show out of stock notification
+        setNotification(`⚠️ Sorry, ${recommendedFood.foodName} is currently out of stock.`);
+        setTimeout(() => setNotification(null), 5000);
+      }
+      
+      // Clear the state to prevent re-adding on re-render
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state, foods]);
 
   const addToCart = (food) => {
     setCart(prev => ({
@@ -123,6 +157,12 @@ const CreateOrder = () => {
           Back
         </button>
       </div>
+
+      {notification && (
+        <div className="notification-banner">
+          {notification}
+        </div>
+      )}
 
       <div className="order-content">
         <div className="foods-section">

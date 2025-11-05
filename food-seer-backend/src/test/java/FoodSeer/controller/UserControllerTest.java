@@ -3,6 +3,7 @@ package FoodSeer.controller;
 // ...existing code...
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -20,8 +21,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 // ...existing code...
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -29,6 +32,8 @@ import FoodSeer.config.Roles;
 import FoodSeer.config.Roles.UserRoles;
 import FoodSeer.dto.RegisterRequestDto;
 import FoodSeer.dto.UpdateRoleDto;
+import FoodSeer.dto.UserDto;
+import FoodSeer.dto.UserPreferencesDto;
 import FoodSeer.entity.User;
 import FoodSeer.repositories.UserRepository;
 import FoodSeer.service.AuthService;
@@ -135,4 +140,73 @@ class UserControllerTest {
                 .content(objectMapper.writeValueAsString(new UpdateRoleDto(Roles.ROLE_ADMIN))))
                 .andExpect(status().isForbidden());
     }
+    
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void shouldDeleteUserWhenAdmin() throws Exception {
+        mockMvc.perform(delete("/api/users/" + testUser.getId()))
+        .andExpect(status().isOk());
+
+        // Ensure user is removed
+        mockMvc.perform(get("/api/users/" + testUser.getId()))
+                .andExpect(status().isNotFound());
+    }
+    
+    @Test
+    @WithMockUser(roles = "STANDARD")
+    void shouldNotAllowNonAdminToDeleteUser() throws Exception {
+        mockMvc.perform(delete("/api/users/" + testUser.getId()))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    @WithMockUser(username = "testuser")
+    void shouldUpdateUserPreferences() throws Exception {
+        UserPreferencesDto prefs = new UserPreferencesDto("LOW", "VEGAN");
+
+        mockMvc.perform(put("/api/users/me/preferences")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(prefs)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.username").value("testuser"))
+                .andExpect(jsonPath("$.costPreference").value("LOW"))
+                .andExpect(jsonPath("$.dietaryRestrictions").value("VEGAN"));
+    }
+
+    @Test
+    void shouldRejectUnauthenticatedUpdatePreferences() throws Exception {
+        UserPreferencesDto prefs = new UserPreferencesDto("LOW", "VEGAN");
+
+        mockMvc.perform(put("/api/users/preferences")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(prefs)))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @WithMockUser(username = "testuser")
+    void shouldReturnCurrentUser() throws Exception {
+        mockMvc.perform(get("/api/users/me")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.username").value("testuser"));
+    }
+
+    @Test
+    void shouldRejectUnauthenticatedGetCurrentUser() throws Exception {
+        mockMvc.perform(get("/api/users/me"))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @WithMockUser(username = "ghostuser")
+    void shouldReturn404WhenUpdatingPreferencesForMissingUser() throws Exception {
+        UserPreferencesDto prefs = new UserPreferencesDto("LOW", "VEGAN");
+
+        mockMvc.perform(put("/api/users/me/preferences")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(prefs)))
+                .andExpect(status().isNotFound());
+    }
+
 }

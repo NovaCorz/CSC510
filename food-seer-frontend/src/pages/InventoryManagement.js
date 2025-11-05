@@ -3,6 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { getAllFoods, createFood, updateFood, deleteFood, getCurrentUser } from '../services/api';
 
 const InventoryManagement = () => {
+  // Comprehensive list of allergens
+  const ALLERGEN_OPTIONS = [
+    'MILK', 'DAIRY', 'LACTOSE', 'EGGS', 'FISH', 'SHELLFISH',
+    'TREE-NUTS', 'PEANUTS', 'WHEAT', 'GLUTEN', 'SOY', 'SESAME',
+    'CORN', 'SULFITES', 'MUSTARD', 'MEAT', 'BEEF', 'PORK',
+    'POULTRY', 'GELATIN', 'CAFFEINE'
+  ];
+
   const [foods, setFoods] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -11,7 +19,7 @@ const InventoryManagement = () => {
     foodName: '',
     amount: 0,
     price: 0,
-    allergies: ''
+    allergies: []
   });
   const navigate = useNavigate();
 
@@ -53,10 +61,19 @@ const InventoryManagement = () => {
       foodName: '',
       amount: 0,
       price: 0,
-      allergies: ''
+      allergies: []
     });
     setEditingFood(null);
     setShowAddForm(false);
+  };
+
+  const handleAllergyToggle = (allergen) => {
+    setFormData(prev => ({
+      ...prev,
+      allergies: prev.allergies.includes(allergen)
+        ? prev.allergies.filter(a => a !== allergen)
+        : [...prev.allergies, allergen]
+    }));
   };
 
   const handleAddFood = async (e) => {
@@ -68,16 +85,11 @@ const InventoryManagement = () => {
     }
 
     try {
-      const allergiesArray = formData.allergies
-        .split(',')
-        .map(a => a.trim())
-        .filter(a => a.length > 0);
-
       const foodData = {
         foodName: formData.foodName.toUpperCase(),
         amount: parseInt(formData.amount),
         price: parseInt(formData.price),
-        allergies: allergiesArray
+        allergies: formData.allergies // Already an array
       };
 
       await createFood(foodData);
@@ -96,7 +108,7 @@ const InventoryManagement = () => {
       foodName: food.foodName,
       amount: food.amount,
       price: food.price,
-      allergies: food.allergies ? food.allergies.join(', ') : ''
+      allergies: food.allergies || [] // Load as array
     });
     setShowAddForm(true);
   };
@@ -110,16 +122,11 @@ const InventoryManagement = () => {
     }
 
     try {
-      const allergiesArray = formData.allergies
-        .split(',')
-        .map(a => a.trim())
-        .filter(a => a.length > 0);
-
       const foodData = {
         foodName: formData.foodName.toUpperCase(),
         amount: parseInt(formData.amount),
         price: parseInt(formData.price),
-        allergies: allergiesArray
+        allergies: formData.allergies // Already an array
       };
 
       await updateFood(foodData);
@@ -143,7 +150,8 @@ const InventoryManagement = () => {
       await fetchFoods();
     } catch (error) {
       console.error('Error deleting food:', error);
-      alert('Failed to delete food. Please try again.');
+      // Show the actual error message from the backend
+      alert(error.message || 'Failed to delete food. Please try again.');
     }
   };
 
@@ -236,15 +244,24 @@ const InventoryManagement = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="allergies">Allergies (comma-separated)</label>
-              <input
-                type="text"
-                id="allergies"
-                name="allergies"
-                value={formData.allergies}
-                onChange={handleInputChange}
-                placeholder="e.g., Peanuts, Dairy, Gluten"
-              />
+              <label>Allergens (select all that apply)</label>
+              <div className="allergens-grid">
+                {ALLERGEN_OPTIONS.map(allergen => (
+                  <label key={allergen} className="allergen-checkbox">
+                    <input
+                      type="checkbox"
+                      checked={formData.allergies.includes(allergen)}
+                      onChange={() => handleAllergyToggle(allergen)}
+                    />
+                    <span>{allergen}</span>
+                  </label>
+                ))}
+              </div>
+              {formData.allergies.length > 0 && (
+                <div className="selected-allergies">
+                  Selected: {formData.allergies.join(', ')}
+                </div>
+              )}
             </div>
 
             <div className="form-actions">

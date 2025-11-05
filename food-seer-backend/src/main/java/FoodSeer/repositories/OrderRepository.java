@@ -3,8 +3,11 @@ package FoodSeer.repositories;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import FoodSeer.entity.Food;
 import FoodSeer.entity.Order;
 import FoodSeer.entity.User;
 
@@ -31,4 +34,13 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
      * @return list of fulfilled orders belonging to the user
      */
     List<Order> findByUserAndIsFulfilled(User user, boolean isFulfilled);
+    
+    /**
+     * Find all orders that contain a specific food.
+     *
+     * @param food the food to search for
+     * @return list of orders containing the food
+     */
+    @Query("SELECT o FROM Order o JOIN o.foods f WHERE f = :food")
+    List<Order> findOrdersContainingFood(@Param("food") Food food);
 }

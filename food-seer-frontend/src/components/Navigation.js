@@ -68,6 +68,26 @@ const Navigation = () => {
                 </button>
 
                 <button
+                  className={`nav-link ${location.pathname === '/chatbot' ? 'active' : ''}`}
+                  onClick={() => {
+                    navigate('/chatbot');
+                    setMenuOpen(false);
+                  }}
+                >
+                  🤖 AI Assistant
+                </button>
+
+                <button
+                  className={`nav-link ${location.pathname === '/quiz' ? 'active' : ''}`}
+                  onClick={() => {
+                    navigate('/quiz');
+                    setMenuOpen(false);
+                  }}
+                >
+                  📋 Quick Quiz
+                </button>
+
+                <button
                   className={`nav-link ${location.pathname === '/inventory' ? 'active' : ''}`}
                   onClick={() => {
                     navigate('/inventory');

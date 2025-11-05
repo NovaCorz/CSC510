@@ -1,52 +1,42 @@
 package FoodSeer.controller;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
-// Import JSONObject
-import org.json.JSONObject;
-import java.util.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import FoodSeer.dto.ChatRequestDto;
+import FoodSeer.dto.ChatResponseDto;
+import FoodSeer.service.ChatService;
+
+/**
+ * Controller for AI chat functionality.
+ * Provides endpoint for communicating with Ollama AI.
+ */
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/chat")
 public class ChatController {
-
-    private final RestTemplate restTemplate = new RestTemplate();
-
-    @Value("${ollama.url:http://localhost:11434}")
-    private String ollamaUrl;
-
+    
+    /** Connection to ChatService */
+    @Autowired
+    private ChatService chatService;
+    
+    /**
+     * Sends a message to the AI and returns the response.
+     *
+     * @param chatRequest the chat request containing the user's message
+     * @return ResponseEntity containing the AI's response
+     */
+    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF', 'CUSTOMER')")
     @PostMapping
-    public ResponseEntity<Map<String, Object>> chat(@RequestBody Map<String, String> request) {
-        String userMessage = request.get("message");
-
-        Map<String, Object> body = new HashMap<>();
-        body.put("model", "gemma3:1b"); // Or whatever model you’ve pulled
-        body.put("model", "gemma3:1b"); // We can change the model to a better one later
-        body.put("prompt", userMessage);
-
-        // Reports the answer in one batch instead of many small ones
-        body.put("stream", false);
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
-
-        // Call Ollama’s local API
-        ResponseEntity<String> response = restTemplate.postForEntity(
-                ollamaUrl + "/api/generate", entity, String.class);
-
-        // Return the raw text response to frontend
-        Map<String, Object> result = new HashMap<>();
-        result.put("response", response.getBody());
-
-        // Put the response in the body field.
-        // May want to specifically put the response's "response" field specifically.
-        String ollamaResponse = new JSONObject(response.getBody()).get("response").toString();
-        result.put("response", ollamaResponse);
-        System.out.println("Ollama response: " + ollamaResponse);
-        return ResponseEntity.ok(result);
+    public ResponseEntity<ChatResponseDto> sendMessage(@RequestBody final ChatRequestDto chatRequest) {
+        final ChatResponseDto response = chatService.sendMessage(chatRequest);
+        return ResponseEntity.ok(response);
     }
 }
+

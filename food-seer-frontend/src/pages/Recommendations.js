@@ -34,19 +34,19 @@ const Recommendations = () => {
   const filterFoodsByPreferences = (foodsData, userData) => {
     let filtered = [...foodsData];
 
-    // Filter by budget/cost preference
+    // Filter by budget/cost preference (cumulative ranges)
     if (userData.costPreference && userData.costPreference !== 'no-limit') {
       const budget = userData.costPreference.toLowerCase();
       
       if (budget === 'budget') {
-        // Budget option: under $10
-        filtered = filtered.filter(food => food.price < 10);
+        // Budget option: $0-$10 (most affordable)
+        filtered = filtered.filter(food => food.price <= 10);
       } else if (budget === 'moderate') {
-        // Moderate option: $10-$20
-        filtered = filtered.filter(food => food.price >= 10 && food.price <= 20);
+        // Moderate option: $0-$20 (includes budget + mid-range)
+        filtered = filtered.filter(food => food.price <= 20);
       } else if (budget === 'premium') {
-        // Premium option: over $20
-        filtered = filtered.filter(food => food.price > 20);
+        // Premium option: $0-$35 (includes everything)
+        filtered = filtered.filter(food => food.price <= 35);
       }
       // If no-limit or unrecognized value, show all foods (no filtering)
     }
@@ -54,62 +54,7 @@ const Recommendations = () => {
     // Filter by dietary restrictions (allergies)
     if (userData.dietaryRestrictions) {
       const restrictionsInput = userData.dietaryRestrictions.toLowerCase();
-      const restrictions = restrictionsInput.split(',').map(r => r.trim());
-      
-      // Expand dietary preference keywords into specific allergen exclusions
-      const expandedRestrictions = new Set();
-      
-      restrictions.forEach(restriction => {
-        // Add the original restriction
-        expandedRestrictions.add(restriction);
-        
-        // Expand special dietary preferences
-        if (restriction.includes('vegan')) {
-          // Vegans avoid all animal products
-          expandedRestrictions.add('dairy');
-          expandedRestrictions.add('lactose');
-          expandedRestrictions.add('eggs');
-          expandedRestrictions.add('meat');
-          expandedRestrictions.add('beef');
-          expandedRestrictions.add('pork');
-          expandedRestrictions.add('poultry');
-          expandedRestrictions.add('chicken');
-          expandedRestrictions.add('fish');
-          expandedRestrictions.add('shellfish');
-          expandedRestrictions.add('honey');
-          expandedRestrictions.add('gelatin');
-        } else if (restriction.includes('vegetarian')) {
-          // Vegetarians avoid meat and fish but can have dairy/eggs
-          expandedRestrictions.add('meat');
-          expandedRestrictions.add('beef');
-          expandedRestrictions.add('pork');
-          expandedRestrictions.add('poultry');
-          expandedRestrictions.add('chicken');
-          expandedRestrictions.add('fish');
-          expandedRestrictions.add('shellfish');
-          expandedRestrictions.add('gelatin');
-        } else if (restriction.includes('lactose') || restriction.includes('dairy free')) {
-          expandedRestrictions.add('dairy');
-          expandedRestrictions.add('lactose');
-        } else if (restriction.includes('gluten free') || restriction.includes('celiac')) {
-          expandedRestrictions.add('gluten');
-          expandedRestrictions.add('wheat');
-          expandedRestrictions.add('barley');
-          expandedRestrictions.add('rye');
-        } else if (restriction.includes('nut')) {
-          expandedRestrictions.add('nuts');
-          expandedRestrictions.add('peanuts');
-          expandedRestrictions.add('tree nuts');
-          expandedRestrictions.add('almonds');
-        } else if (restriction.includes('pescatarian')) {
-          // Pescatarians avoid meat/poultry but eat fish
-          expandedRestrictions.add('meat');
-          expandedRestrictions.add('beef');
-          expandedRestrictions.add('pork');
-          expandedRestrictions.add('poultry');
-          expandedRestrictions.add('chicken');
-        }
-      });
+      const userRestrictions = restrictionsInput.split(',').map(r => r.trim()).filter(r => r.length > 0);
       
       filtered = filtered.filter(food => {
         if (!food.allergies || food.allergies.length === 0) {
@@ -118,10 +63,10 @@ const Recommendations = () => {
         
         // Check if any of the food's allergies match user's restrictions
         const foodAllergies = food.allergies.map(a => a.toLowerCase());
-        return !Array.from(expandedRestrictions).some(restriction => 
-          foodAllergies.some(allergy => 
-            allergy.includes(restriction) || restriction.includes(allergy)
-          )
+        
+        // Return false if any user restriction matches any food allergen
+        return !userRestrictions.some(restriction => 
+          foodAllergies.some(allergy => allergy === restriction)
         );
       });
     }
@@ -165,9 +110,9 @@ const Recommendations = () => {
           <button className="nav-button" onClick={handleViewOrders}>
             My Orders
           </button>
-          <button className="logout-button" onClick={handleLogout}>
-            Logout
-          </button>
+        <button className="logout-button" onClick={handleLogout}>
+          Logout
+        </button>
         </div>
       </div>
 
@@ -203,7 +148,7 @@ const Recommendations = () => {
             <p>Try adjusting your budget or dietary restrictions, or browse all available foods.</p>
           </div>
         ) : (
-          <div className="recommendations-grid">
+        <div className="recommendations-grid">
             {filteredFoods.map((food) => (
               <div key={food.id} className="recommendation-card">
                 <div className="recommendation-icon">🍽️</div>
@@ -214,11 +159,11 @@ const Recommendations = () => {
                   {food.allergies && food.allergies.length > 0 && (
                     <p><strong>Allergies:</strong> {food.allergies.join(', ')}</p>
                   )}
-                </div>
+          </div>
                 <div className="recommendation-match">
                   {food.amount > 0 ? '✓ Available' : '✗ Out of Stock'}
-                </div>
-              </div>
+          </div>
+        </div>
             ))}
           </div>
         )}
