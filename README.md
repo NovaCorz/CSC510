@@ -257,6 +257,21 @@ This project is **self-developed and unfunded**, created as part of academic cou
 - Maintained by the student development team  
 - Future support may include community contributions or academic extensions
 
+---
+
+## 🌟 Success Stories
+
+Food Seer has been tested among a small group of users, including friends and classmates, to evaluate its effectiveness in real-world decision-making.  
+During these early trials, users reported that Food Seer:
+
+- Made choosing a meal **faster and less stressful**  
+- Offered **accurate and relevant** suggestions through both quiz and chat modes  
+- Provided a **clean, easy-to-navigate** interface for exploring recommendations  
+
+> “It actually picked something I wanted without me scrolling for 10 minutes.” — Early User
+
+These early results show promise that Food Seer can genuinely simplify meal decisions and enhance the overall dining experience as the system continues to grow.
+
 
 ## 📎 Recommended Citation
 
