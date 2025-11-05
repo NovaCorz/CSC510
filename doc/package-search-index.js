@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"FoodSeer"},{"l":"FoodSeer.config"},{"l":"FoodSeer.controller"},{"l":"FoodSeer.dto"},{"l":"FoodSeer.entity"},{"l":"FoodSeer.exception"},{"l":"FoodSeer.mapper"},{"l":"FoodSeer.repositories"},{"l":"FoodSeer.security"},{"l":"FoodSeer.service"},{"l":"FoodSeer.service.impl"}];updateSearchResults();

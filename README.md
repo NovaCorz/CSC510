@@ -1,8 +1,5 @@
 # 🍽️ Food Seer - Smart Meal Recommendation System 🍽️
 
-
-
-
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17460388.svg)](https://zenodo.org/records/17460388)
 [![License](https://img.shields.io/github/license/NovaCorz/CSC510)](https://github.com/NovaCorz/CSC510/blob/main/LICENSE)
 [![GitHub Release](https://img.shields.io/github/release/NovaCorz/CSC510.svg)](https://github.com/NovaCorz/CSC510/releases)
@@ -18,90 +15,83 @@
 
 ---
 
-
 ## 🎉 Welcome to Food Seer!
 
-
-**Food Seer** helps take the stress out of daily food choices by turning a simple conversation into a personalized meal recommendation. Designed exclusively for one restaurant's delivery system, Food Seer asks customers a few quick questions about their day and provides a tailored food option they can choose to purchase or pass until the next day.
-
-
-
+**Food Seer** takes the stress out of choosing what to eat by turning meal selection into a smart and personalized experience. Whether you're in the mood for a quick quiz or a natural conversation, Food Seer helps you find the perfect meal based on your preferences, mood, and budget. Start a short quiz or chat with our AI assistant — and receive a tailored meal suggestion in seconds.
 
 **VIDEO**
 
-
-
-
-
-
 ---
 
+## Table of Contents
+
+- [💡 Why This Project?](#-why-this-project)
+- [📈 Use Case](#-use-case)
+- [🚀 Key Features](#-key-features)
+- [Technology Stack](#technology-stack)
+- [🔧 Installation](#-installation)
+- [🎥 Demo Video](#-demo-video)
+- [📊 Project Poster](#-project-poster)
+- [📚 Case Studies](#-case-studies)
+- [🤝 Contribution Guidelines](#-contribution-guidelines)
+- [📈 Code Coverage](#-code-coverage)
+- [🌐 Future Scope](#-future-scope)
+- [🙌 Contributors](#-contributors)
+- [🙏 Acknowledgements](#-acknowledgements)
+- [💡 Feedback](#-feedback)
+- [🏛️ Governance Model](#-governance-model)
+- [🔔 Notifications](#-notifications)
+- [📅 Roadmap & Funding Information](#-roadmap--funding-information)
+- [🌟 Success Stories](#-success-stories)
+- [📎 Recommended Citation](#-recommended-citation)
+- [⚠️ Disclaimer](#️-disclaimer)
+
+---
 
 ## 💡 Why This Project?
 
+Menu overload is real — and decision fatigue hits hard when you're hungry. Food Seer eliminates the guesswork by guiding users toward a meal that fits their lifestyle and cravings without the hassle of scrolling through endless options.
 
-Finding the perfect meal can be overwhelming when faced with endless menu options. Customers often experience decision fatigue, while restaurant staff struggle to streamline operations. This project aims to bridge that gap by providing a platform with useful features like:
+We built Food Seer to:
 
+- ✅ Reduce menu fatigue and decision stress  
+- 🤖 Provide personalized suggestions via **AI chat**  
+- ❓ Offer a quiz-based food recommendation system  
+- 🛒 Streamline ordering into a simple “choose and order” flow  
+- 🧾 Empower staff with inventory, user, and order management tools  
 
-- **Personalized Recommendations**: Get tailored meal suggestions based on your preferences and daily mood.
-- **Reduce Menu Fatigue**: Skip endless scrolling and let Food Seer do the thinking for you.
-- **Quick Decision-Making**: Accept a recommendation or pass until tomorrow with just one click.
-- **Conversation History:** The AI remembers your past interactions to deliver smarter, more personalized suggestions over time.
-- **Rating System:** Share feedback on recommendations to help continuously improve the system's accuracy.
-- **At-Home Meal Instructions:** If you pass on a recommendation, receive instructions for preparing a meal at home instead.
-- **Streamlined Operations:** Staff can manage inventory, accounts, and orders more efficiently through an intuitive interface.
-
-
-
-
-By fostering a smarter dining experience, our platform empowers customers to make quick, confident decisions while helping restaurants operate more efficiently.
-
+Food Seer bridges **AI-driven personalization** with **restaurant efficiency** — improving both customer experience and backend operations.
 
 ---
-
 
 ## 📈 Use Case
 
+**Scenario:** Sarah is tired after work and doesn't want to decide what to eat.
 
-**Scenario**: Meet **Sarah**, a busy professional who orders delivery from her favorite local restaurant regularly but struggles with decision fatigue when browsing the extensive menu.
+### How Food Seer Helps
 
+1. Sarah opens Food Seer  
+2. She chooses between:  
+   - a **quick interactive quiz**, or  
+   - chatting with our **Ollama-powered chatbot**  
+3. She instantly receives a personalized meal recommendation  
+4. With one click, she can place an order — no browsing required  
 
-**How Food Seer Helps**:
-
-
-1. **Quick Questions**: Sarah opens Food Seer and answers a few simple questions about her day, mood, and dietary preferences.
-
-
-2. **Personalized Recommendation**: The AI-powered system analyzes her responses and conversation history to provide a tailored meal suggestion.
-
-
-3. **Easy Decision**: Sarah loves the recommendation and places her order immediately with just one click.
-
-
-4. **Rate & Improve**: After enjoying her meal, Sarah rates the recommendation, helping the system learn and provide even better suggestions next time.
-
-
-5. **Alternative Options:** If Sarah passes on a recommendation, the system offers instructions for preparing a similar meal at home.
-
-
-This is just one example of how our system can help customers like Sarah navigate their dining choices effortlessly!
-
+Food Seer transforms meal choices from a chore into a simple, enjoyable interaction.
 
 ---
 
-
 ## 🚀 Key Features
 
+- **Interactive Quiz System** to generate meal recommendations  
+- **Ollama-powered AI chatbot** for conversational food suggestions  
+- **Clean, tab-based UI** for seamless navigation between ordering, recommendations, and account features  
+- **Back-end systems** for inventory, ordering, session management, and user accounts  
+- **Automated tests** with **85%+ coverage** across frontend & backend  
 
-- **Interactive Quiz System**: Answer quick questions to receive personalized meal recommendations
-- **AI-Powered Suggestions**: Smart recommendations based on your preferences and conversation history
-- **Rating System**: Provide feedback to continuously improve recommendation accuracy
-- **Seamless Ordering**: Accept recommendations and place orders with ease
-- **At-Home Alternatives**: Get cooking instructions when you pass on suggestions
-
+---
 
 ## Technology Stack
-
 
 <code><a href="https://www.javascript.com/" target="_blank"><img height="50" src="https://cdn.freelogovectors.net/wp-content/uploads/2020/11/javascript_logo-768x873.png"></a></code>
 <code><a href="https://developer.mozilla.org/en-US/docs/Glossary/HTML5" target="_blank"><img height="50" src="https://cdn.pixabay.com/photo/2017/08/05/11/16/logo-2582748_1280.png"></a></code>
@@ -112,31 +102,10 @@ This is just one example of how our system can help customers like Sarah navigat
 <code><a href="https://spring.io/projects/spring-boot" target="_blank"><img height="50" src="https://spring.io/img/projects/spring-boot.svg"></a></code>
 <code><a href="https://ollama.com" target="_blank"><img height="50" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/ollama.svg"></a></code>
 
-
-
-
-
 ---
-
-
-## Table of Contents
-
-
-- [Installation](#-installation)
-- [API Documentation](#-api-documentation)
-- [Demo Video](#-demo-video)
-- [Project Poster](#-project-poster)
-- [Contribution Guidelines](#-contribution-guidelines)
-- [Code Coverage](#-code-coverage)
-- [Future Scope](#-future-scope)
-- [Contributors](#-contributors)
-- [Acknowledgements](#-acknowledgements)
-
-
----
-
 
 ## 🔧 Installation
+
 To set up the project locally, follow these steps.
 
 
@@ -147,87 +116,169 @@ cd CSC510
 ```
 Choose Your Installation Method (with Docker or without Docker). Detailed instructions are available in [INSTALL.md](INSTALL.md).
 
-## Chatbot Setup
-To set up the chatbot, you must first download and run OLlama's gemma3:1b model.
-### Download
-1. Go to https://ollama.com/download
-2. Select download for your specific OS
-#### Windows/Mac
-  1. Download the install wizard
-  2. Run the wizard
-  3. Once the wizard is finished, the Ollama interface should begin running
-  4. Select gemma3:1b from the list of LOCAL (non-cloud) options
-  5. Enter a single prompt and wait for gemma3:1b to finish downloading
-#### Linux
-  1. curl using the given prompt
-  2. ollama pull gemma3:1b
-  3. ollama run gemma3:1b
-### Application
-Now that the model is running, any request sent to /api/chat is sent to the ollama model!
-Ensure you are logged in, and that the json is in the form {"message":""}.
-
+---
 
 ## 🎥 Demo Video
 Check out our demo video to see the application in action! Click the link below to watch:
 
-
 **LINK**
 
+---
 
 ## 📊 Project Poster
 Curious about our project? View our project poster showcasing key aspects of the system [here](https://github.com/NovaCorz/CSC510/blob/dev/proj1/Project%201e1.pdf).
 
+---
 
+## 📚 Case Studies
 
+Food Seer was used and evaluated in a controlled environment by our development team and peers.  
+Through hands-on testing sessions, we observed that Food Seer improves food decision-making by:
+
+- Reducing decision fatigue around choosing meals  
+- Helping users quickly narrow down food options  
+- Providing fast, personalized suggestions through quizzes and AI chat  
+- Making the meal-selection process feel more guided and enjoyable  
+
+Our internal testers consistently reported that Food Seer made deciding what to eat **faster**, **simpler**, and **less overwhelming**, especially when unsure where to start.
+
+Additional user studies and data-driven evaluations are planned as the system matures.
+
+---
 
 ## 🤝 Contribution Guidelines
 The rules listed below are to be followed by the ones who will be contributing to the code in the repository:
  
-  - Atleast one review/approval is required from any other contributors of the project to merge a commit to the main branch.
-  - It is recommended to delete the branch as soon as it is merged to the main branch to avoid stale branches in the repository.
-  - It is encouraged to add name tags such as "feature/" or "patch/" in the branches if it is used to add code-patches or features in the project.
+- Atleast one review/approval is required from any other contributors of the project to merge a commit to the main branch.  
+- It is recommended to delete the branch as soon as it is merged to the main branch to avoid stale branches in the repository.  
+- It is encouraged to add name tags such as "feature/" or "patch/" in the branches if it is used to add code-patches or features in the project.
 
+For more details on contributing to Food Seer, please read our full guide here: [CONTRIBUTING.md](./CONTRIBUTING.md)
 
-
+---
 
 ## 📈 Code Coverage
 [![codecov]()]() It is part of the [Github Workflow Build]()
 
+---
 
 ## 🌐 Future Scope
-We're excited about the enhancements coming to Food Seer! Here's what's on the horizon:
-- **Advanced AI Integration:** Deploy sophisticated machine learning models for even more accurate and context-aware recommendations.
-- **Multi-Restaurant Support:** Expand the platform to support multiple restaurant partners, giving customers more dining options.
-- **Dietary Restrictions & Allergies:** Enhanced filtering and recommendation systems that account for health needs and dietary preferences.
-- **Social Features:** Share recommendations with friends, see what others are ordering, and discover trending meals.
-- **Mobile App:** Native iOS and Android applications for convenient on-the-go ordering and recommendations.
 
+We're excited about the enhancements coming to Food Seer! Here's what's next:
 
+- **Chat-Bot Memory & History**  
+  Allow the AI to retain past conversations, preferences, and recommendations — creating a truly personalized dining assistant that learns over time.
 
+- **Recommendation Feedback & Improvement Loop**  
+  Enable rating and review features for each recommendation, helping the system continuously refine and improve food suggestions.
+
+- **Analytics & Insights Dashboard**  
+  Introduce a business-facing analytics suite that visualizes customer preferences, order trends, and engagement insights to support smarter restaurant decisions.
+
+- **Voice-Enabled Chat Experience**  
+  Add speech-to-text and text-to-speech so users can talk to the chatbot like a real waiter and receive spoken, natural meal recommendations — making the experience hands-free and more conversational.
+
+---
 
 ## 🙌 Contributors
 A heartfelt thank you to our contributors who made this project possible:
 
-
 **Group #13**
 
+- [Justin Kuethe](https://github.com/NovaCorz) - jrkuethe  
+- [Chase Goins](https://github.com/jcgoins2) - jcgoins2  
+- [Andrew Parr](https://github.com/afluffybunny15) - aaparr  
+- [Mukul Sauhta](https://github.com/muksaw) - msauhta2  
 
-- [Justin Kuethe](https://github.com/NovaCorz) - jrkuethe
-- [Chase Goins](https://github.com/jcgoins2) - jcgoins2
-- [Andrew Parr](https://github.com/afluffybunny15) - aaparr
-- [Mukul Sauhta](https://github.com/muksaw) - msauhta2
-
-
-
+---
 
 ## 🙏 Acknowledgements
 We extend our heartfelt thanks to Professor Dr. Timothy Menzies for his invaluable guidance in shaping our understanding of effective Software Engineering practices. We’re also deeply grateful to the teaching assistants for their consistent support and encouragement throughout the project.
 
+---
 
 ## 💡 Feedback
 Your input matters to us! If you have ideas for enhancements or new features, feel free to open an issue or submit a pull request. Thoughtful feedback from contributors like you helps us improve and evolve.
 
+---
+
+## 🏛️ Governance Model
+
+Food Seer is maintained as an open-source project by its core development team.  
+Project decisions — including new features, bug fixes, and roadmap updates — are made collaboratively through discussion and consensus among contributors.
+
+While we do not currently have a formal governance structure, our guiding principles are:
+
+- **Transparency:** All changes are proposed and reviewed publicly through GitHub pull requests.  
+- **Collaboration:** Contributions are encouraged from all team members and external participants.  
+- **Consensus-based Decision-Making:** Updates and feature changes are approved when all active contributors agree on the direction.  
+- **Future Growth:** As the project expands and attracts more contributors, we plan to introduce a clearer governance model outlining maintainer roles, voting processes, and long-term project stewardship.
+
+This approach ensures Food Seer remains both open and adaptable while maintaining high standards for code quality and collaboration.
+
+---
+
+## 🔔 Notifications
+
+Users can subscribe to notifications to track changes to the Food Seer repository.  
+To follow updates, visit the repo and click:
+
+**Watch → All Activity**
+
+This sends alerts for code updates, pull requests, issues, releases, and discussions.
+
+---
+
+## 📅 Roadmap & Funding Information
+
+### Project Roadmap
+Our current development focus covers the **next 3 months**, which includes:
+
+- Enhancing AI memory & personalization  
+- Adding user feedback to refine recommendations  
+- Introducing analytics dashboards for insights  
+- Expanding to a voice-enabled chatbot experience  
+
+### Funding & Support
+This project is **self-developed and unfunded**, created as part of academic coursework.  
+- No external financial sponsors  
+- Maintained by the student development team  
+- Future support may include community contributions or academic extensions  
+
+---
+
+## 🌟 Success Stories
+
+Food Seer has been tested among a small group of users, including friends and classmates, to evaluate its effectiveness in real-world decision-making.  
+During these early trials, users reported that Food Seer:
+
+- Made choosing a meal **faster and less stressful**  
+- Offered **accurate and relevant** suggestions through both quiz and chat modes  
+- Provided a **clean, easy-to-navigate** interface for exploring recommendations  
+
+> “It actually picked something I wanted without me scrolling for 10 minutes.” — Early User
+
+---
+
+## 📎 Recommended Citation
+
+If you use Food Seer in academic work, research, or presentations, please cite our project as follows:
+
+**APA Format**
+> Kuethe, J., Goins, C., Parr, A., & Sauhta, M. (2025). *Food Seer: Smart Meal Recommendation System*. GitHub Repository. https://github.com/NovaCorz/CSC510
+
+**BibTeX**
+```bibtex
+@software{foodseer2025,
+  author       = {Kuethe, Justin and Goins, Chase and Parr, Andrew and Sauhta, Mukul},
+  title        = {Food Seer: Smart Meal Recommendation System},
+  year         = {2025},
+  publisher    = {GitHub},
+  url          = {https://github.com/NovaCorz/CSC510},
+}
+```
+
+---
 
 ## ⚠️ Disclaimer
 Food Seer is designed as a smart recommendation system for restaurant delivery services. All meal recommendations are suggestions based on user input and preferences. Individual dietary needs, allergies, and health conditions should always be considered when making food choices. We are not responsible for any adverse reactions or health issues that may arise from following our recommendations.
-
