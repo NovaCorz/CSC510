@@ -1,7 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const DietaryRestrictions = ({ restrictions, onUpdate, onNext, onPrevious, canGoNext }) => {
   const [selectedRestrictions, setSelectedRestrictions] = useState(restrictions);
+
+  // Sync state with prop when it changes (e.g., when user returns to update preferences)
+  useEffect(() => {
+    console.log('🔄 DietaryRestrictions received restrictions prop:', restrictions);
+    setSelectedRestrictions(restrictions);
+  }, [restrictions]);
+
+  // Log initial state
+  useEffect(() => {
+    console.log('🎯 DietaryRestrictions component mounted with:', {
+      restrictions,
+      selectedRestrictions
+    });
+  }, []);
 
   // Comprehensive allergen options matching backend
   const allergenOptions = [
@@ -30,11 +44,14 @@ const DietaryRestrictions = ({ restrictions, onUpdate, onNext, onPrevious, canGo
   const handleRestrictionChange = (value) => {
     let newRestrictions;
     if (selectedRestrictions.includes(value)) {
+      console.log(`➖ Removing restriction: ${value}`);
       newRestrictions = selectedRestrictions.filter(r => r !== value);
     } else {
+      console.log(`➕ Adding restriction: ${value}`);
       newRestrictions = [...selectedRestrictions, value];
     }
     
+    console.log('📝 Updated dietary restrictions:', newRestrictions);
     setSelectedRestrictions(newRestrictions);
     onUpdate('dietaryRestrictions', newRestrictions);
   };
