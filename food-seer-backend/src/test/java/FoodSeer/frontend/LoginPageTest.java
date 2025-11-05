@@ -1,6 +1,7 @@
 package FoodSeer.frontend;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterEach;
@@ -27,18 +28,22 @@ public class LoginPageTest {
 
     private ChromeDriver driver;
 
+    // URL for our driver to start at
     private String baseUrl = "http://localhost:3000/";
 
     private String adminUsername = "admin";
 
+    // Wait object to handle time outs
     private WebDriverWait wait;
 
     @Value("${app.admin-user-password}")
     private String adminPassword;
 
+    // Puts our admin in our repository
     @Autowired
     private DataInitializer dataInitializer;
 
+    // Sets up the chrome driver and the wait object
     @BeforeEach
     public void setUp() {
         dataInitializer.onApplicationReady();
@@ -55,6 +60,7 @@ public class LoginPageTest {
         wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(20));
     }
 
+    // Closes the web driver
     @AfterEach
     public void tearDown() {
         if (driver != null) {
@@ -62,6 +68,12 @@ public class LoginPageTest {
         }
     }
 
+    /**
+     * Tests the admin user logging in
+     * Verifies that:
+     * - Admin should be initialized in the system
+     * - Upon logging in, the admin is directed to order-management
+     */
     @Test
     public void testAdminLogin() {
         attemptLogin(adminUsername, adminPassword);
@@ -71,6 +83,12 @@ public class LoginPageTest {
         assertEquals(driver.getCurrentUrl(), "http://localhost:3000/order-management");
     }
 
+    /**
+     * Tests a login for a user that doesn't exist
+     * Verifies that:
+     * - There should be no redirect on unsuccessful login
+     * - An error message should appear when giving improper credentials
+     */
     @Test
     public void testInvalidLogin() {
         attemptLogin("WrongUser", "WrongPass");
@@ -82,6 +100,12 @@ public class LoginPageTest {
         assertEquals(driver.findElement(By.className("error-message")).getText(), "Invalid username or password");
     }
 
+    /**
+     * Tests that empty credentials are not submitted to the form
+     * Verifies that:
+     * - There are no error messages on empty fields
+     * - No redirect when form doesn't submit
+     */
     @Test
     public void testEmptyCredentials() {
         attemptLogin("", "");
@@ -89,9 +113,15 @@ public class LoginPageTest {
         // Assert login failed by checking we are still on the login page
         wait.until(d -> d.getCurrentUrl().equals("http://localhost:3000/"));
         assertEquals(driver.getCurrentUrl(), baseUrl);
-        // assertEquals(driver.findElement(By.id("error-message")).getText(), "Username and password cannot be empty");
+        assertThrows(Exception.class, () -> {driver.findElement(By.id("error-message"));});
     }
 
+    /**
+     * Tests that partial credentials still do not allow form submission
+     * Verifies that:
+     * - Entering nothing into the password or username fields individually causes no submission
+     * - There are no errors for empty fields
+     */
     @Test
     public void testPartialCredentials() {  
         attemptLogin(adminUsername, "");
@@ -104,9 +134,15 @@ public class LoginPageTest {
 
         // Assert login failed by checking we are still on the login page
         assertEquals(driver.getCurrentUrl(), baseUrl);
-        // assertEquals(driver.findElement(By.id("error-message")).getText(), "Username and password cannot be empty");
+        assertThrows(Exception.class, () -> {driver.findElement(By.id("error-message"));});
     }
 
+    /**
+     * Tests that the register link exists and take the user to the registration page
+     * Verifies that
+     * - A registration link exists
+     * - It takes the user to the correct page
+     */
     @Test
     public void testRegisterLink(){
         driver.get(baseUrl);
