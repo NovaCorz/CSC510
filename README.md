@@ -108,6 +108,7 @@ Food Seer transforms meal choices from a chore into a simple, enjoyable interact
 - [Installation](#-installation)
 - [Demo Video](#-demo-video)
 - [Project Poster](#-project-poster)
+- [Case Studies](#-case-studies)
 - [Contribution Guidelines](#-contribution-guidelines)
 - [Code Coverage](#-code-coverage)
 - [Future Scope](#-future-scope)
@@ -140,6 +141,19 @@ Check out our demo video to see the application in action! Click the link below 
 ## 📊 Project Poster
 Curious about our project? View our project poster showcasing key aspects of the system [here](https://github.com/NovaCorz/CSC510/blob/dev/proj1/Project%201e1.pdf).
 
+## 📚 Case Studies
+
+Food Seer was used and evaluated in a controlled environment by our development team and peers.  
+Through hands-on testing sessions, we observed that Food Seer improves food decision-making by:
+
+- Reducing decision fatigue around choosing meals  
+- Helping users quickly narrow down food options  
+- Providing fast, personalized suggestions through quizzes and AI chat  
+- Making the meal-selection process feel more guided and enjoyable  
+
+Our internal testers consistently reported that Food Seer made deciding what to eat **faster**, **simpler**, and **less overwhelming**, especially when unsure where to start.
+
+Additional user studies and data-driven evaluations are planned as the system matures.
 
 
 
