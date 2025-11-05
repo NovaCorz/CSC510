@@ -30,12 +30,12 @@
 |Question 5.6| Is your project's ticketing system publicly visible to your users, so they can view bug reports and feature requests?| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/issues)        |
 | **Q6 - Maintainability**         | |  |   |   |
 |Question 6.1| Is your software’s architecture and design modular?| ✅   | ❌  |          |
-|Question 6.2| Does your software use an accepted coding standard or convention?| ✅   | ❌  |          |
+|Question 6.2| Does your software use an accepted coding standard or convention?| ✅   |   | [Yes, badges show in README](https://github.com/NovaCorz/CSC510/blob/main/README.md)         |
 | **Q7 - Open Standards**          | |  |   |   |
-|Question 7.1| Does your software allow data to be imported and exported using open data formats?| ✅   | ❌  |          |
-|Question 7.2| Does your software allow communications using open communications protocols?| ✅   | ❌  |          |
+|Question 7.1| Does your software allow data to be imported and exported using open data formats?| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/tree/main/doc)        |
+|Question 7.2| Does your software allow communications using open communications protocols?| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/tree/main/doc)        |
 | **Q8 - Portability**             | |  |   |   |
-|Question 8.1| Is your software cross-platform compatible?| ✅   | ❌  |          |
+|Question 8.1| Is your software cross-platform compatible?| ✅   |   | [Yes, we provide instrutions for multiple platforms](https://github.com/NovaCorz/CSC510/blob/main/INSTALL.md)         |
 | **Q9 - Accessibility**           | |  |   |   |
 |Question 9.1| Does your software adhere to appropriate accessibility conventions or standards?| ✅   | ❌  |          |
 |Question 9.2| Does your documentation adhere to appropriate accessibility conventions or standards?| ✅   | ❌  |          |
@@ -46,25 +46,25 @@
 |Question 10.4| Is there a branch of the repository that is always stable? (i.e. tests always pass, code always builds successfully)| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/tree/main)        |
 |Question 10.5| Do you back-up your repository?| ✅   | ❌  |          |
 | **Q11 - Building & Installing**  | |  |   |   |
-|Question 11.1| Do you provide publicly-available instructions for building your software from the source code?| ✅   | ❌  |          |
+|Question 11.1| Do you provide publicly-available instructions for building your software from the source code?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/blob/main/INSTALL.md)          |
 |Question 11.2| Can you build, or package, your software using an automated tool?| ✅   | ❌  |          |
 |Question 11.3| Do you provide publicly-available instructions for deploying your software?| ✅   | ❌  |          |
-|Question 11.4| Does your documentation list all third-party dependencies?| ✅   | ❌  |          |
-|Question 11.5| Does your documentation list the version number for all third-party dependencies?| ✅   | ❌  |          |
-|Question 11.6| Does your software list the web address, and licences for all third-party dependencies and say whether the dependencies are mandatory or optional?| ✅   | ❌  |          |
-|Question 11.7| Can you download dependencies using a dependency management tool or package manager?| ✅   | ❌  |          |
+|Question 11.4| Does your documentation list all third-party dependencies?| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/blob/main/INSTALL.md#dependencies)         |
+|Question 11.5| Does your documentation list the version number for all third-party dependencies?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/blob/main/INSTALL.md#dependencies)          |
+|Question 11.6| Does your software list the web address, and licences for all third-party dependencies and say whether the dependencies are mandatory or optional?| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/blob/main/INSTALL.md#dependencies)         |
+|Question 11.7| Can you download dependencies using a dependency management tool or package manager?| ✅   |   | [Yes, maven and npm](https://github.com/NovaCorz/CSC510/blob/main/INSTALL.md#dependencies)         |
 |Question 11.8| Do you have tests that can be run after your software has been built or deployed to show whether the build or deployment has been successful?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/actions)          |
 | **Q12 - Testing**                | |  |   |   |
 |Question 12.1| Do you have an automated test suite for your software?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/actions)         |
 |Question 12.2| Do you have a framework to periodically (e.g. nightly) run your tests on the latest version of the source code?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/actions)         |
 |Question 12.3| Do you use continuous integration, automatically running tests whenever changes are made to your source code?| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/actions)        |
 |Question 12.4| Are your test results publicly visible?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/actions)         |
-|Question 12.5| Are all manually-run tests documented?| ✅   | ❌  |          |
+|Question 12.5| Are all manually-run tests documented?| ✅   |   | [Yes we automated all manual frontend test](https://github.com/NovaCorz/CSC510/actions)         |
 | **Q13 - Community Engagement**   |  |  |   |   |                                                                                                                                                                                           
 |Question 13.1| Does your project have resources (e.g. blog, Twitter, RSS feed, Facebook page, wiki, mailing list) that are regularly updated with information about your software?| ✅   | ❌  |          |
 |Question 13.2| Does your website state how many projects and users are associated with your project?| ✅   | ❌  |          |
 |Question 13.3| Do you provide success stories on your website?| ✅   | ❌  |          |
-|Question 13.4| Do you list your important partners and collaborators on your website?| ✅   | ❌  |          |
+|Question 13.4| Do you list your important partners and collaborators on your website?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/tree/main#-contributors)          |
 |Question 13.6| Do you list third-party publications that refer to your software on your website or link to a resource where these are available?| ✅   | ❌  |          |
 |Question 13.7| Can users subscribe to notifications to changes to your source code repository?| ✅   | ❌  |          |
 |Question 13.8| If your software is developed as an open source project (and, not just a project developing open source software), do you have a governance model?| ✅   | ❌  |          |
@@ -72,7 +72,7 @@
 |Question 14.1| Do you accept contributions (e.g. bug fixes, enhancements, documentation updates, tutorials) from people who are not part of your project?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/blob/main/CONTRIBUTING.md)          |
 |Question 14.2| Do you have a contributions policy?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/blob/main/CONTRIBUTING.md)         |
 |Question 14.3| Is your contributions' policy publicly available?| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/blob/main/CONTRIBUTING.md)         |
-|Question 14.4| Do contributors keep the copyright/IP of their contributions?| ✅   | ❌  |          |
+|Question 14.4| Do contributors keep the copyright/IP of their contributions?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/blob/main/CONTRIBUTING.md#contributor-ip--copyright)          |
 | **Q15 - Licensing**              |  |  |   |   |                                                                                                                                                                                                                                 
 |Question 15.1| Does your website and documentation clearly state the copyright owners of your software and documentation?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/blob/main/LICENSE)            |
 |Question 15.2| Does each of your source code files include a copyright statement?| ✅   |   |  [We have a licence file](https://github.com/NovaCorz/CSC510/blob/main/LICENSE)        |
