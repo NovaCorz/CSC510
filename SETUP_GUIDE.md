@@ -34,9 +34,9 @@ Inside of this newly created application.properties file change the following
 - app.jwt-secret: Using https://emn178.github.io/online-tools/sha256.html make a jwt secret
 - app.admin-user-password: To whatever you want the default admin password to be.
 
-## How to Set Up Ollama
+### 3. How to Set Up Ollama
 
-### Step 1: Download Ollama
+## Step 1: Download Ollama
 
 #### For Windows:
 1. Go to https://ollama.com/download
@@ -81,7 +81,8 @@ ollama serve
 
 The server will run on `http://localhost:11434` by default.
 
-### 3. Build and Run Backend
+
+### 4. Build and Run Backend
 
 ```bash
 cd food-seer-backend
@@ -104,7 +105,7 @@ curl -X POST http://localhost:8080/auth/login \
   -d '{"username":"admin","password":"admin123"}'
 ```
 
-## Frontend Setup
+## 5. Frontend Setup
 
 ### 1. Install Dependencies
 
