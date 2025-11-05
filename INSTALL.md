@@ -429,3 +429,39 @@ Solutions:
 - **Fix:** Ensure you're logged in with customer role, not admin/staff
 
 ---
+
+## Getting Help
+
+For questions or issues:
+1. Check the [GitHub Issues](https://github.com/NovaCorz/CSC510/issues)
+2. Check the demo video linked in the README
+3. Review contribution guidelines before submitting PRs
+
+---
+
+## Quick Start Summary
+
+```bash
+# 1. Clone repo
+git clone https://github.com/NovaCorz/CSC510.git
+cd CSC510
+
+# 2. Setup MySQL database
+
+# 3. Install and start Ollama
+ollama pull gemma3:1b
+ollama serve
+
+# 4. Start backend
+cd food-seer-backend
+mvn spring-boot:run
+
+# 5. Start frontend (in new terminal)
+cd food-seer-frontend
+npm install
+npm start
+
+# 6. Access application
+# http://localhost:3000
+# Login: admin / admin123
+```
