@@ -4,10 +4,13 @@ This guide will help you set up and run the FoodSeer application.
 
 ## Prerequisites
 
-1. **Java 21** - For running the Spring Boot backend
-2. **Maven** - For building the backend
-3. **MySQL** - Database for user management
-4. **Node.js & npm** - For running the React frontend
+- [Java JDK](https://www.oracle.com/java/technologies/downloads/) (version 11 or higher, Java 21 recommended)
+- [Maven](https://maven.apache.org/download.cgi) (version 3.6 or higher)
+- [Node.js](https://nodejs.org/) (version 16.x or higher)
+- [npm](https://www.npmjs.com/) (version 8.x or higher)
+- [MySQL](https://dev.mysql.com/downloads/mysql/) (version 8.0 or higher)
+- Git
+- A modern web browser (Chrome, Firefox, Safari, or Edge)
 
 ## Dependencies 
 
@@ -511,4 +514,5 @@ npm start
 # http://localhost:3000
 # Login: admin / admin123
 ```
+
 
