@@ -159,12 +159,22 @@ The rules listed below are to be followed by the ones who will be contributing t
 
 
 ## 🌐 Future Scope
-We're excited about the enhancements coming to Food Seer! Here's what's on the horizon:
-- **Advanced AI Integration:** Deploy sophisticated machine learning models for even more accurate and context-aware recommendations.
-- **Multi-Restaurant Support:** Expand the platform to support multiple restaurant partners, giving customers more dining options.
-- **Dietary Restrictions & Allergies:** Enhanced filtering and recommendation systems that account for health needs and dietary preferences.
-- **Social Features:** Share recommendations with friends, see what others are ordering, and discover trending meals.
-- **Mobile App:** Native iOS and Android applications for convenient on-the-go ordering and recommendations.
+
+We're excited about the enhancements coming to Food Seer! Here's what's next:
+
+- **Chat-Bot Memory & History**  
+  Allow the AI to retain past conversations, preferences, and recommendations — creating a truly personalized dining assistant that learns over time.
+
+- **Recommendation Feedback & Improvement Loop**  
+  Enable rating and review features for each recommendation, helping the system continuously refine and improve food suggestions.
+
+- **Analytics & Insights Dashboard**  
+  Introduce a business-facing analytics suite that visualizes customer preferences, order trends, and engagement insights to support smarter restaurant decisions.
+
+- **Voice-Enabled Chat Experience**  
+  Add speech-to-text and text-to-speech so users can talk to the chatbot like a real waiter and receive spoken, natural meal recommendations — making the experience hands-free and more conversational.
+
+
 
 
 
