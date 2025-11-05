@@ -44,7 +44,7 @@
 |Question 10.2| Is each source code release a snapshot of the repository?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/tree/main)         |
 |Question 10.3| Are releases tagged in the repository?| ✅   | ❌  |          |
 |Question 10.4| Is there a branch of the repository that is always stable? (i.e. tests always pass, code always builds successfully)| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/tree/main)        |
-|Question 10.5| Do you back-up your repository?| ✅   | ❌  |          |
+|Question 10.5| Do you back-up your repository?| ✅   |   |   Yes, through Zendo in our [README](https://github.com/NovaCorz/CSC510/blob/main/README.md) there is a backup along with local backups.       |
 | **Q11 - Building & Installing**  | |  |   |   |
 |Question 11.1| Do you provide publicly-available instructions for building your software from the source code?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/blob/main/INSTALL.md)          |
 |Question 11.2| Can you build, or package, your software using an automated tool?| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/blob/main/INSTALL.md)        |
