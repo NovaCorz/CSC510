@@ -45,9 +45,7 @@ We built Food Seer to:
 - ✅ Reduce menu fatigue and decision stress  
 - 🤖 Provide personalized suggestions via **AI chat**  
 - ❓ Offer a quiz-based food recommendation system  
-- ⭐ Improve recommendations over time using user preferences  
 - 🛒 Streamline ordering into a simple “choose and order” flow  
-- 👨‍🍳 Give at-home meal ideas if users pass on suggestions  
 - 🧾 Empower staff with inventory, user, and order management tools  
 
 Food Seer bridges **AI-driven personalization** with **restaurant efficiency** — improving both customer experience and backend operations.
