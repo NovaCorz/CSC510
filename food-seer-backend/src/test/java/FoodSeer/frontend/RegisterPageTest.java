@@ -125,6 +125,7 @@ public class RegisterPageTest {
 
         // We should still be on the register page with an error message
         assertEquals("http://localhost:3000/register", driver.getCurrentUrl());
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("error-message")));
         WebElement errorMessage = driver.findElement(By.className("error-message"));
         assertTrue(errorMessage.isDisplayed());
     }
