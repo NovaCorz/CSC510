@@ -17,91 +17,7 @@
 - ✅ Beautiful chat UI with typing indicators and animations
 - ✅ Added to navigation as "🤖 AI Assistant"
 
-## How to Set Up Ollama
 
-### Step 1: Download Ollama
-
-#### For Windows:
-1. Go to https://ollama.com/download
-2. Click "Download for Windows"
-3. Run the installer (`OllamaSetup.exe`)
-4. Follow the installation wizard
-
-#### For Mac:
-1. Go to https://ollama.com/download
-2. Click "Download for macOS"
-3. Open the `.dmg` file and drag Ollama to Applications
-
-#### For Linux:
-```bash
-curl -fsSL https://ollama.com/install.sh | sh
-```
-
-### Step 2: Pull the gemma3:1b Model
-
-After installation, open a terminal and run:
-
-```bash
-ollama pull gemma3:1b
-```
-
-This will download the model (~1GB). Wait for it to complete.
-
-### Step 3: Start Ollama Server
-
-Ollama should start automatically after installation. To verify it's running:
-
-```bash
-ollama list
-```
-
-You should see `gemma3:1b` in the list.
-
-If Ollama isn't running, start it:
-```bash
-ollama serve
-```
-
-The server will run on `http://localhost:11434` by default.
-
-### Step 4: Test Ollama
-
-Test that Ollama is working:
-
-```bash
-ollama run gemma3:1b
-```
-
-Type a test message like "Hello!" and you should get a response. Type `/bye` to exit.
-
-## How to Test the Chatbot Integration
-
-### 1. Start the Backend
-
-```bash
-cd food-seer-backend
-mvn spring-boot:run
-```
-
-### 2. Start the Frontend
-
-```bash
-cd food-seer-frontend
-npm start
-```
-
-### 3. Test the Chatbot
-
-1. Login as a **customer** (not admin/staff)
-2. Click "🤖 AI Assistant" in the navigation
-3. Answer the 3 questions:
-   - **Question 1:** How are you feeling today? (e.g., "tired")
-   - **Question 2:** How hungry are you? (e.g., "very hungry")
-   - **Question 3:** What kind of food are you in the mood for? (e.g., "comfort food")
-4. The AI will analyze your responses along with your budget and dietary restrictions
-5. It will recommend ONE food item from the available menu
-6. Click "Order This Now!" to create an order immediately
-7. Click "Get Another Suggestion" to start over
 
 ## How It Works
 
@@ -157,29 +73,130 @@ Potential improvements:
                     {"message": "AI response"}
 ```
 
-## Files Changed/Created
+## Using the Application
 
-### Backend:
-- ✅ `food-seer-backend/src/main/java/FoodSeer/dto/ChatRequestDto.java` (new)
-- ✅ `food-seer-backend/src/main/java/FoodSeer/dto/ChatResponseDto.java` (new)
-- ✅ `food-seer-backend/src/main/java/FoodSeer/service/ChatService.java` (new)
-- ✅ `food-seer-backend/src/main/java/FoodSeer/service/impl/ChatServiceImpl.java` (new)
-- ✅ `food-seer-backend/src/main/java/FoodSeer/controller/ChatController.java` (new)
+### Flow:
 
-### Frontend:
-- ✅ `food-seer-frontend/src/pages/Chatbot.js` (new)
-- ✅ `food-seer-frontend/src/services/api.js` (modified - added `sendChatMessage`)
-- ✅ `food-seer-frontend/src/App.js` (modified - added `/chatbot` route)
-- ✅ `food-seer-frontend/src/components/Navigation.js` (modified - added AI Assistant link)
-- ✅ `food-seer-frontend/src/index.css` (modified - added chatbot styles)
+1. **Login Page** (`/`)
+   - Use the demo credentials: `admin` / `admin123`
+   - The login page has a clean, modern design
 
-## Ready to Test!
+2. **Preferences Page** (`/preferences`)
+   - After login, you'll be directed to set your preferences
+   - **Step 1**: Select your budget (Under $10, Under $20, Under $30, or custom)
+   - **Step 2**: Select dietary restrictions (Vegan, Vegetarian, Lactose intolerant, or custom)
+   - Click "Next" to proceed to the next step
+   - On the final step, your preferences are saved to the backend
 
-Once Ollama is installed and running, you can:
-1. Start both backend and frontend
-2. Login as a customer
-3. Click "🤖 AI Assistant"
-4. Have a conversation and get personalized food recommendations!
+3. **Recommendations Page** (`/recommendations`)
+   - View personalized recommendations based on your preferences
+   - See your saved budget and dietary restrictions
+   - Update preferences anytime by clicking "Update Preferences"
+   - Logout when done
 
-Enjoy your AI-powered food recommendations! 🍕🤖
+## API Endpoints
 
+The backend provides the following key endpoints:
+
+### Authentication
+- `POST /auth/login` - Login with username and password
+- `POST /auth/register` - Register a new user
+
+### User Management
+- `GET /api/users/me` - Get current user info (requires authentication)
+- `PUT /api/users/me/preferences` - Update user preferences (requires authentication)
+
+### Request/Response Examples
+
+**Login Request:**
+```json
+{
+  "username": "admin",
+  "password": "admin123"
+}
+```
+
+**Login Response:**
+```json
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "tokenType": "Bearer"
+}
+```
+
+**Update Preferences Request:**
+```json
+{
+  "costPreference": "under-20",
+  "dietaryRestrictions": "vegan, lactose-intolerant"
+}
+```
+
+## Database Schema
+
+The `User` entity now includes:
+- `id` - Primary key
+- `username` - Unique username
+- `email` - Unique email
+- `password` - Encrypted password
+- `role` - User role (ROLE_STANDARD, ROLE_ADMIN)
+- `costPreference` - User's budget preference (NEW)
+- `dietaryRestrictions` - User's dietary restrictions (NEW)
+
+## Troubleshooting
+
+### Backend Issues
+
+1. **Port 8080 already in use:**
+   ```bash
+   # Find and kill the process using port 8080
+   lsof -ti:8080 | xargs kill -9
+   ```
+
+2. **MySQL connection failed:**
+   - Verify MySQL is running: `mysql.server start` (macOS) or `sudo service mysql start` (Linux)
+   - Check credentials in `application.properties`
+
+3. **Admin user not created:**
+   - The admin user is created automatically on startup
+   - Check the console logs for any errors
+
+### Frontend Issues
+
+1. **Port 3000 already in use:**
+   - The terminal will prompt you to use a different port
+   - Or kill the process: `lsof -ti:3000 | xargs kill -9`
+
+2. **CORS errors:**
+   - The backend is configured with `@CrossOrigin("*")`
+   - Make sure the backend is running on port 8080
+
+3. **Login fails:**
+   - Check that the backend is running
+   - Verify the API_BASE_URL in `src/services/api.js` is correct
+   - Check browser console for error messages
+
+## Next Steps
+
+### Features to Implement:
+1. Connect to actual restaurant recommendation API
+2. Add more sophisticated preference options
+3. Implement user registration flow
+4. Add favorite restaurants functionality
+5. Include location-based recommendations
+
+### Development:
+- All frontend code is in `food-seer-frontend/src/`
+- All backend code is in `food-seer-backend/src/main/java/FoodSeer/`
+- Make sure to commit your changes regularly
+- Push to the `frontend-recreation` branch
+
+## Merging to Dev
+
+When ready to merge back to dev:
+```bash
+git add .
+git commit -m "Recreated frontend with login, preferences, and recommendations"
+git push origin frontend-recreation
+# Then create a pull request on GitHub
+```
