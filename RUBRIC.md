@@ -24,8 +24,8 @@
 | **Q5 - Support**                 | |  |   |   |
 |Question 5.1| Does your software describe how a user can get help with using your software?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/blob/main/INSTALL.md#getting-help)         |
 |Question 5.2| Does your website and documentation describe what support, if any, you provide to users and developers?| ✅   |   |[Yes](https://github.com/NovaCorz/CSC510/blob/main/INSTALL.md#getting-help)          |
-|Question 5.3| Does your project have an e-mail address or forum that is solely for supporting users?| ✅   | ❌  |          |
-|Question 5.4| Are e-mails to your support e-mail address received by more than one person?| ✅   | ❌  |          |
+|Question 5.3| Does your project have an e-mail address or forum that is solely for supporting users?| ✅   |   | [Yes, we have a forum](https://github.com/NovaCorz/CSC510/discussions)          |
+|Question 5.4| Are e-mails to your support e-mail address received by more than one person?| ✅   |   | [Yes, we have a forum](https://github.com/NovaCorz/CSC510/discussions)           |
 |Question 5.5| Does your project have a ticketing system to manage bug reports and feature requests?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/issues)         |
 |Question 5.6| Is your project's ticketing system publicly visible to your users, so they can view bug reports and feature requests?| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/issues)        |
 | **Q6 - Maintainability**         | |  |   |   |
