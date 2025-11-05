@@ -218,3 +218,48 @@ The frontend will start on `http://localhost:3000`
 ```
 
 ---
+
+## Testing
+
+### Backend Tests
+
+Using Maven:
+```bash
+cd food-seer-backend
+mvn test
+
+# Run specific test class
+mvn test -Dtest=YourTestClass
+
+# Run with coverage
+mvn test jacoco:report
+```
+
+### Frontend Tests
+
+```bash
+cd food-seer-frontend
+npm test
+```
+
+### Testing the Chatbot Integration
+
+1. Start Ollama, backend, and frontend
+2. Login as a **customer** (not admin/staff)
+3. Navigate to "🤖 AI Assistant"
+4. Complete the 3-question conversation
+5. Verify recommendation is received
+6. Test "Order This Now!" functionality
+7. Test "Get Another Suggestion"
+
+### Code Coverage
+
+**Backend (Maven with JaCoCo):**
+```bash
+cd food-seer-backend
+mvn clean test jacoco:report
+# View report at: target/site/jacoco/index.html
+```
+
+---
+
