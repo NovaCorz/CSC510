@@ -1,0 +1,124 @@
+# Food Seer - Python Dependencies
+# This file lists Python packages that may be used for AI/ML integration,
+# data processing, or utility scripts in the project
+
+# ============================================================================
+# AI/ML Libraries
+# ============================================================================
+
+# OpenAI API client for AI-powered recommendations
+openai==1.3.0
+
+# Alternative AI libraries (uncomment if needed)
+# anthropic==0.7.0
+# langchain==0.0.350
+# transformers==4.35.0
+# torch==2.1.0
+
+# ============================================================================
+# Data Processing & Analysis
+# ============================================================================
+
+# Data manipulation and analysis
+pandas==2.1.3
+numpy==1.26.2
+
+# JSON and data validation
+jsonschema==4.20.0
+pydantic==2.5.0
+
+# ============================================================================
+# HTTP & API Tools
+# ============================================================================
+
+# HTTP library for API calls
+requests==2.31.0
+
+# Async HTTP client (if needed)
+httpx==0.25.2
+
+# ============================================================================
+# Database & ORM (if Python scripts interact with DB)
+# ============================================================================
+
+# MySQL connector
+mysql-connector-python==8.2.0
+
+# PostgreSQL adapter (alternative)
+# psycopg2-binary==2.9.9
+
+# SQLAlchemy ORM (if using Python for DB operations)
+# SQLAlchemy==2.0.23
+
+# ============================================================================
+# Utilities
+# ============================================================================
+
+# Environment variable management
+python-dotenv==1.0.0
+
+# Date and time utilities
+python-dateutil==2.8.2
+
+# Logging
+colorlog==6.8.0
+
+# ============================================================================
+# Testing & Quality Assurance
+# ============================================================================
+
+# Testing framework
+pytest==7.4.3
+pytest-cov==4.1.0
+pytest-mock==3.12.0
+
+# Code quality
+pylint==3.0.3
+flake8==6.1.0
+black==23.12.0
+
+# Type checking
+mypy==1.7.1
+
+# ============================================================================
+# Development Tools
+# ============================================================================
+
+# Interactive Python shell
+ipython==8.18.1
+
+# Jupyter notebooks (for data exploration)
+# jupyter==1.0.0
+# notebook==7.0.6
+
+# ============================================================================
+# Security
+# ============================================================================
+
+# Secure password hashing
+bcrypt==4.1.1
+
+# JWT token handling
+PyJWT==2.8.0
+
+# ============================================================================
+# Web Scraping (if needed for restaurant data)
+# ============================================================================
+
+# beautifulsoup4==4.12.2
+# selenium==4.16.0
+
+# ============================================================================
+# Task Queue (if using background jobs)
+# ============================================================================
+
+# celery==5.3.4
+# redis==5.0.1
+
+# ============================================================================
+# Documentation
+# ============================================================================
+
+# Sphinx documentation generator
+# sphinx==7.2.6
+# sphinx-rtd-theme==2.0.0
