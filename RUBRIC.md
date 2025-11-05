@@ -37,8 +37,8 @@
 | **Q8 - Portability**             | |  |   |   |
 |Question 8.1| Is your software cross-platform compatible?| ✅   |   | [Yes, we provide instrutions for multiple platforms](https://github.com/NovaCorz/CSC510/blob/main/INSTALL.md)         |
 | **Q9 - Accessibility**           | |  |   |   |
-|Question 9.1| Does your software adhere to appropriate accessibility conventions or standards?| ✅   | ❌  |          |
-|Question 9.2| Does your documentation adhere to appropriate accessibility conventions or standards?| ✅   | ❌  |          |
+|Question 9.1| Does your software adhere to appropriate accessibility conventions or standards?| ✅   |   | Yes, our frontend has intentional design choices demonstrating that we follow accessibility best practices.         |
+|Question 9.2| Does your documentation adhere to appropriate accessibility conventions or standards?| ✅   |   |  Yes, throughout our documentation, we make sure it follows accessibility standards. We use headers for easy navigation and list a table of contents. We also use bold and large fonts for ease of reading.        |
 | **Q10 - Source Code Management** | |  |   |   |
 |Question 10.1| Is your source code stored in a repository under revision control?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/tree/main)         |
 |Question 10.2| Is each source code release a snapshot of the repository?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/tree/main)         |
