@@ -215,6 +215,17 @@ We extend our heartfelt thanks to Professor Dr. Timothy Menzies for his invaluab
 Your input matters to us! If you have ideas for enhancements or new features, feel free to open an issue or submit a pull request. Thoughtful feedback from contributors like you helps us improve and evolve.
 
 
+## 🔔 Notifications
+
+Users can subscribe to notifications to track changes to the Food Seer repository.  
+To follow updates, visit the repo and click:
+
+**Watch → All Activity**
+
+This sends alerts for code updates, pull requests, issues, releases, and discussions.
+
+
+
 ## ⚠️ Disclaimer
 Food Seer is designed as a smart recommendation system for restaurant delivery services. All meal recommendations are suggestions based on user input and preferences. Individual dietary needs, allergies, and health conditions should always be considered when making food choices. We are not responsible for any adverse reactions or health issues that may arise from following our recommendations.
 
