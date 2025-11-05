@@ -1,386 +1,523 @@
-# FoodSeer Complete Setup Guide
+# Installation Guide
 
-This comprehensive guide covers the complete setup of the FoodSeer application, including the AI chatbot integration with Ollama.
+This guide will help you set up Food Seer locally on your machine. You can choose between Docker installation (recommended) or manual installation.
 
-## Branch Information
+## Table of Contents
+- [Prerequisites](#prerequisites)
+- [Installation Method 1: Docker (Recommended)](#installation-method-1-docker-recommended)
+- [Installation Method 2: Manual Installation](#installation-method-2-manual-installation)
+- [Environment Configuration](#environment-configuration)
+- [Running the Application](#running-the-application)
+- [Troubleshooting](#troubleshooting)
 
-Current branch: `frontend-recreation`
-
-Created off of `dev` to ensure safe development without losing work.
+---
 
 ## Prerequisites
 
-1. **Java 21** - For running the Spring Boot backend
-2. **Maven** - For building the backend
-3. **MySQL** - Database for user management
-4. **Node.js & npm** - For running the React frontend
-5. **Ollama** - For AI-powered food recommendations
+Before you begin, ensure you have the following installed on your system:
 
-## Backend Setup
+### For Docker Installation:
+- [Docker](https://docs.docker.com/get-docker/) (version 20.10 or higher)
+- [Docker Compose](https://docs.docker.com/compose/install/) (version 2.0 or higher)
+- Git
 
-### 1. Configure MySQL Database
+### For Manual Installation:
+- [Java JDK](https://www.oracle.com/java/technologies/downloads/) (version 11 or higher, 17 recommended)
+- [Maven](https://maven.apache.org/download.cgi) (version 3.6 or higher) or [Gradle](https://gradle.org/install/)
+- [Node.js](https://nodejs.org/) (version 16.x or higher)
+- [npm](https://www.npmjs.com/) (version 8.x or higher) or [yarn](https://yarnpkg.com/)
+- Git
+- A modern web browser (Chrome, Firefox, Safari, or Edge)
 
-Make sure MySQL is running on your machine. The application will automatically create the database if it doesn't exist.
+---
 
-Default configuration:
-- Database: `users`
-- Host: `localhost:3306`
-- Username: `root`
-- Password: `` (empty)
+## Installation Method 1: Docker (Recommended)
 
-If your MySQL setup is different, update `food-seer-backend/src/main/resources/application.properties`
+Docker installation is the easiest way to get started with Food Seer as it handles all dependencies automatically.
 
-### 2. Build and Run Backend
+### Step 1: Clone the Repository
 
 ```bash
+git clone https://github.com/NovaCorz/CSC510.git
+cd CSC510
+```
+
+### Step 2: Configure Environment Variables
+
+Create a `.env` file in the root directory:
+
+```bash
+cp .env.example .env
+```
+
+Edit the `.env` file with your configuration (see [Environment Configuration](#environment-configuration) section).
+
+### Step 3: Build and Run with Docker
+
+```bash
+# Build the Docker containers
+docker-compose build
+
+# Start the application
+docker-compose up
+```
+
+The application will be available at:
+- Frontend: `http://localhost:3000`
+- Backend API: `http://localhost:8080`
+
+### Step 4: Verify Installation
+
+Open your browser and navigate to `http://localhost:3000`. You should see the Food Seer landing page.
+
+To stop the application:
+```bash
+docker-compose down
+```
+
+---
+
+## Installation Method 2: Manual Installation
+
+If you prefer not to use Docker, follow these steps for manual installation.
+
+### Step 1: Clone the Repository
+
+```bash
+git clone https://github.com/NovaCorz/CSC510.git
+cd CSC510
+```
+
+### Step 2: Backend Setup (Java Spring Boot)
+
+#### Verify Java Installation
+
+```bash
+# Check Java version (should be 11 or higher)
+java -version
+
+# Check Maven version
+mvn -version
+```
+
+#### Install Backend Dependencies
+
+```bash
+# Navigate to backend directory (adjust path if different)
 cd food-seer-backend
+
+# Clean and install dependencies using Maven
 mvn clean install
-mvn spring-boot:run
 ```
 
-The backend will start on `http://localhost:8080`
+#### Configure Application Properties
 
-### 3. Verify Backend
+Edit `src/main/resources/application.properties` or `application.yml` with your configuration:
 
-The application automatically creates an admin user with credentials:
-- Username: `admin`
-- Password: `admin123`
+```properties
+# Server Configuration
+server.port=8080
 
-You can test the login endpoint:
-```bash
-curl -X POST http://localhost:8080/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"username":"admin","password":"admin123"}'
+# Database Configuration
+spring.datasource.url=jdbc:mysql://localhost:3306/foodseer
+spring.datasource.username=your_db_username
+spring.datasource.password=your_db_password
+spring.jpa.hibernate.ddl-auto=update
+
+# Or for H2 in-memory database (development):
+# spring.datasource.url=jdbc:h2:mem:testdb
+# spring.h2.console.enabled=true
+
+# AI/ML Configuration
+openai.api.key=your-openai-api-key
+
+# CORS Configuration
+cors.allowed.origins=http://localhost:3000
 ```
 
-## Frontend Setup
-
-### 1. Install Dependencies
+#### Build the Application
 
 ```bash
-cd food-seer-frontend
+# Using Maven
+mvn package
+```
+
+### Step 3: Frontend Setup
+
+```bash
+# Navigate to frontend directory (adjust path if different)
+cd ../food-seer-frontend
+
+# Install Node.js dependencies
 npm install
 ```
 
-### 2. Run Frontend
+### Step 4: Configure Environment Variables
+
+**Frontend (.env in frontend directory):**
+```bash
+cp .env.example .env
+```
+
+Edit the `.env` file:
+```env
+REACT_APP_API_URL=http://localhost:8080/api
+REACT_APP_ENV=development
+```
+
+---
+
+## Environment Configuration
+
+### Backend Configuration (application.properties)
+
+Create or edit `backend/src/main/resources/application.properties`:
+
+```properties
+# Server Settings
+server.port=8080
+server.servlet.context-path=/api
+
+# Database Configuration
+spring.datasource.url=jdbc:mysql://localhost:3306/foodseer
+spring.datasource.username=root
+spring.datasource.password=your_password
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# JPA/Hibernate
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+spring.jpa.properties.hibernate.format_sql=true
+
+# H2 Database (Alternative for Development)
+# spring.datasource.url=jdbc:h2:mem:foodseer
+# spring.datasource.driver-class-name=org.h2.Driver
+# spring.h2.console.enabled=true
+# spring.h2.console.path=/h2-console
+
+# Logging
+logging.level.root=INFO
+logging.level.com.foodseer=DEBUG
+
+# AI Service Configuration
+ai.service.api.key=your-api-key-here
+ai.service.endpoint=https://api.openai.com/v1
+
+# CORS Settings
+cors.allowed.origins=http://localhost:3000,http://localhost:3001
+cors.allowed.methods=GET,POST,PUT,DELETE,OPTIONS
+cors.allowed.headers=*
+cors.allow.credentials=true
+
+# File Upload Settings
+spring.servlet.multipart.max-file-size=10MB
+spring.servlet.multipart.max-request-size=10MB
+
+# Session Configuration
+spring.session.timeout=30m
+```
+
+### Frontend Environment Variables
+
+Create `.env` file in the frontend directory:
+
+```env
+REACT_APP_API_URL=http://localhost:8080/api
+REACT_APP_ENV=development
+REACT_APP_API_TIMEOUT=30000
+```
+
+---
+
+## Running the Application
+
+### Using Docker
 
 ```bash
+# Start all services
+docker-compose up
+
+# Start in detached mode (background)
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop all services
+docker-compose down
+```
+
+### Manual Run
+
+You'll need to run both backend and frontend in separate terminal windows.
+
+**Terminal 1 - Backend (Java Spring Boot):**
+
+Using Maven:
+```bash
+cd food-seer-backend
+mvn spring-boot:run
+```
+
+**Terminal 2 - Frontend:**
+```bash
+cd food-seer-frontend
 npm start
 ```
 
-The frontend will start on `http://localhost:3000`
+The application will be available at:
+- Frontend: `http://localhost:3000`
+- Backend API: `http://localhost:8080/api`
+- H2 Console (if enabled): `http://localhost:8080/h2-console`
 
-## Ollama AI Setup
+---
 
-### Step 1: Download Ollama
+## Database Setup
 
-#### For Windows:
-1. Go to https://ollama.com/download
-2. Click "Download for Windows"
-3. Run the installer (`OllamaSetup.exe`)
-4. Follow the installation wizard
+### Using MySQL
 
-#### For Mac:
-1. Go to https://ollama.com/download
-2. Click "Download for macOS"
-3. Open the `.dmg` file and drag Ollama to Applications
+1. **Install MySQL** (if not already installed)
 
-#### For Linux:
-```bash
-curl -fsSL https://ollama.com/install.sh | sh
+2. **Create Database:**
+```sql
+CREATE DATABASE foodseer;
+CREATE USER 'foodseer_user'@'localhost' IDENTIFIED BY 'your_password';
+GRANT ALL PRIVILEGES ON foodseer.* TO 'foodseer_user'@'localhost';
+FLUSH PRIVILEGES;
 ```
 
-### Step 2: Pull the gemma3:1b Model
+3. **Update application.properties** with your database credentials
 
-After installation, open a terminal and run:
+### Using H2 (In-Memory Database)
 
-```bash
-ollama pull gemma3:1b
+For quick development setup, use H2 database:
+
+```properties
+spring.datasource.url=jdbc:h2:mem:foodseer
+spring.datasource.driver-class-name=org.h2.Driver
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
 ```
 
-This will download the model (~1GB). Wait for it to complete.
+Access H2 Console at `http://localhost:8080/h2-console`
 
-### Step 3: Start Ollama Server
-
-Ollama should start automatically after installation. To verify it's running:
-
-```bash
-ollama list
-```
-
-You should see `gemma3:1b` in the list.
-
-If Ollama isn't running, start it:
-```bash
-ollama serve
-```
-
-The server will run on `http://localhost:11434` by default.
-
-### Step 4: Test Ollama
-
-Test that Ollama is working:
-
-```bash
-ollama run gemma3:1b
-```
-
-Type a test message like "Hello!" and you should get a response. Type `/bye` to exit.
-
-## Using the Application
-
-### Application Flow:
-
-1. **Login Page** (`/`)
-   - Use the demo credentials: `admin` / `admin123`
-   - The login page has a clean, modern design
-
-2. **Preferences Page** (`/preferences`)
-   - After login, you'll be directed to set your preferences
-   - **Step 1**: Select your budget (Under $10, Under $20, Under $30, or custom)
-   - **Step 2**: Select dietary restrictions (Vegan, Vegetarian, Lactose intolerant, or custom)
-   - Click "Next" to proceed to the next step
-   - On the final step, your preferences are saved to the backend
-
-3. **Recommendations Page** (`/recommendations`)
-   - View personalized recommendations based on your preferences
-   - See your saved budget and dietary restrictions
-   - Update preferences anytime by clicking "Update Preferences"
-   - Logout when done
-
-4. **AI Assistant** (`/chatbot`) - 🤖
-   - Login as a **customer** (not admin/staff)
-   - Click "🤖 AI Assistant" in the navigation
-   - Answer 3 questions about your day:
-     - **Question 1:** How are you feeling today? (e.g., "tired")
-     - **Question 2:** How hungry are you? (e.g., "very hungry")
-     - **Question 3:** What kind of food are you in the mood for? (e.g., "comfort food")
-   - The AI analyzes your responses along with your budget and dietary restrictions
-   - Recommends ONE perfect food item from the available menu
-   - Click "Order This Now!" to create an order immediately
-   - Click "Get Another Suggestion" to start over
-
-## How the AI Chatbot Works
-
-1. **User Input Collection:** The chatbot asks 3 questions to understand your current state
-2. **Preference Integration:** It fetches your saved budget and dietary restrictions from your profile
-3. **Food Filtering:** Foods are filtered based on:
-   - Your budget (budget/moderate/premium/no-limit)
-   - Your dietary restrictions (vegan/vegetarian/gluten-free)
-4. **AI Analysis:** The filtered food list + your responses are sent to Ollama's gemma3:1b model
-5. **Recommendation:** The AI selects the best food match and explains why it's perfect for you
-6. **Quick Order:** You can order directly from the recommendation
-
-## API Endpoints
-
-The backend provides the following key endpoints:
-
-### Authentication
-- `POST /auth/login` - Login with username and password
-- `POST /auth/register` - Register a new user
-
-### User Management
-- `GET /api/users/me` - Get current user info (requires authentication)
-- `PUT /api/users/me/preferences` - Update user preferences (requires authentication)
-
-### Chat
-- `POST /api/chat` - Send message to AI chatbot (requires authentication)
-
-### Request/Response Examples
-
-**Login Request:**
-```json
-{
-  "username": "admin",
-  "password": "admin123"
-}
-```
-
-**Login Response:**
-```json
-{
-  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "tokenType": "Bearer"
-}
-```
-
-**Update Preferences Request:**
-```json
-{
-  "costPreference": "under-20",
-  "dietaryRestrictions": "vegan, lactose-intolerant"
-}
-```
-
-**Chat Request:**
-```json
-{
-  "message": "I'm feeling tired and want comfort food"
-}
-```
-
-## Database Schema
-
-The `User` entity includes:
-- `id` - Primary key
-- `username` - Unique username
-- `email` - Unique email
-- `password` - Encrypted password
-- `role` - User role (ROLE_STANDARD, ROLE_ADMIN)
-- `costPreference` - User's budget preference
-- `dietaryRestrictions` - User's dietary restrictions
-
-## Architecture
-
-```
-┌─────────────┐      ┌──────────────┐      ┌─────────────┐      ┌──────────┐
-│  Frontend   │ ───> │  Backend     │ ───> │  Ollama     │ ───> │ gemma3:1b│
-│  Chatbot.js │      │ChatController│      │  API        │      │  Model   │
-└─────────────┘      └──────────────┘      └─────────────┘      └──────────┘
-       │                                            │                   │
-       │ POST /api/chat                             │ POST /api/generate│
-       │ {"message": "prompt"}                      │ {"model": "...",  │
-       │                                            │  "prompt": "..."} │
-       │                                            │                   │
-       └────────────────────────────────────────────┴───────────────────┘
-                    {"message": "AI response"}
-```
-
-## Files Implemented
-
-### Backend:
-- ✅ `food-seer-backend/src/main/java/FoodSeer/dto/ChatRequestDto.java` (new)
-- ✅ `food-seer-backend/src/main/java/FoodSeer/dto/ChatResponseDto.java` (new)
-- ✅ `food-seer-backend/src/main/java/FoodSeer/service/ChatService.java` (new)
-- ✅ `food-seer-backend/src/main/java/FoodSeer/service/impl/ChatServiceImpl.java` (new)
-- ✅ `food-seer-backend/src/main/java/FoodSeer/controller/ChatController.java` (new)
-
-### Frontend:
-- ✅ `food-seer-frontend/src/pages/Chatbot.js` (new)
-- ✅ `food-seer-frontend/src/services/api.js` (modified - added `sendChatMessage`)
-- ✅ `food-seer-frontend/src/App.js` (modified - added `/chatbot` route)
-- ✅ `food-seer-frontend/src/components/Navigation.js` (modified - added AI Assistant link)
-- ✅ `food-seer-frontend/src/index.css` (modified - added chatbot styles)
+---
 
 ## Troubleshooting
 
-### Backend Issues
+### Common Issues
 
-1. **Port 8080 already in use:**
-   ```bash
-   # Find and kill the process using port 8080
-   lsof -ti:8080 | xargs kill -9
-   ```
+#### Port Already in Use
 
-2. **MySQL connection failed:**
-   - Verify MySQL is running: `mysql.server start` (macOS) or `sudo service mysql start` (Linux)
-   - Check credentials in `application.properties`
+If you see an error like "port already in use":
 
-3. **Admin user not created:**
-   - The admin user is created automatically on startup
-   - Check the console logs for any errors
-
-4. **Backend 500 Error:**
-   - Ensure Ollama is running: `curl http://localhost:11434`
-   - Check backend logs for connection errors
-
-### Frontend Issues
-
-1. **Port 3000 already in use:**
-   - The terminal will prompt you to use a different port
-   - Or kill the process: `lsof -ti:3000 | xargs kill -9`
-
-2. **CORS errors:**
-   - The backend is configured with `@CrossOrigin("*")`
-   - Make sure the backend is running on port 8080
-
-3. **Login fails:**
-   - Check that the backend is running
-   - Verify the API_BASE_URL in `src/services/api.js` is correct
-   - Check browser console for error messages
-
-### Ollama Issues
-
-1. **"Failed to send message to AI":**
-   - **Cause:** Ollama is not running
-   - **Fix:** Run `ollama serve` in a terminal
-
-2. **"No response from AI":**
-   - **Cause:** Model not downloaded
-   - **Fix:** Run `ollama pull gemma3:1b`
-
-3. **"Error communicating with Ollama":**
-   - **Cause:** Ollama is running on a different port
-   - **Fix:** Check Ollama is on port 11434 (default)
-
-## Future Enhancements
-
-### Features to Implement:
-1. 💾 **Conversation History:** Save past recommendations
-2. ⭐ **Rating System:** Let users rate recommendations to improve accuracy
-3. 🧠 **Learning:** Use past orders to personalize recommendations
-4. 📊 **Analytics:** Track which recommendations users accept/decline
-5. 🎨 **Custom Prompts:** Allow users to customize the AI's personality
-6. Connect to actual restaurant recommendation API
-7. Add more sophisticated preference options
-8. Implement user registration flow
-9. Add favorite restaurants functionality
-10. Include location-based recommendations
-
-## Development Notes
-
-- All frontend code is in `food-seer-frontend/src/`
-- All backend code is in `food-seer-backend/src/main/java/FoodSeer/`
-- The frontend uses JWT tokens stored in localStorage for authentication
-- Tokens expire after 7 days
-- All API calls include the Bearer token in the Authorization header
-- Protected routes redirect to login if not authenticated
-- Backend communicates with Ollama running on `localhost:11434`
-- Make sure to commit your changes regularly
-- Push to the `frontend-recreation` branch
-
-## Merging to Dev
-
-When ready to merge back to dev:
 ```bash
-git add .
-git commit -m "Recreated frontend with login, preferences, recommendations, and AI chatbot"
-git push origin frontend-recreation
-# Then create a pull request on GitHub
+# Find the process using the port (example for port 8080)
+# On macOS/Linux:
+lsof -i :8080
+# On Windows:
+netstat -ano | findstr :8080
+
+# Kill the process or change the port in application.properties
 ```
 
-## Quick Start Commands
+#### Java Version Issues
 
+**Problem:** Wrong Java version
 ```bash
-# Terminal 1 - Start MySQL (if not running)
-mysql.server start  # macOS
-# or
-sudo service mysql start  # Linux
+# Check current Java version
+java -version
 
-# Terminal 2 - Start Backend
-cd food-seer-backend
+# Set JAVA_HOME environment variable
+# On macOS/Linux:
+export JAVA_HOME=/path/to/java11
+# On Windows:
+set JAVA_HOME=C:\Program Files\Java\jdk-11
+
+# Verify
+echo $JAVA_HOME  # macOS/Linux
+echo %JAVA_HOME%  # Windows
+```
+
+#### Maven Build Failures
+
+**Problem:** Maven dependencies not downloading
+```bash
+# Clear Maven cache and rebuild
+mvn clean install -U
+
+# Force update snapshots
+mvn clean install -U -DskipTests
+
+# Clear local repository cache
+rm -rf ~/.m2/repository
+mvn clean install
+```
+
+#### Docker Issues
+
+**Problem:** Docker build fails
+```bash
+# Clear Docker cache and rebuild
+docker-compose down -v
+docker-compose build --no-cache
+docker-compose up
+```
+
+**Problem:** Permission denied errors
+```bash
+# On Linux, you may need to run with sudo or add your user to docker group
+sudo usermod -aG docker $USER
+# Log out and back in for changes to take effect
+```
+
+#### Database Connection Issues
+
+**Problem:** Cannot connect to database
+- Verify MySQL service is running:
+  ```bash
+  # On macOS:
+  brew services start mysql
+  # On Linux:
+  sudo systemctl start mysql
+  # On Windows: Start MySQL service from Services panel
+  ```
+- Check database credentials in `application.properties`
+- Ensure database exists and user has proper permissions
+
+#### Spring Boot Application Won't Start
+
+**Problem:** Application fails to start
+```bash
+# Check logs for specific errors
 mvn spring-boot:run
 
-# Terminal 3 - Start Frontend
-cd food-seer-frontend
-npm start
+# Run with debug enabled
+mvn spring-boot:run -Dspring-boot.run.arguments=--debug
 
-# Terminal 4 - Start Ollama (if not auto-started)
-ollama serve
-
-# Test everything is working
-curl http://localhost:8080/auth/login
-curl http://localhost:11434
-open http://localhost:3000
+# Verify all required dependencies are in pom.xml
+mvn dependency:tree
 ```
 
-## Ready to Use!
+#### Frontend Module Not Found Errors
 
-Once everything is set up:
-1. Navigate to `http://localhost:3000`
-2. Login with `admin` / `admin123`
-3. Set your preferences
-4. View recommendations
-5. Try the AI Assistant for personalized food suggestions!
+```bash
+# Clear node_modules and reinstall
+rm -rf node_modules package-lock.json
+npm install
 
-Enjoy your AI-powered food recommendations! 🍕🤖
+# Clear npm cache
+npm cache clean --force
+npm install
+```
+
+#### AI/API Key Issues
+
+**Problem:** AI recommendations not working
+- Verify your API key is correctly set in `application.properties`
+- Check that your API key has sufficient credits/permissions
+- Review backend logs for specific error messages
+- Test API key independently with a curl command
+
+---
+
+## Additional Setup
+
+### Running Tests
+
+**Backend Tests:**
+
+Using Maven:
+```bash
+cd food-seer-backend
+mvn src/test
+
+# Run specific test class
+mvn src/test -Dtest=YourTestClass
+
+# Run with coverage
+mvn src/test jacoco:report
+```
+
+### Code Coverage
+
+**Backend (Maven with JaCoCo):**
+```bash
+cd food-seer-backend
+mvn clean test jacoco:report
+# View report at: target/site/jacoco/index.html
+```
+
+### Linting and Formatting
+
+**Backend (Java):**
+```bash
+# Using Checkstyle (if configured in pom.xml)
+mvn checkstyle:check
+
+# Using SpotBugs
+mvn spotbugs:check
+
+# Format code with google-java-format
+mvn com.coveo:fmt-maven-plugin:format
+```
+
+**Frontend:**
+```bash
+# Run linter
+npm run lint
+
+# Fix linting issues
+npm run lint:fix
+
+# Format code with Prettier
+npm run format
+```
+
+### Building for Production
+
+**Backend:**
+```bash
+cd food-seer-backend
+mvn clean package -DskipTests
+# JAR file will be in target/ directory
+```
+
+**Frontend:**
+```bash
+cd food-seer-frontend
+npm run build
+# Production build will be in build/ directory
+```
+
+---
+
+## Next Steps
+
+After successful installation:
+
+1. **Create a test account** to explore the recommendation system
+2. **Check the API endpoints** at `http://localhost:8080/swagger-ui.html` (if Swagger is configured)
+3. **Review the API Documentation** 
+4. **Check out the Demo Video** linked in the README
+5. **Read the Contribution Guidelines** if you plan to contribute
+
+For questions or issues, please open an issue on the [GitHub repository](https://github.com/NovaCorz/CSC510/issues).
+
+---
+
+## System Requirements
+
+### Minimum Requirements
+- **CPU:** 2 cores
+- **RAM:** 4 GB (6 GB recommended for running both frontend and backend)
+- **Storage:** 5 GB free space
+- **OS:** Windows 10/11, macOS 10.15+, or Linux (Ubuntu 20.04+)
+- **Java:** JDK 11 or higher
+
+### Recommended Requirements
+- **CPU:** 4+ cores
+- **RAM:** 8 GB or more
+- **Storage:** 10 GB free space
+- **Internet:** Stable connection for AI API calls and dependency downloads
