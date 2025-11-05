@@ -42,7 +42,7 @@
 | **Q10 - Source Code Management** | |  |   |   |
 |Question 10.1| Is your source code stored in a repository under revision control?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/tree/main)         |
 |Question 10.2| Is each source code release a snapshot of the repository?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/tree/main)         |
-|Question 10.3| Are releases tagged in the repository?| ✅   | ❌  |          |
+|Question 10.3| Are releases tagged in the repository?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/releases)         |
 |Question 10.4| Is there a branch of the repository that is always stable? (i.e. tests always pass, code always builds successfully)| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/tree/main)        |
 |Question 10.5| Do you back-up your repository?| ✅   |   |   Yes, through Zendo in our [README](https://github.com/NovaCorz/CSC510/blob/main/README.md) there is a backup along with local backups.       |
 | **Q11 - Building & Installing**  | |  |   |   |
