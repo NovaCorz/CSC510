@@ -98,9 +98,9 @@ but nevertheless, here is a track record that everyone is contributing a lot)|[e
 |Number of commits: by different people|[in GH](https://github.com/NovaCorz/CSC510/tree/main/collaboration-proof)| 3|
 |Issues reports: there are **many**| [Yes](https://github.com/NovaCorz/CSC510/issues) |3
 |Issues are being closed|[evidence in GH](https://github.com/NovaCorz/CSC510/issues)|3 |
-|Docs: doco generated, format not ugly |in GH| |
-|Docs: what: point descriptions of each class/function (in isolation)| | |
-|Docs: how: for common use cases X,Y,Z mini-tutorials showing worked examples on how to do X,Y,Z|doc page entries| | |
+|Docs: doco generated, format not ugly |[in GH](https://github.com/NovaCorz/CSC510/tree/main/doc)|3 |
+|Docs: what: point descriptions of each class/function (in isolation)| [Yes](https://github.com/NovaCorz/CSC510/tree/main/doc) |3 |
+|Docs: how: for common use cases X,Y,Z mini-tutorials showing worked examples on how to do X,Y,Z|doc page entries| [Yes](https://github.com/NovaCorz/CSC510/tree/main/doc) | 3|
 |Docs: why: docs tell a story, motivate the whole thing, deliver a punchline that makes you want to rush out and use the thing| |
 |Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code.| |
 |Use of version control tools| |
