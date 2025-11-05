@@ -1,12 +1,6 @@
 # FoodSeer Frontend Recreation - Setup Guide
 
-This guide will help you set up and run the FoodSeer application with the newly recreated frontend.
-
-## Branch Information
-
-We've created a new branch `frontend-recreation` off of `dev` to ensure safe development without losing work.
-
-Current branch: `frontend-recreation`
+This guide will help you set up and run the FoodSeer application.
 
 ## Prerequisites
 
@@ -29,7 +23,18 @@ Default configuration:
 
 If your MySQL setup is different, update `food-seer-backend/src/main/resources/application.properties`
 
-### 2. Build and Run Backend
+### 2. Create and update application.properties file
+
+At the following path you will find a template file: food-seer-backend/src/main/resources/application.properties.template
+
+Use this template and make a copy in the same folder called application.properties
+
+Inside of this newly created application.properties file change the following
+- spring.datasource.password: To whatever you have your MySQL password set to
+- app.jwt-secret: Using https://emn178.github.io/online-tools/sha256.html make a jwt secret
+- app.admin-user-password: To whatever you want the default admin password to be.
+
+### 3. Build and Run Backend
 
 ```bash
 cd food-seer-backend
@@ -43,7 +48,7 @@ The backend will start on `http://localhost:8080`
 
 The application automatically creates an admin user with credentials:
 - Username: `admin`
-- Password: `admin123`
+- Password: `what you have app.admin-user-password set to in the application.properties file`
 
 You can test the login endpoint:
 ```bash
