@@ -18,7 +18,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 
 import FoodSeer.entity.User;
+import FoodSeer.repositories.FoodRepository;
 import FoodSeer.repositories.UserRepository;
+import FoodSeer.service.impl.DataInitializer;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import java.util.List;
@@ -34,9 +36,17 @@ public class RecommendationsPageTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private FoodRepository foodRepository;
+
+    @Autowired
+    private DataInitializer dataInitializer;
+
     @BeforeEach
     public void setUp() {
         // Set up ChromeDriver
+        foodRepository.deleteAll();
+        dataInitializer.onApplicationReady();
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox");
