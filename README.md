@@ -21,8 +21,7 @@
 
 ## 🎉 Welcome to Food Seer!
 
-
-**Food Seer** helps take the stress out of daily food choices by turning a simple conversation into a personalized meal recommendation. Designed exclusively for one restaurant's delivery system, Food Seer asks customers a few quick questions about their day and provides a tailored food option they can choose to purchase or pass until the next day.
+**Food Seer** takes the stress out of choosing what to eat by turning meal selection into a smart and personalized experience. Whether you're in the mood for a quick quiz or a natural conversation, Food Seer helps you find the perfect meal based on your preferences, mood, and budget. Start a short quiz or chat with our AI assistant — and receive a tailored meal suggestion in seconds.
 
 
 
@@ -39,22 +38,21 @@
 
 ## 💡 Why This Project?
 
+Menu overload is real — and decision fatigue hits hard when you're hungry. Food Seer eliminates the guesswork by guiding users toward a meal that fits their lifestyle and cravings without the hassle of scrolling through endless options.
 
-Finding the perfect meal can be overwhelming when faced with endless menu options. Customers often experience decision fatigue, while restaurant staff struggle to streamline operations. This project aims to bridge that gap by providing a platform with useful features like:
+We built Food Seer to:
+
+- ✅ Reduce menu fatigue and decision stress  
+- 🤖 Provide personalized suggestions via **AI chat**  
+- ❓ Offer a quiz-based food recommendation system  
+- ⭐ Improve recommendations over time using user preferences  
+- 🛒 Streamline ordering into a simple “choose and order” flow  
+- 👨‍🍳 Give at-home meal ideas if users pass on suggestions  
+- 🧾 Empower staff with inventory, user, and order management tools  
+
+Food Seer bridges **AI-driven personalization** with **restaurant efficiency** — improving both customer experience and backend operations.
 
 
-- **Personalized Recommendations**: Get tailored meal suggestions based on your preferences and daily mood.
-- **Reduce Menu Fatigue**: Skip endless scrolling and let Food Seer do the thinking for you.
-- **Quick Decision-Making**: Accept a recommendation or pass until tomorrow with just one click.
-- **Conversation History:** The AI remembers your past interactions to deliver smarter, more personalized suggestions over time.
-- **Rating System:** Share feedback on recommendations to help continuously improve the system's accuracy.
-- **At-Home Meal Instructions:** If you pass on a recommendation, receive instructions for preparing a meal at home instead.
-- **Streamlined Operations:** Staff can manage inventory, accounts, and orders more efficiently through an intuitive interface.
-
-
-
-
-By fostering a smarter dining experience, our platform empowers customers to make quick, confident decisions while helping restaurants operate more efficiently.
 
 
 ---
@@ -62,42 +60,29 @@ By fostering a smarter dining experience, our platform empowers customers to mak
 
 ## 📈 Use Case
 
+**Scenario:** Sarah is tired after work and doesn't want to decide what to eat.
 
-**Scenario**: Meet **Sarah**, a busy professional who orders delivery from her favorite local restaurant regularly but struggles with decision fatigue when browsing the extensive menu.
+### How Food Seer Helps
 
+1. Sarah opens Food Seer
+2. She chooses between:
+   - a **quick interactive quiz**, or  
+   - chatting with our **Ollama-powered chatbot**
+3. She instantly receives a personalized meal recommendation
+4. With one click, she can place an order — no browsing required
 
-**How Food Seer Helps**:
-
-
-1. **Quick Questions**: Sarah opens Food Seer and answers a few simple questions about her day, mood, and dietary preferences.
-
-
-2. **Personalized Recommendation**: The AI-powered system analyzes her responses and conversation history to provide a tailored meal suggestion.
-
-
-3. **Easy Decision**: Sarah loves the recommendation and places her order immediately with just one click.
-
-
-4. **Rate & Improve**: After enjoying her meal, Sarah rates the recommendation, helping the system learn and provide even better suggestions next time.
-
-
-5. **Alternative Options:** If Sarah passes on a recommendation, the system offers instructions for preparing a similar meal at home.
-
-
-This is just one example of how our system can help customers like Sarah navigate their dining choices effortlessly!
-
+Food Seer transforms meal choices from a chore into a simple, enjoyable interaction.
 
 ---
 
 
 ## 🚀 Key Features
 
-
-- **Interactive Quiz System**: Answer quick questions to receive personalized meal recommendations
-- **AI-Powered Suggestions**: Smart recommendations based on your preferences and conversation history
-- **Rating System**: Provide feedback to continuously improve recommendation accuracy
-- **Seamless Ordering**: Accept recommendations and place orders with ease
-- **At-Home Alternatives**: Get cooking instructions when you pass on suggestions
+- **Interactive Quiz System** to generate meal recommendations  
+- **Ollama-powered AI chatbot** for conversational food suggestions  
+- **Clean, tab-based UI** for seamless navigation between ordering, recommendations, and account features  
+- **Back-end systems** for inventory, ordering, session management, and user accounts  
+- **Automated tests** with **85%+ coverage** across frontend & backend  
 
 
 ## Technology Stack
