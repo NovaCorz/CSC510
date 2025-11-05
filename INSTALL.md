@@ -2,6 +2,28 @@
 
 This guide will help you set up and run the FoodSeer application.
 
+## 📑 Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Dependencies](#dependencies)
+- [Backend Setup](#backend-setup)
+  - [1. Configure MySQL Database](#1-configure-mysql-database)
+  - [2. Create and update applicationproperties file](#2-create-and-update-applicationproperties-file)
+  - [3. How to Set Up Ollama](#3-how-to-set-up-ollama)
+  - [4. Build and Run Backend](#4-build-and-run-backend)
+  - [5. Verify Backend](#5-verify-backend)
+- [Frontend Setup](#frontend-setup)
+- [Notes](#notes)
+- [Using the Application](#using-the-application)
+- [API Endpoints](#api-endpoints)
+- [Testing](#testing)
+- [Troubleshooting](#troubleshooting)
+  - [Common Issues](#common-issues)
+  - [Chatbot-Specific Issues](#chatbot-specific-issues)
+- [Getting Help](#getting-help)
+- [Quick Start Summary](#quick-start-summary)
+
+
 ## Prerequisites
 
 - [Java JDK](https://www.oracle.com/java/technologies/downloads/) (version 11 or higher, Java 21 recommended)
@@ -514,5 +536,6 @@ npm start
 # http://localhost:3000
 # Login: admin / admin123
 ```
+
 
 
