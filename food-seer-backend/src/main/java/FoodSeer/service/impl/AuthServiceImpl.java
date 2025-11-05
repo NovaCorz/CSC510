@@ -32,10 +32,30 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public ResponseEntity<Map<String, String>> register ( final RegisterRequestDto req ) {
-        System.out.println( "PasswordEncoder bean is: " + passwordEncoder.getClass() );
+        // Username checks
         if ( userRepository.existsByUsername( req.username() ) ) {
             return ResponseEntity.badRequest().body( Map.of( "error", "Username already taken" ) );
         }
+        if ( req.username().length() > 50 || req.username().length() < 3 ){
+            return ResponseEntity.badRequest().body( Map.of( "error", "Username must be between 3-50 characters" ) );
+        }
+        for(Character c : req.username().toCharArray()){
+            if(!Character.isAlphabetic(c) && c != '_' && c != '-'){
+                return ResponseEntity.badRequest().body( Map.of( "error", "Username must only contain letters, -, and _" ) );
+            }
+        }
+        
+        // Password checks
+        if ( req.password().length() < 2 || req.password().length() > 128){
+            return ResponseEntity.badRequest().body( Map.of( "error", "Password must be longer than 8 characters" ) );
+        }
+
+        // Email checks
+        if ( req.email().length() > 254 ||  !req.email().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
+            return ResponseEntity.badRequest().body( Map.of( "error", "Username must be between 3-50 characters" ) );
+        }
+        
+        
         final String hash = passwordEncoder.encode( req.password() );
         final User hashedUser = new User( req, hash );
         userRepository.save( hashedUser );
