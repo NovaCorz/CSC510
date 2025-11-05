@@ -85,8 +85,13 @@ public class FoodController {
      */
     @DeleteMapping ( "{id}" )
     public ResponseEntity<String> deleteFood ( @PathVariable ( "id" ) final Long foodId ) {
-        foodService.deleteFood( foodId );
-        return ResponseEntity.ok( "Food deleted successfully." );
+        try {
+            foodService.deleteFood( foodId );
+            return ResponseEntity.ok( "Food deleted successfully." );
+        } catch (final IllegalStateException e) {
+            // Food is part of unfulfilled orders
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
 
     /**
