@@ -10,6 +10,7 @@ Before you begin, please take a moment to read our [Code of Conduct](https://git
 1. [How Can I Contribute?](#how-can-i-contribute)
 2. [Submitting a Pull Request](#submitting-a-pull-request)
 3. [Coding Standards](#coding-standards)
+4. [Contributor IP & Copyright](#contributor-ip--copyright)
 
 ---
 
@@ -102,6 +103,23 @@ npm run lint:fix
 # Run type checking
 npm run type-check
 ```
+
+---
+
+## Contributor IP & Copyright
+
+### Do contributors keep the copyright/IP of their contributions?
+
+Yes — contributors retain ownership of their own contributions.
+
+By contributing code, documentation, or other content to this repository, you agree that:
+
+- **You still own the intellectual property for your contributions**
+- You grant the project maintainers a license to use, modify, and distribute your contributions as part of the project
+- You confirm that your contributions are original or appropriately licensed by you
+
+This model encourages open collaboration while protecting contributor rights.
+
 
 - **Code Quality Standards**:
   - Follow Airbnb JavaScript Style Guide
