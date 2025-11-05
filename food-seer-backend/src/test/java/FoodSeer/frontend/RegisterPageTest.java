@@ -253,6 +253,7 @@ public class RegisterPageTest {
 
         // Should stay on register page with error about length
         assertEquals("http://localhost:3000/register", driver.getCurrentUrl());
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("error-message")));
         WebElement errorMessage = driver.findElement(By.className("error-message"));
         assertTrue(errorMessage.isDisplayed());
     }
