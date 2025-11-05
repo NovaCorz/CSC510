@@ -225,6 +225,26 @@ To follow updates, visit the repo and click:
 This sends alerts for code updates, pull requests, issues, releases, and discussions.
 
 
+## 📅 Roadmap & Funding Information
+
+### Project Roadmap
+Our current development focus covers the **next 3 months**, which includes:
+
+- Enhancing AI memory & personalization
+- Adding user feedback to refine recommendations
+- Introducing analytics dashboards for insights
+- Expanding to a voice-enabled chatbot experience
+
+At this time, we do not have established milestones for 6 or 12-month development plans. Future long-term roadmap items will be defined based on project direction and contributor interest.
+
+### Funding & Support
+This project is **self-developed and unfunded**, created as part of academic coursework.  
+- No external financial sponsors  
+- Maintained by the student development team  
+- Future support may include community contributions or academic extensions
+
+
+
 
 ## ⚠️ Disclaimer
 Food Seer is designed as a smart recommendation system for restaurant delivery services. All meal recommendations are suggestions based on user input and preferences. Individual dietary needs, allergies, and health conditions should always be considered when making food choices. We are not responsible for any adverse reactions or health issues that may arise from following our recommendations.
