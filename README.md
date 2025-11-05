@@ -106,7 +106,6 @@ Food Seer transforms meal choices from a chore into a simple, enjoyable interact
 
 
 - [Installation](#-installation)
-- [API Documentation](#-api-documentation)
 - [Demo Video](#-demo-video)
 - [Project Poster](#-project-poster)
 - [Contribution Guidelines](#-contribution-guidelines)
@@ -151,7 +150,7 @@ The rules listed below are to be followed by the ones who will be contributing t
   - It is recommended to delete the branch as soon as it is merged to the main branch to avoid stale branches in the repository.
   - It is encouraged to add name tags such as "feature/" or "patch/" in the branches if it is used to add code-patches or features in the project.
 
-
+For more details on contributing to Food Seer, please read our full guide here: [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 
 ## 📈 Code Coverage
