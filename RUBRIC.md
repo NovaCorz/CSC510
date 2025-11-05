@@ -82,8 +82,8 @@
 |Question 15.6| Does each of your source code files include a licence header?| ✅   |   |  [We have a licence file](https://github.com/NovaCorz/CSC510/blob/main/LICENSE)        |
 |Question 15.7| Do you have a recommended citation for your software?| ✅   | ❌  |          |
 | **Q16 - Future Plans**           |  |  |   |   |
-|Question 16.1| Does your website or documentation include a project roadmap (a list of project and development milestones for the next 3, 6 and 12 months)?| ✅   | ❌  |          |
-|Question 16.2| Does your website or documentation describe how your project is funded, and the period over which funding is guaranteed?| ✅   | ❌  |          |
+|Question 16.1| Does your website or documentation include a project roadmap (a list of project and development milestones for the next 3, 6 and 12 months)?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/blob/main/README.md#-roadmap--funding-information)         |
+|Question 16.2| Does your website or documentation describe how your project is funded, and the period over which funding is guaranteed?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/blob/main/README.md#-roadmap--funding-information)           |
 |Question 16.3| Do you make timely announcements of the deprecation of components, APIs, etc.?| ✅   | ❌  |          |
 
 
