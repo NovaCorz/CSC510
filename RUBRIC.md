@@ -69,17 +69,17 @@
 |Question 13.7| Can users subscribe to notifications to changes to your source code repository?| ✅   | ❌  |          |
 |Question 13.8| If your software is developed as an open source project (and, not just a project developing open source software), do you have a governance model?| ✅   | ❌  |          |
 | **Q14 - Contributions**          ||  |   |   |
-|Question 14.1| Do you accept contributions (e.g. bug fixes, enhancements, documentation updates, tutorials) from people who are not part of your project?| ✅   | ❌  |          |
-|Question 14.2| Do you have a contributions policy?| ✅   | ❌  |          |
-|Question 14.3| Is your contributions' policy publicly available?| ✅   | ❌  |          |
+|Question 14.1| Do you accept contributions (e.g. bug fixes, enhancements, documentation updates, tutorials) from people who are not part of your project?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/blob/main/CONTRIBUTING.md)          |
+|Question 14.2| Do you have a contributions policy?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/blob/main/CONTRIBUTING.md)         |
+|Question 14.3| Is your contributions' policy publicly available?| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/blob/main/CONTRIBUTING.md)         |
 |Question 14.4| Do contributors keep the copyright/IP of their contributions?| ✅   | ❌  |          |
 | **Q15 - Licensing**              |  |  |   |   |                                                                                                                                                                                                                                 
-|Question 15.1| Does your website and documentation clearly state the copyright owners of your software and documentation?| ✅   | ❌  |          |
-|Question 15.2| Does each of your source code files include a copyright statement?| ✅   | ❌  |          |
-|Question 15.3| Does your website and documentation clearly state the licence of your software?| ✅   | ❌  |          |
-|Question 15.4| Is your software released under an open source licence?| ✅   | ❌  |          |
-|Question 15.5| Is your software released under an OSI-approved open-source licence?| ✅   | ❌  |          |
-|Question 15.6| Does each of your source code files include a licence header?| ✅   | ❌  |          |
+|Question 15.1| Does your website and documentation clearly state the copyright owners of your software and documentation?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/blob/main/LICENSE)            |
+|Question 15.2| Does each of your source code files include a copyright statement?| ✅   |   |  [We have a licence file](https://github.com/NovaCorz/CSC510/blob/main/LICENSE)        |
+|Question 15.3| Does your website and documentation clearly state the licence of your software?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/blob/main/LICENSE)         |
+|Question 15.4| Is your software released under an open source licence?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/blob/main/LICENSE)         |
+|Question 15.5| Is your software released under an OSI-approved open-source licence?| ✅   |   |   [Yes](https://github.com/NovaCorz/CSC510/blob/main/LICENSE)       |
+|Question 15.6| Does each of your source code files include a licence header?| ✅   |   |  [We have a licence file](https://github.com/NovaCorz/CSC510/blob/main/LICENSE)        |
 |Question 15.7| Do you have a recommended citation for your software?| ✅   | ❌  |          |
 | **Q16 - Future Plans**           |  |  |   |   |
 |Question 16.1| Does your website or documentation include a project roadmap (a list of project and development milestones for the next 3, 6 and 12 months)?| ✅   | ❌  |          |
