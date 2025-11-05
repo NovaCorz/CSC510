@@ -67,7 +67,7 @@
 |Question 13.4| Do you list your important partners and collaborators on your website?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/tree/main#-contributors)          |
 |Question 13.6| Do you list third-party publications that refer to your software on your website or link to a resource where these are available?| ✅   | ❌  |          |
 |Question 13.7| Can users subscribe to notifications to changes to your source code repository?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/blob/main/README.md#-notifications)         |
-|Question 13.8| If your software is developed as an open source project (and, not just a project developing open source software), do you have a governance model?| ✅   | ❌  |          |
+|Question 13.8| If your software is developed as an open source project (and, not just a project developing open source software), do you have a governance model?| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/blob/main/README.md#%EF%B8%8F-governance-model)        |
 | **Q14 - Contributions**          ||  |   |   |
 |Question 14.1| Do you accept contributions (e.g. bug fixes, enhancements, documentation updates, tutorials) from people who are not part of your project?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/blob/main/CONTRIBUTING.md)          |
 |Question 14.2| Do you have a contributions policy?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/blob/main/CONTRIBUTING.md)         |
