@@ -129,3 +129,92 @@ The frontend will start on `http://localhost:3000`
 - All API calls include the Bearer token in the Authorization header
 - Protected routes redirect to login if not authenticated
 
+## Using the Application
+
+### Application Flow:
+
+1. **Login Page** (`/`)
+   - Use demo credentials: `admin` / `admin123`
+   - Or register a new account
+   - Clean, modern login interface
+
+2. **Preferences Page** (`/preferences`)
+   - After login, set your preferences
+   - **Step 1**: Select budget (Under $10, Under $20, Under $30, or custom)
+   - **Step 2**: Select dietary restrictions (Vegan, Vegetarian, Lactose intolerant, or custom)
+   - Click "Next" between steps
+   - Preferences saved to backend on completion
+
+3. **Recommendations Page** (`/recommendations`)
+   - View personalized recommendations
+   - See saved budget and dietary restrictions
+   - Update preferences anytime
+   - Logout when done
+
+4. **AI Assistant** (`/chatbot`) - **Customer Only**
+   - Click "🤖 AI Assistant" in navigation
+   - Answer 3 questions:
+     - **Q1:** How are you feeling today? (e.g., "tired")
+     - **Q2:** How hungry are you? (e.g., "very hungry")
+     - **Q3:** What food are you in the mood for? (e.g., "comfort food")
+   - AI analyzes responses with your preferences
+   - Get ONE personalized food recommendation
+   - Click "Order This Now!" to create order immediately
+   - Click "Get Another Suggestion" to restart
+
+---
+
+## API Endpoints
+
+### Authentication
+- `POST /auth/login` - Login with username and password
+- `POST /auth/register` - Register a new user
+
+### User Management
+- `GET /api/users/me` - Get current user info (requires authentication)
+- `PUT /api/users/me/preferences` - Update user preferences (requires authentication)
+
+### Chat/AI
+- `POST /api/chat` - Send message to AI chatbot (requires authentication)
+
+### Request/Response Examples
+
+**Login Request:**
+```json
+{
+  "username": "admin",
+  "password": "admin123"
+}
+```
+
+**Login Response:**
+```json
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "tokenType": "Bearer"
+}
+```
+
+**Update Preferences Request:**
+```json
+{
+  "costPreference": "under-20",
+  "dietaryRestrictions": "vegan, lactose-intolerant"
+}
+```
+
+**Chat Request:**
+```json
+{
+  "message": "I'm feeling tired and want comfort food"
+}
+```
+
+**Chat Response:**
+```json
+{
+  "message": "Based on your preferences, I recommend..."
+}
+```
+
+---
