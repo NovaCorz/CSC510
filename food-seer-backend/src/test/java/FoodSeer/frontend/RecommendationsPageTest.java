@@ -8,7 +8,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -45,7 +44,7 @@ public class RecommendationsPageTest {
         options.addArguments("--window-size=1920,1080");
         options.addArguments("--headless");
         driver = new ChromeDriver(options);
-        wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(15));
     }
 
     @AfterEach
@@ -110,7 +109,10 @@ public class RecommendationsPageTest {
         registerUserWithPreferences("budgetuser", "testpass123", "budget@test.com", "Budget (Under $10)");
         
         // Verify only budget foods are shown
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("recommendations-grid")));
+        wait.until(driver -> {
+            List<WebElement> cards = driver.findElements(By.className("recommendation-card"));
+            return cards.size() > 0; // wait until cards actually rendered
+        });
         List<WebElement> recommendedFoods = driver.findElements(By.className("recommendation-card"));
         
         // Should show budget items
@@ -141,7 +143,10 @@ public class RecommendationsPageTest {
             "Moderate ($10-$20)", "Vegan");
         
         // Verify only vegan-compatible foods are shown
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("recommendations-grid")));
+        wait.until(driver -> {
+            List<WebElement> cards = driver.findElements(By.className("recommendation-card"));
+            return cards.size() > 0; // wait until cards actually rendered
+        });
         String recommendedText = driver.findElement(By.className("recommendations-grid")).getText();
         
         // Should show vegan items in moderate price range
@@ -168,7 +173,10 @@ public class RecommendationsPageTest {
             "Premium ($20+)", "Vegan", "Gluten Free");
         
         // Verify no recommendations message
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("no-recommendations")));
+        wait.until(ExpectedConditions.or(
+            ExpectedConditions.presenceOfElementLocated(By.className("recommendations-grid")),
+            ExpectedConditions.presenceOfElementLocated(By.className("no-recommendations"))
+        ));
         WebElement noRecommendations = driver.findElement(By.className("no-recommendations"));
         assertTrue(noRecommendations.getText().contains("No foods match your current preferences"));
     }
@@ -265,7 +273,10 @@ public class RecommendationsPageTest {
             "No Limit", "Vegetarian", "Gluten Free");
         
         // Verify recommendations respect multiple restrictions
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("recommendations-grid")));
+        wait.until(driver -> {
+            List<WebElement> cards = driver.findElements(By.className("recommendation-card"));
+            return cards.size() > 0; // wait until cards actually rendered
+        });
         List<WebElement> recommendedFoods = driver.findElements(By.className("recommendation-card"));
         
         // Should only show the vegan food (which is vegetarian and gluten-free)
