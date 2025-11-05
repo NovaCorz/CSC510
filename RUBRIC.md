@@ -62,8 +62,8 @@
 |Question 12.5| Are all manually-run tests documented?| ✅   |   | [Yes we automated all manual frontend test](https://github.com/NovaCorz/CSC510/actions)         |
 | **Q13 - Community Engagement**   |  |  |   |   |                                                                                                                                                                                           
 |Question 13.1| Does your project have resources (e.g. blog, Twitter, RSS feed, Facebook page, wiki, mailing list) that are regularly updated with information about your software?| ✅   |   | Yes, we have our discussion [forum](https://github.com/NovaCorz/CSC510/discussions) for that purpose         |
-|Question 13.2| Does your website state how many projects and users are associated with your project?| ✅   | ❌  |          |
-|Question 13.3| Do you provide success stories on your website?| ✅   | ❌  |          |
+|Question 13.2| Does your website state how many projects and users are associated with your project?| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510), our github main pages shows stats like that such as stars, forks, etc.        |
+|Question 13.3| Do you provide success stories on your website?| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/blob/main/README.md#-success-stories)        |
 |Question 13.4| Do you list your important partners and collaborators on your website?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/tree/main#-contributors)          |
 |Question 13.6| Do you list third-party publications that refer to your software on your website or link to a resource where these are available?| ✅   | ❌  |          |
 |Question 13.7| Can users subscribe to notifications to changes to your source code repository?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/blob/main/README.md#-notifications)         |
