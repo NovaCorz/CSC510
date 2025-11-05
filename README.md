@@ -214,6 +214,20 @@ We extend our heartfelt thanks to Professor Dr. Timothy Menzies for his invaluab
 ## 💡 Feedback
 Your input matters to us! If you have ideas for enhancements or new features, feel free to open an issue or submit a pull request. Thoughtful feedback from contributors like you helps us improve and evolve.
 
+## 🏛️ Governance Model
+
+Food Seer is maintained as an open-source project by its core development team.  
+Project decisions — including new features, bug fixes, and roadmap updates — are made collaboratively through discussion and consensus among contributors.
+
+While we do not currently have a formal governance structure, our guiding principles are:
+
+- **Transparency:** All changes are proposed and reviewed publicly through GitHub pull requests.  
+- **Collaboration:** Contributions are encouraged from all team members and external participants.  
+- **Consensus-based Decision-Making:** Updates and feature changes are approved when all active contributors agree on the direction.  
+- **Future Growth:** As the project expands and attracts more contributors, we plan to introduce a clearer governance model outlining maintainer roles, voting processes, and long-term project stewardship.
+
+This approach ensures Food Seer remains both open and adaptable while maintaining high standards for code quality and collaboration.
+
 
 ## 🔔 Notifications
 
