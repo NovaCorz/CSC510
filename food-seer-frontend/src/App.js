@@ -11,6 +11,7 @@ import OrderManagement from './pages/OrderManagement';
 import InventoryManagement from './pages/InventoryManagement';
 import UserManagement from './pages/UserManagement';
 import Chatbot from './pages/Chatbot';
+import Quiz from './pages/Quiz';
 import Navigation from './components/Navigation';
 import { isAuthenticated } from './services/api';
 
@@ -55,6 +56,16 @@ function App() {
               <ProtectedRoute>
                 <AppLayout>
                   <Chatbot />
+                </AppLayout>
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/quiz" 
+            element={
+              <ProtectedRoute>
+                <AppLayout>
+                  <Quiz />
                 </AppLayout>
               </ProtectedRoute>
             } 
