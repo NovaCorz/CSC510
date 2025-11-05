@@ -1,8 +1,8 @@
 | Category                         | Question                                                                                                                                                                                                                                                                                                                      | Yes | No | Evidence |
 | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- | -- | -------- |
 | **Q1 - Software Overview**       |  |  |   |   |
-|Question 1.1| Does your website and documentation provide a clear, high-level overview of your software?| ✅   | ❌  |          |
-|Question 1.2| Does your website and documentation clearly describe the type of user who should use your software?| ✅   | ❌  |          |
+|Question 1.1| Does your website and documentation provide a clear, high-level overview of your software?| ✅   |   |    [Yes](https://github.com/NovaCorz/CSC510/blob/jcgoins2/docs/README.md#-welcome-to-food-seer)      |
+|Question 1.2| Does your website and documentation clearly describe the type of user who should use your software?| ✅   |   |   [Yes](https://github.com/NovaCorz/CSC510/blob/main/README.md#-use-case)       |
 |Question 1.3| Do you publish case studies to show how your software has been used by yourself and others?| ✅   | ❌  |          |
 | **Q2 - Identity**                | |  |   |   |
 |Question 2.1| Is the name of your project/software unique?| ✅   |   |  Yes, there are no other products that we can find with the name Food Seer        |
