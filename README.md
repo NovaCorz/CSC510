@@ -118,7 +118,7 @@ To set up the project locally, follow these steps.
 git clone https://github.com/NovaCorz/CSC510.git
 cd CSC510
 ```
-Choose Your Installation Method (with Docker or without Docker). Detailed instructions are available in [INSTALL.md](INSTALL.md).
+Choose Your Installation Method. Detailed instructions are available in [INSTALL.md](INSTALL.md).
 
 ---
 
@@ -169,6 +169,13 @@ The rules listed below are to be followed by the ones who will be contributing t
 - It is encouraged to add name tags such as "feature/" or "patch/" in the branches if it is used to add code-patches or features in the project.
 
 For more details on contributing to Food Seer, please read our full guide here: [CONTRIBUTING.md](./CONTRIBUTING.md)
+
+---
+
+---
+
+## 📈 Code Coverage
+[![codecov]()]() It is part of the [Github Workflow Build]()
 
 ---
 
