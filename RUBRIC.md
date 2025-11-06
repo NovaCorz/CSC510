@@ -101,9 +101,9 @@ but nevertheless, here is a track record that everyone is contributing a lot)|[e
 |Docs: doco generated, format not ugly |[in GH](https://github.com/NovaCorz/CSC510/tree/main/doc)|3 |
 |Docs: what: point descriptions of each class/function (in isolation)| [Yes](https://github.com/NovaCorz/CSC510/tree/main/doc) |3 |
 |Docs: how: for common use cases X,Y,Z mini-tutorials showing worked examples on how to do X,Y,Z|[doc page entries](https://github.com/NovaCorz/CSC510/tree/main/doc)| 3 | |
-|Docs: why: docs tell a story, motivate the whole thing, deliver a punchline that makes you want to rush out and use the thing| |
+|Docs: why: docs tell a story, motivate the whole thing, deliver a punchline that makes you want to rush out and use the thing|[Yes](https://github.com/NovaCorz/CSC510/tree/main/doc) we also have [user stories](https://github.com/NovaCorz/CSC510/blob/main/README.md#-case-studies) |3
 |Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code.| |
-|Use of version control tools| |
+|Use of version control tools| [Yes](https://github.com/NovaCorz/CSC510/branches) |3
 |Test cases exist|[dozens of tests and those test cases are more than 30% of the code base](https://github.com/NovaCorz/CSC510/actions) [And](https://app.codecov.io/gh/NovaCorz/CSC510)|3 |
 |Test cases are routinely executed|[E.g. travis-com.com or github actions or something](https://github.com/NovaCorz/CSC510/actions)|3 |
 |Issues are discussed before they are closed|[even if you discuss in slack, need a sumamry statement here](https://github.com/NovaCorz/CSC510/tree/dev/collaboration-proof) [And here](https://github.com/NovaCorz/CSC510/issues)|3 |
