@@ -43,7 +43,7 @@
 - [🙌 Contributors](#-contributors)
 - [🙏 Acknowledgements](#-acknowledgements)
 - [💡 Feedback](#-feedback)
-- [🏛️ Governance Model](#governance-model)
+- [🏛️ Governance Model](#governance-model-)
 - [🔔 Notifications](#-notifications)
 - [📅 Roadmap & Funding Information](#-roadmap--funding-information)
 - [🌟 Success Stories](#-success-stories)
@@ -219,7 +219,7 @@ Your input matters to us! If you have ideas for enhancements or new features, fe
 
 ---
 
-## 🏛️ Governance Model
+## Governance Model 🏛️
 
 Food Seer is maintained as an open-source project by its core development team.  
 Project decisions — including new features, bug fixes, and roadmap updates — are made collaboratively through discussion and consensus among contributors.
