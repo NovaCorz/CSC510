@@ -125,7 +125,7 @@ Choose Your Installation Method (with Docker or without Docker). Detailed instru
 ## 🎥 Demo Video
 Check out our demo video to see the application in action! Click the link below to watch:
 
-**LINK**
+[▶️ Watch the Demo Video](https://github.com/NovaCorz/CSC510/raw/main/doc/DEMO.mkv)
 
 ---
 
