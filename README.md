@@ -147,6 +147,17 @@ Additional user studies and data-driven evaluations are planned as the system ma
 
 ---
 
+## Academic Paper Guidance
+
+The guidance for Food Seer's chat bot was based on the influence on the following academic papers. These papers prompted ethical use and implementation of the chat bot for the best experience for users.
+
+[The influence of chatbot humour on consumer evaluations of services] - Hyunju Shin, Isabella Bunosso, Lindsay R. Levine (https://onlinelibrary.wiley.com/doi/full/10.1111/ijcs.12849).
+[“I Am Here to Assist You Today”: The Role of Entity, Interactivity and Experiential Perceptions in Chatbot Persuasion] - Carolin Ischen, Theo Araujo,Guda van Noort, Hilde Voorveld, Edith Smit (https://www.tandfonline.com/doi/abs/10.1080/08838151.2020.1834297?casa_token=w7sm6mnxsvMAAAAA:3MLFEo2kl-5tGra4ProYsyEMoFyJi3MOITlHtuhw8gBd0rTxLLS01ktiG63waepcvlAyx1n_uYZQ).
+[Understanding the impact of control levels over emotion-aware chatbots] - Ivo Benke, Ulrich Gnewuch, Alexander Maedche (https://www.sciencedirect.com/science/article/pii/S0747563221004453?casa_token=1ktZE4ekOqUAAAAA:5he3BwdaB_6WISF7UTxF9v2JO3KJ4eGiI3VbX48doIW7-s_XUhbHgWC0LoYT83UdYyxG8pHlDA).
+
+
+---
+
 ## 🤝 Contribution Guidelines
 The rules listed below are to be followed by the ones who will be contributing to the code in the repository:
  
