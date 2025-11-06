@@ -30,7 +30,7 @@ This guide will help you set up and run the FoodSeer application.
 - [Maven](https://maven.apache.org/download.cgi) (version 3.6 or higher)
 - [Node.js](https://nodejs.org/) (version 16.x or higher)
 - [npm](https://www.npmjs.com/) (version 8.x or higher)
-- [MySQL](https://dev.mysql.com/downloads/mysql/) (version 8.0 or higher)
+- [MySQL](https://dev.mysql.com/downloads/workbench/) (version 8.0 or higher)
 - Git
 - A modern web browser (Chrome, Firefox, Safari, or Edge)
 - A chromium based web browser (Google Chrome)
@@ -536,6 +536,7 @@ npm start
 # http://localhost:3000
 # Login: admin / admin123
 ```
+
 
 
 
