@@ -127,7 +127,7 @@ but nevertheless, here is a track record that everyone is contributing a lot)|[e
 |Badges showing your syntax checkers. |[config files iin  GH showing this checker's config, badges in README](https://github.com/NovaCorz/CSC510/blob/main/README.md)  |3|
 |Badges showing your code coverage tools|[config files in GH, badges in README](https://github.com/NovaCorz/CSC510/blob/main/README.md)|3 |
 |Badges showing any other Other automated analysis tools|[config files in GH, badges in README](https://github.com/NovaCorz/CSC510/blob/main/README.md)|3|
-| total | total | 108
+| total | total | 105
 
 
 - **Column 1**: Required points (see table above and ).
