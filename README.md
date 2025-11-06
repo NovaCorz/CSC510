@@ -157,11 +157,6 @@ For more details on contributing to Food Seer, please read our full guide here: 
 
 ---
 
-## 📈 Code Coverage
-[![codecov]()]() It is part of the [Github Workflow Build]()
-
----
-
 ## 🌐 Future Scope
 
 We're excited about the enhancements coming to Food Seer! Here's what's next:
