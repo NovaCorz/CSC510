@@ -120,14 +120,14 @@ but nevertheless, here is a track record that everyone is contributing a lot)|[e
 |The file CODE-OF-CONDUCT.md lists rules of behavior for this repo; e.g. see [example](https://github.com/probot/template/blob/master/CODE_OF_CONDUCT.md)|[in GH](https://github.com/NovaCorz/CSC510/blob/main/CODE-OF-CONDUCT.md)|3|
 |The file CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up; e.g. see [example](https://github.com/probot/template/blob/master/CONTRIBUTING.md)|[in GH](https://github.com/NovaCorz/CSC510/blob/main/CONTRIBUTING.md)|3 |
 |The file README.md contains all the following|[in GH](https://github.com/NovaCorz/CSC510/blob/main/README.md)| 3|
-|Video|2min video of new functionality, showing a significant delta from prior.| [Yes](https://github.com/NovaCorz/CSC510/blob/main/doc/DEMO.mkv) |3
+|Video|[2min video of new functionality, showing a significant delta from prior.](https://github.com/NovaCorz/CSC510/blob/main/doc/DEMO.mkv)| 3 |
 |DOI badge: exists. To get a Digitial Object Indentifier, regiser the project at [Zenodo](https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content). DOI badges look like this: ![Zenodo doi badge](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.1234567-blue.svg) |[in GH](https://github.com/NovaCorz/CSC510/blob/main/README.md)|3| 
 |Badges showing your style checkers |[config files in GH showing your config, badges in README](https://github.com/NovaCorz/CSC510/blob/main/README.md)|3 |
 |Badges showing your code formatters. |[config files in GH showing your this formatter's  config, badges in README](https://github.com/NovaCorz/CSC510/blob/main/README.md)|3|
 |Badges showing your syntax checkers. |[config files iin  GH showing this checker's config, badges in README](https://github.com/NovaCorz/CSC510/blob/main/README.md)  |3|
 |Badges showing your code coverage tools|[config files in GH, badges in README](https://github.com/NovaCorz/CSC510/blob/main/README.md)|3 |
 |Badges showing any other Other automated analysis tools|[config files in GH, badges in README](https://github.com/NovaCorz/CSC510/blob/main/README.md)|3|
-| ||
+| total | total |
 
 
 - **Column 1**: Required points (see table above and ).
