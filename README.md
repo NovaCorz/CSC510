@@ -34,6 +34,7 @@
 - [🎥 Demo Video](#-demo-video)
 - [📊 Project Poster](#-project-poster)
 - [📚 Case Studies](#-case-studies)
+- [🎓 Academic Paper Guidance](#-academic-paper-guidance)
 - [🤝 Contribution Guidelines](#-contribution-guidelines)
 - [📈 Code Coverage](#-code-coverage)
 - [🌐 Future Scope](#-future-scope)
@@ -147,7 +148,7 @@ Additional user studies and data-driven evaluations are planned as the system ma
 
 ---
 
-## Academic Paper Guidance
+## 🎓 Academic Paper Guidance
 
 The guidance for Food Seer's chat bot was based on the influence on the following academic papers. These papers prompted ethical use and implementation of the chat bot for the best experience for users.
 
