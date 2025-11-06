@@ -65,7 +65,7 @@
 |Question 13.2| Does your website state how many projects and users are associated with your project?| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510), our github main pages shows stats like that such as stars, forks, etc.        |
 |Question 13.3| Do you provide success stories on your website?| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/blob/main/README.md#-success-stories)        |
 |Question 13.4| Do you list your important partners and collaborators on your website?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/tree/main#-contributors)          |
-|Question 13.6| Do you list third-party publications that refer to your software on your website or link to a resource where these are available?| ✅   | ❌  |          |
+|Question 13.6| Do you list third-party publications that refer to your software on your website or link to a resource where these are available?| ✅   |  | [Yes](https://github.com/NovaCorz/CSC510/blob/main/README.md#-academic-paper-guidance)         |
 |Question 13.7| Can users subscribe to notifications to changes to your source code repository?| ✅   |   | [Yes](https://github.com/NovaCorz/CSC510/blob/main/README.md#-notifications)         |
 |Question 13.8| If your software is developed as an open source project (and, not just a project developing open source software), do you have a governance model?| ✅   |   |  [Yes](https://github.com/NovaCorz/CSC510/blob/main/README.md#%EF%B8%8F-governance-model)        |
 | **Q14 - Contributions**          ||  |   |   |
