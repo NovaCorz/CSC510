@@ -2,6 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17460388.svg)](https://zenodo.org/records/17460388)
 [![License](https://img.shields.io/github/license/NovaCorz/CSC510)](https://github.com/NovaCorz/CSC510/blob/main/LICENSE)
+[![Rubric](https://img.shields.io/badge/Rubric-View-blue)](./RUBRIC.md)
 [![GitHub Release](https://img.shields.io/github/release/NovaCorz/CSC510.svg)](https://github.com/NovaCorz/CSC510/releases)
 [![codecov](https://codecov.io/gh/NovaCorz/CSC510/branch/main/graph/badge.svg)](https://codecov.io/gh/NovaCorz/CSC510)
 [![Build main](https://github.com/NovaCorz/CSC510/actions/workflows/run-tests.yml/badge.svg)](https://github.com/NovaCorz/CSC510/actions/workflows/run-tests.yml)
@@ -276,7 +277,7 @@ If you use Food Seer in academic work, research, or presentations, please cite o
 ---
 
 ## 📋 Project Rubric
-See the full evaluation criteria in the [Rubric](./RUBRIC.md).
+See the full evaluation criteria in the [RUBRIC.md](./RUBRIC.md).
 
 ## ⚠️ Disclaimer
 Food Seer is designed as a smart recommendation system for restaurant delivery services. All meal recommendations are suggestions based on user input and preferences. Individual dietary needs, allergies, and health conditions should always be considered when making food choices. We are not responsible for any adverse reactions or health issues that may arise from following our recommendations.
