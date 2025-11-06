@@ -275,5 +275,8 @@ If you use Food Seer in academic work, research, or presentations, please cite o
 
 ---
 
+## 📋 Project Rubric
+See the full evaluation criteria in the [Rubric](./RUBRIC.md).
+
 ## ⚠️ Disclaimer
 Food Seer is designed as a smart recommendation system for restaurant delivery services. All meal recommendations are suggestions based on user input and preferences. Individual dietary needs, allergies, and health conditions should always be considered when making food choices. We are not responsible for any adverse reactions or health issues that may arise from following our recommendations.
