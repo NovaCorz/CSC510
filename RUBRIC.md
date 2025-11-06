@@ -109,9 +109,9 @@ but nevertheless, here is a track record that everyone is contributing a lot)|[e
 |Issues are discussed before they are closed|[even if you discuss in slack, need a sumamry statement here](https://github.com/NovaCorz/CSC510/tree/dev/collaboration-proof) [And here](https://github.com/NovaCorz/CSC510/issues)|3 |
 |Chat channel: exists|[Link or screenshots](https://github.com/NovaCorz/CSC510/tree/main/collaboration-proof)|3 |
 |Test cases: a large proportion of the issues related to handling failing cases.|[If a test case fails, open an issue and fix it](https://github.com/NovaCorz/CSC510/issues)|3 |
-|Evidence that the whole team is using the same tools: everyone can get to all tools and files| |
-|Evidence that the whole team is using the same tools (e.g. config files in the repo, updated by lots of different people)| |
-|Evidence that the whole team is using the same tools (e.g. tutor can ask anyone to share screen, they demonstrate the system running on their computer)| |
+|Evidence that the whole team is using the same tools: everyone can get to all tools and files| Yes, we have and [install doc](https://github.com/NovaCorz/CSC510/blob/main/INSTALL.md) for this | 3
+|Evidence that the whole team is using the same tools (e.g. config files in the repo, updated by lots of different people)| Yes, we have and [install doc](https://github.com/NovaCorz/CSC510/blob/main/INSTALL.md) for this | 3
+|Evidence that the whole team is using the same tools (e.g. tutor can ask anyone to share screen, they demonstrate the system running on their computer)| We have it all running, we do not know how to link evidence for this one | 3
 |Evidence that the members of the team are working across multiple places in the code base| [Yes](https://github.com/NovaCorz/CSC510/branches) |3
 |Short release cycles | [(hard to see in short projects) project members are committing often enough so that everyone can get your work](https://github.com/NovaCorz/CSC510/commits/main/)|3 |
 |The file .gitignore lists what files should not be saved to the repo. See [examples](https://github.com/github/gitignore)|[in GH](https://github.com/NovaCorz/CSC510/blob/main/.gitignore)| 3|
