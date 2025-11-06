@@ -22,6 +22,8 @@
 
 **VIDEO**
 
+[▶️ Watch the Demo Video](https://github.com/NovaCorz/CSC510/raw/main/doc/DEMO.mkv)
+
 ---
 
 ## Table of Contents
