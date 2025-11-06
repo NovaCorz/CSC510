@@ -22,7 +22,7 @@
 
 **VIDEO**
 
-[▶️ Watch the Demo Video](https://github.com/NovaCorz/CSC510/raw/main/doc/DEMO.mkv)
+[▶️ Watch the Demo Video](https://github.com/NovaCorz/CSC510/blob/main/doc/DEMO.mkv)
 
 ---
 
@@ -125,7 +125,7 @@ Choose Your Installation Method (with Docker or without Docker). Detailed instru
 ## 🎥 Demo Video
 Check out our demo video to see the application in action! Click the link below to watch:
 
-[▶️ Watch the Demo Video](https://github.com/NovaCorz/CSC510/raw/main/doc/DEMO.mkv)
+[▶️ Watch the Demo Video](https://github.com/NovaCorz/CSC510/blob/main/doc/DEMO.mkv)
 
 ---
 
