@@ -43,7 +43,7 @@
 - [🙌 Contributors](#-contributors)
 - [🙏 Acknowledgements](#-acknowledgements)
 - [💡 Feedback](#-feedback)
-- [🏛️ Governance Model](#-governance-model)
+- [🏛️ Governance Model](#governance-model)
 - [🔔 Notifications](#-notifications)
 - [📅 Roadmap & Funding Information](#-roadmap--funding-information)
 - [🌟 Success Stories](#-success-stories)
