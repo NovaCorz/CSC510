@@ -33,6 +33,7 @@ This guide will help you set up and run the FoodSeer application.
 - [MySQL](https://dev.mysql.com/downloads/mysql/) (version 8.0 or higher)
 - Git
 - A modern web browser (Chrome, Firefox, Safari, or Edge)
+- A chromium based web browser (Google Chrome)
 
 ## Dependencies 
 
@@ -535,6 +536,7 @@ npm start
 # http://localhost:3000
 # Login: admin / admin123
 ```
+
 
 
 
