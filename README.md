@@ -175,7 +175,7 @@ For more details on contributing to Food Seer, please read our full guide here: 
 ---
 
 ## 📈 Code Coverage
-[![codecov]()]() It is part of the [Github Workflow Build]()
+[![codecov](https://codecov.io/gh/NovaCorz/CSC510/branch/main/graph/badge.svg)](https://codecov.io/gh/NovaCorz/CSC510) It is part of the [Github Workflow Build](https://github.com/NovaCorz/CSC510/actions)
 
 ---
 
