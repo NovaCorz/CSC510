@@ -102,7 +102,7 @@ but nevertheless, here is a track record that everyone is contributing a lot)|[e
 |Docs: what: point descriptions of each class/function (in isolation)| [Yes](https://github.com/NovaCorz/CSC510/tree/main/doc) |3 |
 |Docs: how: for common use cases X,Y,Z mini-tutorials showing worked examples on how to do X,Y,Z|[doc page entries](https://github.com/NovaCorz/CSC510/tree/main/doc)| 3 | |
 |Docs: why: docs tell a story, motivate the whole thing, deliver a punchline that makes you want to rush out and use the thing|[Yes](https://github.com/NovaCorz/CSC510/tree/main/doc) we also have [user stories](https://github.com/NovaCorz/CSC510/blob/main/README.md#-case-studies) |3
-|Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code.| |
+|Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code.| [Yes](https://github.com/NovaCorz/CSC510/blob/main/doc/DEMO.mkv) |3
 |Use of version control tools| [Yes](https://github.com/NovaCorz/CSC510/branches) |3
 |Test cases exist|[dozens of tests and those test cases are more than 30% of the code base](https://github.com/NovaCorz/CSC510/actions) [And](https://app.codecov.io/gh/NovaCorz/CSC510)|3 |
 |Test cases are routinely executed|[E.g. travis-com.com or github actions or something](https://github.com/NovaCorz/CSC510/actions)|3 |
@@ -120,7 +120,7 @@ but nevertheless, here is a track record that everyone is contributing a lot)|[e
 |The file CODE-OF-CONDUCT.md lists rules of behavior for this repo; e.g. see [example](https://github.com/probot/template/blob/master/CODE_OF_CONDUCT.md)|[in GH](https://github.com/NovaCorz/CSC510/blob/main/CODE-OF-CONDUCT.md)|3|
 |The file CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up; e.g. see [example](https://github.com/probot/template/blob/master/CONTRIBUTING.md)|[in GH](https://github.com/NovaCorz/CSC510/blob/main/CONTRIBUTING.md)|3 |
 |The file README.md contains all the following|[in GH](https://github.com/NovaCorz/CSC510/blob/main/README.md)| 3|
-|Video|2min video of new functionality, showing a significant delta from prior.| |
+|Video|2min video of new functionality, showing a significant delta from prior.| [Yes](https://github.com/NovaCorz/CSC510/blob/main/doc/DEMO.mkv) |3
 |DOI badge: exists. To get a Digitial Object Indentifier, regiser the project at [Zenodo](https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content). DOI badges look like this: ![Zenodo doi badge](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.1234567-blue.svg) |[in GH](https://github.com/NovaCorz/CSC510/blob/main/README.md)|3| 
 |Badges showing your style checkers |[config files in GH showing your config, badges in README](https://github.com/NovaCorz/CSC510/blob/main/README.md)|3 |
 |Badges showing your code formatters. |[config files in GH showing your this formatter's  config, badges in README](https://github.com/NovaCorz/CSC510/blob/main/README.md)|3|
