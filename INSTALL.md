@@ -79,6 +79,29 @@ This guide will help you set up and run the FoodSeer application.
 | Tests    | Maven + Jest | `mvn test` / `npm test`  |
 | Coverage | JaCoCo       | `mvn test jacoco:report` |
 
+## Frontend Setup
+
+### 1. Install Dependencies
+
+```bash
+cd food-seer-frontend
+npm install
+```
+
+### 2. Run Frontend
+
+```bash
+npm start
+```
+
+The frontend will start on `http://localhost:3000`
+
+## Notes
+
+- The frontend uses JWT tokens stored in localStorage for authentication
+- Tokens expire after 7 days
+- All API calls include the Bearer token in the Authorization header
+- Protected routes redirect to login if not authenticated
 
 ## Backend Setup
 
@@ -175,30 +198,6 @@ curl -X POST http://localhost:8080/auth/login \
   -H "Content-Type: application/json" \
   -d '{"username":"admin","password":"admin123"}'
 ```
-
-## Frontend Setup
-
-### 1. Install Dependencies
-
-```bash
-cd food-seer-frontend
-npm install
-```
-
-### 2. Run Frontend
-
-```bash
-npm start
-```
-
-The frontend will start on `http://localhost:3000`
-
-## Notes
-
-- The frontend uses JWT tokens stored in localStorage for authentication
-- Tokens expire after 7 days
-- All API calls include the Bearer token in the Authorization header
-- Protected routes redirect to login if not authenticated
 
 ## Using the Application
 
@@ -536,6 +535,7 @@ npm start
 # http://localhost:3000
 # Login: admin / admin123
 ```
+
 
 
 
