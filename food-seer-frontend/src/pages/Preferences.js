@@ -19,14 +19,20 @@ function Preferences() {
     const loadPreferences = async () => {
       try {
         const user = await getCurrentUser();
+        console.log('📥 Loading user preferences:', user);
         
         if (user.costPreference || user.dietaryRestrictions) {
           // Parse existing preferences
           const existingBudget = user.costPreference || '';
           const existingDietary = user.dietaryRestrictions || '';
           
-          // Parse dietary restrictions
-          const dietaryArray = existingDietary ? existingDietary.split(',').map(d => d.trim().toLowerCase()) : [];
+          // Parse dietary restrictions - KEEP ORIGINAL CASE (should be UPPERCASE)
+          const dietaryArray = existingDietary ? existingDietary.split(',').map(d => d.trim().toUpperCase()) : [];
+          
+          console.log('✅ Parsed preferences:', {
+            budget: existingBudget,
+            dietaryRestrictions: dietaryArray
+          });
           
           setQuizData({
             budget: existingBudget,
@@ -34,7 +40,7 @@ function Preferences() {
           });
         }
       } catch (error) {
-        console.error('Error loading preferences:', error);
+        console.error('❌ Error loading preferences:', error);
         // If error, just show empty form
       } finally {
         setLoading(false);
@@ -70,13 +76,21 @@ function Preferences() {
       const costPreference = quizData.budget;
       const dietaryRestrictions = quizData.dietaryRestrictions.join(', ');
 
+      console.log('💾 Saving preferences to backend:', {
+        costPreference,
+        dietaryRestrictions,
+        dietaryRestrictionsArray: quizData.dietaryRestrictions
+      });
+
       // Save preferences to backend
       await updateUserPreferences(costPreference, dietaryRestrictions);
+      
+      console.log('✅ Preferences saved successfully!');
 
       // Navigate to recommendations
       navigate('/recommendations');
     } catch (error) {
-      console.error('Error saving preferences:', error);
+      console.error('❌ Error saving preferences:', error);
       alert('Failed to save preferences. Please try again.');
     } finally {
       setSaving(false);

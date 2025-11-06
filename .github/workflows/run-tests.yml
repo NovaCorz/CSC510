@@ -41,6 +41,58 @@ jobs:
           java-version: '21'
           cache: 'maven'
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install frontend dependencies
+        working-directory: food-seer-frontend
+        run: npm install
+
+      - name: Build frontend
+        working-directory: food-seer-frontend
+        run: CI=false npm run build
+
+      - name: Start frontend (React)
+        working-directory: food-seer-frontend
+        run: CI=false npm start &
+      
+      - name: Wait for frontend to be ready
+        run: |
+          echo "Waiting for frontend to start on port 3000..."
+          for i in {1..30}; do
+            if curl -s http://localhost:3000 > /dev/null; then
+              echo "Frontend is up!"
+              break
+            fi
+            echo "Still waiting..."
+            sleep 3
+          done
+      
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget gnupg unzip
+          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+')
+          echo "Installed Chrome version: $CHROME_VERSION"
+
+          # Download matching ChromeDriver
+          DRIVER_VERSION=$(curl -s "https://googlechromelabs.github.io/chrome-for-testing/LATEST_RELEASE_STABLE")
+          wget -q "https://storage.googleapis.com/chrome-for-testing-public/${DRIVER_VERSION}/linux64/chromedriver-linux64.zip"
+          unzip chromedriver-linux64.zip
+          sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
+
+      - name: Verify Chrome and Chromedriver
+        run: |
+          google-chrome --version
+          chromedriver --version
+
       - name: Copy application.properties (template → actual)
         run: |
           if [ -f food-seer-backend/src/main/resources/application.properties.template ]; then

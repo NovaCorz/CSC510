@@ -4,9 +4,9 @@ const BudgetQuestion = ({ budget, onUpdate, onNext, onPrevious, canGoNext }) => 
   const [selectedBudget, setSelectedBudget] = useState(budget);
 
   const budgetOptions = [
-    { value: 'budget', label: 'Budget (Under $10)', description: 'Affordable options' },
-    { value: 'moderate', label: 'Moderate ($10-$20)', description: 'Mid-range pricing' },
-    { value: 'premium', label: 'Premium ($20+)', description: 'High-end options' },
+    { value: 'budget', label: 'Budget ($0-$10)', description: 'Most affordable options' },
+    { value: 'moderate', label: 'Moderate ($0-$20)', description: 'Budget + mid-range options' },
+    { value: 'premium', label: 'Premium ($0-$35)', description: 'All options including high-end' },
     { value: 'no-limit', label: 'No Limit', description: 'Show me everything' }
   ];
 
